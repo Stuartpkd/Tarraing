@@ -1,1 +1,1 @@
-web: gunicorn tarraing.wsgi
+web: gunicorn Tarraing.wsgi
