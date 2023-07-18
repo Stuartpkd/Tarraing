@@ -8,12 +8,14 @@ STATUS = ((0, "Draft"), (1, "Published"))
 class Post(models.Model):
     title = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(max_length=100, unique=True)
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="brush_posts")
+    author = models.ForeignKey(User, on_delete=models.CASCADE,
+                               related_name="brush_posts")
     content = models.TextField()
     brush_image = CloudinaryField('image', default='placeholder')
     created_on = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=STATUS, default=0)
-    likes = models.ManyToManyField(User, related_name='brush_likes', blank=True)
+    likes = models.ManyToManyField(User,
+                                   related_name='brush_likes', blank=True)
     brush = CloudinaryField('brush_file', default='placeholder')
 
     class Meta:
@@ -27,7 +29,8 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
+    post = models.ForeignKey(Post, on_delete=models.CASCADE,
+                             related_name='comments')
     name = models.CharField(max_length=80)
     email = models.EmailField()
     body = models.TextField()
