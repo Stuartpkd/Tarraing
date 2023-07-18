@@ -15,3 +15,14 @@ class Post(models.Model):
     status = models.IntegerField(choices=STATUS, default=0)
     likes = models.ManyToManyField(User, related_name='brush_likes', blank=True)
     brush = CloudinaryField('brush_file', default='placeholder')
+
+    class Meta:
+        ordering = ['-created_on']
+
+    def __str__(self):
+        return self.title
+    
+    def number_of_likes(self):
+        return self.likes.count()
+
+
