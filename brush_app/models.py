@@ -8,8 +8,8 @@ STATUS = ((0, "Draft"), (1, "Published"))
 class Post(models.Model):
     title = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(max_length=100, unique=True)
-    author = models.ForeignKey(User, on_delete=models.CASCADE,
-                               related_name="brush_posts")
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE,
+                                related_name="brush_posts")
     content = models.TextField()
     brush_image = CloudinaryField('image', default='placeholder')
     created_on = models.DateTimeField(auto_now_add=True)
@@ -31,6 +31,8 @@ class Post(models.Model):
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE,
                              related_name='comments')
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE,
+                                related_name="brush_posts")
     name = models.CharField(max_length=80)
     email = models.EmailField()
     body = models.TextField()
