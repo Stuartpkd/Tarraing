@@ -1,0 +1,43 @@
+<!-- post_detail.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="post">
+    <h2>{{ post.title }}</h2>
+    <h3>{{ author }}</h3>
+    <p>{{ post.content }}</p>
+
+    {% if post.image %}
+    <img src="{{ post.image.url }}" alt="{{ post.title }}" class="post-image">
+    {% endif %}
+
+    <h3>Brush File: <a href="{{ post.brush_file.url }}">{{ post.brush_file.name }}</a></h3>
+
+    <div class="likes-comments">
+        <h4>Likes: {{ post.likes.count }}</h4>
+        <h4>Comments: {{ post.comments.count }}</h4>
+    </div>
+
+    {% if user.is_authenticated %}
+    <form method="post" action="{% url 'like_post' post.id %}">
+        <button type="submit">Like</button>
+    </form>
+    <form method="post" action="{% url 'comment_post' post.id %}">
+        <textarea name="comment" rows="4" cols="50"></textarea>
+        <button type="submit">Comment</button>
+    </form>
+    {% else %}
+    <p>Please <a href="{% url 'login' %}">login</a> to like and comment on this post.</p>
+    {% endif %}
+
+    <h3>Comments:</h3>
+    {% for comment in post.comments.all %}
+    <div class="comment">
+        <p>{{ comment.content }}</p>
+        <small>By: {{ comment.author }} | {{ comment.created_on }}</small>
+    </div>
+    {% empty %}
+    <p>No comments yet.</p>
+    {% endfor %}
+</div>
+{% endblock %}
