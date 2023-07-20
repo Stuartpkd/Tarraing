@@ -8,11 +8,19 @@
         <!-- Brush Entries Column -->
         <div class="">
             <div class="">
+                {% for post in post_list %}
 
+
+                {% if forloop.counter|divisibleby:3 %}
+                <div>
+                    <div>
+
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
+
         </div>
-    </div>
 
-</div>
-
-{%endblock%}
+        {%endblock%}
