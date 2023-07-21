@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block content %}
 
 <div class="">
@@ -12,7 +14,11 @@
                     {% for post in object_list %}
                     <div class="post">
                         <h2>{{ post.title }}</h2>
+                        {% if post.brush_image %}
                         <img src="{{ post.brush_image.url }}" alt="{{ brush.name }} Brush Image">
+                        {% else %}
+                        <img src="{% static 'static/temp_images/github.png' %}" alt="Placeholder Image">
+                        {% endif %}
                         <p>{{ post.content }}</p>
                     </div>
                     {% endfor %}
