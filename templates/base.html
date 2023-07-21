@@ -15,16 +15,16 @@
         <a class="" href="#">Tarraing</a>
         <ul class="navbar-nav">
             <li>
-                <a href="#">Home</a>
+                <a href="{% url 'home' %}">Home</a>
             </li>
             <li>
-                <a href="#">Brushes</a>
+                <a href="{% url 'brushes' %}">Brushes</a>
             </li>
             <li>
-                <a href="#">Profile</a>
+                <a href="{% url 'profile' %}">Profile</a>
             </li>
             <li>
-                <a href="#">Upload</a>
+                <a href="{% url 'upload' %}">Upload</a>
             </li>
             {% if user.is_authenticated %}
             <li>
