@@ -8,7 +8,7 @@
         <!-- Brush Entries Column -->
         <div class="">
             <div class="">
-                <div class="post-list">
+                <div class="">
                     {% for post in object_list %}
                     <div class="post">
                         <h2>{{ post.title }}</h2>
@@ -16,13 +16,24 @@
                     </div>
                     {% endfor %}
                 </div>
-                <div>
-                    <div>
+                <!-- Pagination Links -->
+                <div class="pagination">
+                    <span class="step-links">
+                        {% if page_obj.has_previous %}
+                        <a href="?page=1">&laquo; first</a>
+                        <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                        {% endif %}
 
-                    </div>
+                        <span class="current">
+                            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                        </span>
+
+                        {% if page_obj.has_next %}
+                        <a href="?page={{ page_obj.next_page_number }}">next</a>
+                        <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                        {% endif %}
+                    </span>
                 </div>
+                {% endblock %}
+
             </div>
-
-        </div>
-
-        {%endblock%}
