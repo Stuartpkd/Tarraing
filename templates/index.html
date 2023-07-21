@@ -12,6 +12,7 @@
                     {% for post in object_list %}
                     <div class="post">
                         <h2>{{ post.title }}</h2>
+                        <img src="{{ post.brush_image.url }}" alt="{{ brush.name }} Brush Image">
                         <p>{{ post.content }}</p>
                     </div>
                     {% endfor %}
