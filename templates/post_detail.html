@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 <div class="post">
@@ -20,15 +21,15 @@
     </div>
 
     {% if user.is_authenticated %}
-    <form method="post" action="{% url 'like_post' post.id %}">
+    <form method="post" action="url 'like_post' post.id">
         <button type="submit">Like</button>
     </form>
-    <form method="post" action="{% url 'comment_post' post.id %}">
+    <form method="post" action="url 'comment_post' post.id">
         <textarea name="comment" rows="4" cols="50"></textarea>
         <button type="submit">Comment</button>
     </form>
     {% else %}
-    <p>Please <a href="{% url 'login' %}">login</a> to like and comment on this post.</p>
+    <p>Please <a href="url 'login'">login</a> to like and comment on this post.</p>
     {% endif %}
 
     <h3>Comments:</h3>
