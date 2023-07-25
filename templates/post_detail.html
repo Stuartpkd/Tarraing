@@ -35,14 +35,12 @@
     <p>Please <a href="url 'login'">login</a> to like and comment on this post.</p>
     {% endif %}
 
+    {% if user.is_authenticated %}
     <h3>Comments:</h3>
-    {% for comment in post.comments.all %}
-    <div class="comment">
-        <p>{{ comment.content }}</p>
-        <small>By: {{ comment.author }} | {{ comment.created_on }}</small>
-    </div>
-    {% empty %}
-    <p>No comments yet.</p>
-    {% endfor %}
+    <form method="post" action="">
+        {{ comment_form | crispy }}
+        {% csrf_token %}
+        <button type="submit">Comment</button>
+    </form>
 </div>
 {% endblock %}
