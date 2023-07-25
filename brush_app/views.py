@@ -12,9 +12,8 @@ class PostList(generic.ListView):
 class PostDetail(View):
 
     def get(self, request, slug, *args, **kwargs):
-        queryset = Post.objects.filter(status=1)
         print(slug)
-        post = get_object_or_404(queryset, slug=slug)
+        post = get_object_or_404(Post, slug=slug)
         comments = post.comments.filter().order_by('created_on')
         liked = False
         if post.likes.filter(id=self.request.user.id).exists():
