@@ -32,7 +32,7 @@
         <button type="submit">Comment</button>
     </form>
     {% else %}
-    <p>Please <a href="url 'login'">login</a> to like and comment on this post.</p>
+    <p>Please <a href="{% url 'account_signup' %}">login</a> to like and comment on this post.</p>
     {% endif %}
 
     {% if user.is_authenticated %}
@@ -42,5 +42,6 @@
         {% csrf_token %}
         <button type="submit">Comment</button>
     </form>
+    {% endif %}
 </div>
 {% endblock %}
