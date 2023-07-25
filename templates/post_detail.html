@@ -27,10 +27,6 @@
     <form method="post" action="url 'like_post' post.id">
         <button type="submit">Like</button>
     </form>
-    <form method="post" action="url 'comment_post' post.id">
-        <textarea name="comment" rows="4" cols="50"></textarea>
-        <button type="submit">Comment</button>
-    </form>
     {% else %}
     <p>Please <a href="{% url 'account_signup' %}">login</a> to like and comment on this post.</p>
     {% endif %}
