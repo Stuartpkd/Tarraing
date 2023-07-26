@@ -24,8 +24,14 @@
     </div>
 
     {% if user.is_authenticated %}
-    <form method="post" action="url 'like_post' post.id">
-        <button type="submit">Like</button>
+    <form method="POST" action="{% url 'post_like' post.slug %}">
+        {% csrf_token %}
+        {% if liked %}
+        <button type="submit" value="{{post.slug}}">Unlike</button>
+        {% else %}
+        <button type="submit" value="{{post.slug}}">Like</button>
+        {% endif %}
+
     </form>
     {% else %}
     <p>Please <a href="{% url 'account_signup' %}">login</a> to like and comment on this post.</p>
