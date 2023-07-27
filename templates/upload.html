@@ -1,30 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tarraing</title>
-</head>
+{% block content %}
+<h1>Upload Brush</h1>
+<form method="POST" action="">
+    {% csrf_token %}
+    <label for="title">Title:</label>
+    {{ form.title }}
 
-<body>
-    <h1>Upload Brush</h1>
-    <form method="POST" action="">
-        {% csrf_token %}
-        <label for="title">Title:</label>
-        {{ form.title }}
+    <label for="content">Description</label>
+    {{ form.content }}
 
-        <label for="content">Description</label>
-        {{ form.content }}
+    <label for="brush_image">Brush Image:</label>
+    {{ form.brush_image }}
 
-        <label for="brush_image">Brush Image:</label>
-        {{ form.brush_image }}
+    <label for="brush_file">Brush File:</label>
+    {{ form.brush_file }}
 
-        <label for="brush_file">Brush File:</label>
-        {{ form.brush_file }}
-
-        <button type="submit">Post</button>
-    </form>
-</body>
-
-</html>
+    <button type="submit">Post</button>
+</form>
+{% endblock %}

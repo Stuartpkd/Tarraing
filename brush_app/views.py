@@ -73,3 +73,10 @@ class PostLike(View):
             post.likes.add(request.user)
 
         return HttpResponseRedirect(reverse('post_detail', args=[slug]))
+
+
+class Upload(View):
+    model = Post
+    template_name = 'upload.html'
+    fields = ['title', 'content', 'brush_image', 'brush_file']
+    success_url = reverse('home')
