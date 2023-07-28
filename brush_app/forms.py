@@ -8,7 +8,7 @@ class CommentForm(forms.ModelForm):
         fields = ('body',)
 
 
-class BrushUploadform(forms.ModelForm):
+class BrushUploadForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ['title', 'content', 'brush_image', 'brush']

@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, reverse
 from django.views import generic, View
 from django.http import HttpResponseRedirect
 from .models import Post
-from .forms import CommentForm, BrushUploadform
+from .forms import CommentForm, BrushUploadForm
 
 
 class PostList(generic.ListView):
@@ -85,25 +85,19 @@ class Upload(View):
 
     def get(self, request, *args, **kwargs):
         posts = Post.objects.all()
-        title = Post.title
-        content = Post.content
-
         return render(
             request,
             "upload.html",
             {
-                "posts": posts,
-                "title": title,
-                "content": content,
-                "BrushUploadform":  BrushUploadform()
+                "form": BrushUploadForm()
             },
         )
 
     def post(self, request, *args, **kwargs):
         posts = Post.objects.all()
-        brush_upload_form = BrushUploadform(request.POST, request.FILES)
+        brush_upload_form = BrushUploadForm(request.POST, request.FILES)
 
-        if BrushUploadform.is_valid():
+        if brush_upload_form.is_valid():
             upload = brush_upload_form.save(commit=False)
             selected_post_id = request.POST.get('selected_post')
             selected_post = get_object_or_404(Post, id=selected_post_id)
@@ -118,6 +112,8 @@ class Upload(View):
                 "post": post,
                 "title": title,
                 "content": content,
-                "BrushUploadform":  BrushUploadform()
+                "image": image,
+                "brush": brush,
+                "form": BrushUploadForm()
             },
         )
