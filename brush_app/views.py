@@ -75,12 +75,6 @@ class PostLike(View):
         return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
 
-# class Upload(View):
-#     model = Post
-#     template_name = 'upload.html'
-#     fields = ['title', 'content', 'brush_image', 'brush']
-#     success_url = reverse('home')
-
 class Upload(View):
 
     def get(self, request, *args, **kwargs):
@@ -99,21 +93,19 @@ class Upload(View):
 
         if brush_upload_form.is_valid():
             upload = brush_upload_form.save(commit=False)
-            selected_post_id = request.POST.get('selected_post')
-            selected_post = get_object_or_404(Post, id=selected_post_id)
-            upload.post = selected_post
+            upload.author = self.request.user
             upload.save()
-            return redirect('home')
+            return redirect(reverse('home'))
         
-        return render(
-            request,
-            "upload.html",
-            {
-                "post": post,
-                "title": title,
-                "content": content,
-                "image": image,
-                "brush": brush,
-                "form": BrushUploadForm()
-            },
-        )
+        # return render(
+        #     request,
+        #     "upload.html",
+        #     {
+        #         "post": post,
+        #         "title": title,
+        #         "content": content,
+        #         "image": image,
+        #         "brush": brush,
+        #         "form": BrushUploadForm()
+        #     },
+        # )
