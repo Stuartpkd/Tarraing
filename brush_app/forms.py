@@ -11,4 +11,4 @@ class CommentForm(forms.ModelForm):
 class BrushUploadform(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['title', 'content', 'brush_image', 'brush_file']
+        fields = ['title', 'content', 'brush_image', 'brush']

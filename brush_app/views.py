@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, reverse
 from django.views import generic, View
 from django.http import HttpResponseRedirect
 from .models import Post
-from .forms import CommentForm
+from .forms import CommentForm, BrushUploadform
 
 
 class PostList(generic.ListView):
@@ -75,8 +75,49 @@ class PostLike(View):
         return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
 
+# class Upload(View):
+#     model = Post
+#     template_name = 'upload.html'
+#     fields = ['title', 'content', 'brush_image', 'brush']
+#     success_url = reverse('home')
+
 class Upload(View):
-    model = Post
-    template_name = 'upload.html'
-    fields = ['title', 'content', 'brush_image', 'brush_file']
-    success_url = reverse('home')
+
+    def get(self, request, *args, **kwargs):
+        posts = Post.objects.all()
+        title = Post.title
+        content = Post.content
+
+        return render(
+            request,
+            "upload.html",
+            {
+                "posts": posts,
+                "title": title,
+                "content": content,
+                "BrushUploadform":  BrushUploadform()
+            },
+        )
+
+    def post(self, request, *args, **kwargs):
+        posts = Post.objects.all()
+        brush_upload_form = BrushUploadform(request.POST, request.FILES)
+
+        if BrushUploadform.is_valid():
+            upload = brush_upload_form.save(commit=False)
+            selected_post_id = request.POST.get('selected_post')
+            selected_post = get_object_or_404(Post, id=selected_post_id)
+            upload.post = selected_post
+            upload.save()
+            return redirect('home')
+        
+        return render(
+            request,
+            "upload.html",
+            {
+                "post": post,
+                "title": title,
+                "content": content,
+                "BrushUploadform":  BrushUploadform()
+            },
+        )
