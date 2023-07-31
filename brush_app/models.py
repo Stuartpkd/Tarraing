@@ -53,3 +53,9 @@ class Profile(models.Model):
     num_likes = models.PositiveIntegerField(default=0)
     num_posts = models.PositiveIntegerField(default=0)
     num_downloads = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return self.user.username
+
+    def update_likes_count(self):
+        self.num_likes = self.user.brush_likes.count()
