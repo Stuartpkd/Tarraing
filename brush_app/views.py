@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.views import generic, View
 from django.http import HttpResponseRedirect
-from .models import Post
+from .models import Post, Profile
 from .forms import CommentForm, BrushUploadForm
 
 
@@ -101,14 +101,13 @@ class Upload(View):
                           brush_upload_form})
 
 
-class UserProfileView(View):
+class ProfileView(View):
     template_name = 'profile.html'
 
-    def get(self, request, username, *args, **kwargs):
+    def get(self, request, username):
+        print("Requested username:", username)
         profile = get_object_or_404(Profile, user__username=username)
-        user_posts = Post.objects.filter(author=profile.user)
-        context = {
-            'profile': profile,
-            'user_posts': user_posts,
-        }
-        return render(request, self.template_name, context)
+        print("Profile object:", profile)
+        user_posts = profile.user.posts.all()
+        return render(request, self.template_name, {'profile': profile,
+                                                    'user_posts': user_posts})
