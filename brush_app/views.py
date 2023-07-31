@@ -100,15 +100,15 @@ class Upload(View):
             return render(request, 'upload.html', {'BrushUploadform':
                           brush_upload_form})
 
-        # return render(
-        #     request,
-        #     "upload.html",
-        #     {
-        #         "post": post,
-        #         "title": title,
-        #         "content": content,
-        #         "image": image,
-        #         "brush": brush,
-        #         "form": BrushUploadForm()
-        #     },
-        # )
+
+class UserProfileView(View):
+    template_name = 'profile.html'
+
+    def get(self, request, username, *args, **kwargs):
+        profile = get_object_or_404(Profile, user__username=username)
+        user_posts = Post.objects.filter(author=profile.user)
+        context = {
+            'profile': profile,
+            'user_posts': user_posts,
+        }
+        return render(request, self.template_name, context)
