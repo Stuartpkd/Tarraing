@@ -66,3 +66,7 @@ class Profile(models.Model):
     def update_downloads_count(self):
         self.num_downloads = self.user.downloads.count()
     
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.user.username)
+        super(Profile, self).save(*args, **kwargs)
