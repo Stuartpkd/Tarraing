@@ -59,3 +59,7 @@ class Profile(models.Model):
 
     def update_likes_count(self):
         self.num_likes = self.user.brush_likes.count()
+
+    def update_posts_count(self):
+        self.num_posts = self.user.posts.count()
+    
