@@ -62,4 +62,7 @@ class Profile(models.Model):
 
     def update_posts_count(self):
         self.num_posts = self.user.posts.count()
+
+    def update_downloads_count(self):
+        self.num_downloads = self.user.downloads.count()
     
