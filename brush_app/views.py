@@ -97,8 +97,9 @@ class Upload(View):
             upload.save()
             return redirect(reverse('home'))
         else:
-            return render(request, 'upload.html', {'BrushUploadform': brush_upload_form})
-        
+            return render(request, 'upload.html', {'BrushUploadform':
+                          brush_upload_form})
+
         # return render(
         #     request,
         #     "upload.html",

@@ -24,7 +24,7 @@ class Post(models.Model):
 
     def number_of_likes(self):
         return self.likes.count()
-    
+
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
