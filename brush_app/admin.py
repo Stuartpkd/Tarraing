@@ -20,6 +20,7 @@ class CommentAdmin(admin.ModelAdmin):
     list_filter = ('created_on',)
     search_fields = ('name', 'email', 'body')
 
+
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
 
