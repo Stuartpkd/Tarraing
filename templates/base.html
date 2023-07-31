@@ -21,7 +21,7 @@
                 <a href="#">Brushes</a>
             </li>
             <li>
-                <a href="#">Profile</a>
+                <a href="{% url 'profile' username=request.user.username %}">Profile</a>
             </li>
             <li>
                 <a href="{% url 'upload' %}">Upload</a>

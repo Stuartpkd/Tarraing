@@ -108,6 +108,6 @@ class ProfileView(View):
         print("Requested username:", username)
         profile = get_object_or_404(Profile, user__username=username)
         print("Profile object:", profile)
-        user_posts = profile.user.posts.all()
+        user_posts = profile.user.brush_posts.all()
         return render(request, self.template_name, {'profile': profile,
                                                     'user_posts': user_posts})
