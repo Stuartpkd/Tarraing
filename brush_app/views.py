@@ -115,3 +115,12 @@ class ProfileView(View):
                                            'user_posts': user_posts,
                                            'total_likes_count': total_likes_count,
                                            'total_posts_count': total_posts_count})
+
+
+def save_brush(request, post_slug):
+    post = get_object_or_404(Post, slug=post_slug)
+
+    if not SavedBrush.objects.filter(user=request.user, post=post).exists():
+        SavedBrush.objects.create(user=request.user, post=post)
+
+    return redirect('post_detail', slug=post_slug)
