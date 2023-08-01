@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, reverse, redirect
+from django.db.models import Count
 from django.views import generic, View
 from django.http import HttpResponseRedirect
 from .models import Post, Profile
@@ -105,9 +106,9 @@ class ProfileView(View):
     template_name = 'profile.html'
 
     def get(self, request, username):
-        print("Requested username:", username)
         profile = get_object_or_404(Profile, user__username=username)
-        print("Profile object:", profile)
         user_posts = profile.user.brush_posts.all()
+        total_likes_count = user_posts.aggregate(total_likes=Count('likes'))['total_likes']
         return render(request, self.template_name, {'profile': profile,
-                                                    'user_posts': user_posts})
+                                                    'user_posts': user_posts,
+                                                    'total_likes_count': total_likes_count})
