@@ -17,6 +17,7 @@ class Post(models.Model):
     likes = models.ManyToManyField(User,
                                    related_name='brush_likes', blank=True)
     brush = CloudinaryField('brush_file', default='placeholder')
+    saved_brushes = models.ManyToManyField('SavedBrush', related_name='post_saved')
 
     class Meta:
         ordering = ['-created_on']
@@ -35,10 +36,10 @@ class Post(models.Model):
 
 class SavedBrush(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='savedbrush_set')
 
-    class Meta:
-        unique_together = ['user', 'post']
+    def __str__(self):
+        return f"{self.user.username} - {self.post.title}"
 
 
 class Comment(models.Model):

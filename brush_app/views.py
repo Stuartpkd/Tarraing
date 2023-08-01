@@ -18,10 +18,11 @@ class PostDetail(View):
         print(slug)
         post = get_object_or_404(Post, slug=slug)
         comments = post.comments.filter().order_by('created_on')
-        liked = False
-        if post.likes.filter(id=self.request.user.id).exists():
-            liked = True
-
+        has_saved_brush = False
+        if request.user.is_authenticated:
+            has_saved_brush = post.saved_brushes.filter(user=request.user).exists()
+        liked = post.likes.filter(id=request.user.id).exists()
+        
         return render(
             request,
             "post_detail.html",
@@ -29,6 +30,7 @@ class PostDetail(View):
                 "post": post,
                 "comments": comments,
                 "liked": liked,
+                "has_saved_brush": has_saved_brush,
                 "comment_form": CommentForm()
             },
         )
@@ -124,7 +126,10 @@ class ProfileView(View):
 def save_brush(request, post_slug):
     post = get_object_or_404(Post, slug=post_slug)
 
-    if not SavedBrush.objects.filter(user=request.user, post=post).exists():
-        SavedBrush.objects.create(user=request.user, post=post)
+    if request.user.is_authenticated:
+        has_saved_brush = SavedBrush.objects.filter(user=request.user, post=post).exists()
+
+        if not has_saved_brush:
+            SavedBrush.objects.create(user=request.user, post=post)
 
     return redirect('post_detail', slug=post_slug)

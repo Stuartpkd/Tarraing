@@ -20,7 +20,7 @@
     <h3>Brush File: <a href="{{ post.brush_file.url }}">{{ post.brush_file.name }}</a>
     </h3>
     {% if user.is_authenticated %}
-    {% if not post.savedbrush_set.filter(user=user).exists %}
+    {% if not has_saved_brush %}
     <form method="post" action="{% url 'save_brush' post.slug %}">
         {% csrf_token %}
         <button type="submit">Save Brush</button>
