@@ -110,11 +110,15 @@ class ProfileView(View):
         user_posts = profile.user.brush_posts.all()
         total_likes_count = user_posts.aggregate(total_likes=Count('likes'))['total_likes']
         total_posts_count = user_posts.count()
+
+        saved_brushes = SavedBrush.objects.filter(user=request.user)
+
         return render(request,
                       self.template_name, {'profile': profile,
                                            'user_posts': user_posts,
                                            'total_likes_count': total_likes_count,
-                                           'total_posts_count': total_posts_count})
+                                           'total_posts_count': total_posts_count,
+                                           'saved_brushes': saved_brushes})
 
 
 def save_brush(request, post_slug):
