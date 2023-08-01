@@ -109,6 +109,9 @@ class ProfileView(View):
         profile = get_object_or_404(Profile, user__username=username)
         user_posts = profile.user.brush_posts.all()
         total_likes_count = user_posts.aggregate(total_likes=Count('likes'))['total_likes']
-        return render(request, self.template_name, {'profile': profile,
-                                                    'user_posts': user_posts,
-                                                    'total_likes_count': total_likes_count})
+        total_posts_count = user_posts.count()
+        return render(request,
+                      self.template_name, {'profile': profile,
+                                           'user_posts': user_posts,
+                                           'total_likes_count': total_likes_count,
+                                           'total_posts_count': total_posts_count})
