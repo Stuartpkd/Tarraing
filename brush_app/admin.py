@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post, Comment, Profile
+from .models import Post, Comment, Profile, SavedBrush
 from django_summernote.admin import SummernoteModelAdmin
 
 
@@ -28,3 +28,11 @@ class ProfileAdmin(admin.ModelAdmin):
                     'num_posts', 'num_downloads')
     search_fields = ('user__username',)
     list_filter = ('num_likes', 'num_posts', 'num_downloads')
+
+
+@admin.register(SavedBrush)
+class SavedBrushAdmin(admin.ModelAdmin):
+    list_display = ('user', 'post')
+    search_fields = ('user__username', 'post__title')
+    list_filter = ('user', 'post')
+
