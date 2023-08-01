@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block content %}
 
 <h1>{{ profile.user.username }}'s Profile</h1>
@@ -37,11 +37,22 @@
     </div>
     <div class="toggle-content" id="saved_brushes_content">
         {% if saved_brushes %}
-        <ul>
+
+        <div>
             {% for saved_brush in saved_brushes %}
-            <li>{{ saved_brush.post.title }}</li>
+            <div>
+                <h1>{{ post.title }}</h1>
+                {% if post.brush_image %}
+                <img src="{{ post.brush_image.url }}" alt="{{ brush.name }} Brush Image">
+                {% else %}
+                <img src="{% static 'static/temp_images/github.png' %}" alt="Placeholder Image">
+                {% endif %}
+                <h3>Brush File: <a href="{{ post.brush_file.url }}">{{ post.brush_file.name }}</a>
+                </h3>
+            </div>
             {% endfor %}
-        </ul>
+        </div>
+
         {% else %}
         <p>No saved brushes yet.</p>
         {% endif %}
