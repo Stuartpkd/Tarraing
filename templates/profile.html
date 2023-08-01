@@ -4,32 +4,47 @@
 
 <h1>{{ profile.user.username }}'s Profile</h1>
 
-
 {% if profile.profile_picture %}
 <img src="{{ profile.profile_picture.url }}" alt="">
 {% endif %}
-
 
 <p>Likes: {{ total_likes_count }}</p>
 <p>Posts: {{ total_posts_count }}</p>
 <p>Downloads: {{ profile.num_downloads }}</p>
 
+<!-- Add the toggle switch for choosing between "My Posts" and "Saved Brushes" -->
+<div class="toggle-switch">
+    <input type="radio" id="my_posts_tab" name="content_switch" checked>
+    <label for="my_posts_tab">My Posts</label>
+    <input type="radio" id="saved_brushes_tab" name="content_switch">
+    <label for="saved_brushes_tab">Saved Brushes</label>
 
-<div class="">
-    {% for post in user_posts %}
-    <div class="">
+    <div class="toggle-content" id="my_posts_content">
+        {% for post in user_posts %}
+        <div class="">
+            <h2>{{ post.title }}</h2>
+            <p>{{ post.content }}</p>
 
-        <h2>{{ post.title }}</h2>
-        <p>{{ post.content }}</p>
+            {% if post.brush_image %}
+            <img src="{{ post.brush_image.url }}" alt="{{ post.title }} Brush Image">
+            {% endif %}
 
-        {% if post.brush_image %}
-        <img src="{{ post.brush_image.url }}" alt="{{ post.title }} Brush Image">
-        {% endif %}
+            <h3>Brush File: <a href="{{ post.brush_file.url }}">{{ post.brush_file.name }}</a></h3>
 
-        <h3>Brush File: <a href="{{ post.brush_file.url }}">{{ post.brush_file.name }}</a></h3>
-
-        <p>Likes: {{ post.likes.count }}</p>
+            <p>Likes: {{ post.likes.count }}</p>
+        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
+    <div class="toggle-content" id="saved_brushes_content">
+        {% if saved_brushes %}
+        <ul>
+            {% for saved_brush in saved_brushes %}
+            <li>{{ saved_brush.post.title }}</li>
+            <!-- You can display other details of the saved brush here -->
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>No saved brushes yet.</p>
+        {% endif %}
+    </div>
 </div>
-{% endblock %}
