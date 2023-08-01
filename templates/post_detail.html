@@ -16,7 +16,9 @@
     <img src="{% static 'static/temp_images/github.png' %}" alt="Placeholder Image">
     {% endif %}
 
-    <h3>Brush File: <a href="{{ post.brush_file.url }}">{{ post.brush_file.name }}</a></h3>
+    <h3>Brush File: <a href="{{ post.brush_file.url }}">{{ post.brush_file.name }}</a>
+    </h3>
+
 
     <div class="likes-comments">
         <h4>Likes: {{ post.likes.count }}</h4>

@@ -33,6 +33,11 @@ class Post(models.Model):
         super(Post, self).save(*args, **kwargs)
 
 
+class SavedBrush(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+
+
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE,
                              related_name='comments')
