@@ -19,7 +19,6 @@ class Post(models.Model):
                                    related_name='brush_likes', blank=True)
     brush = CloudinaryField('brush_file', default='placeholder')
     saved_brushes = models.ManyToManyField('SavedBrush', related_name='post_saved')
-    r = CloudinaryResource(public_id="brush-test.brush",resource_type="raw")
 
     class Meta:
         ordering = ['-created_on']
