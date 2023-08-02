@@ -22,7 +22,7 @@ class PostDetail(View):
         if request.user.is_authenticated:
             has_saved_artwork = post.saved_artworks.filter(user=request.user).exists()
         liked = post.likes.filter(id=request.user.id).exists()
-        
+
         return render(
             request,
             "post_detail.html",
@@ -91,6 +91,19 @@ class PostEdit(View):
             return redirect("post_detail", slug=slug)
 
         return render(request, "edit_post.html", {"form": form, "post": post})
+
+
+class PostDelete(View):
+    def post(self, request, slug, *args, **kwargs):
+        post = get_object_or_404(Post, slug=slug)
+
+        if request.user != post.author:
+            return HttpResponseForbidden("You do not have "
+                                         "permission to delete this post.")
+
+        post.delete()
+
+        return redirect("profile")
 
 
 class PostLike(View):
