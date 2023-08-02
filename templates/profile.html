@@ -12,7 +12,7 @@
 <p>Posts: {{ total_posts_count }}</p>
 <p>Downloads: {{ profile.num_downloads }}</p>
 
-<!-- Add the toggle switch for choosing between "My Posts" and "Saved Brushes" -->
+
 <div class="toggle-switch">
     <input type="radio" id="my_posts_tab" name="content_switch" checked>
     <label for="my_posts_tab">My Posts</label>
@@ -27,34 +27,25 @@
 
             {% if post.artwork_image %}
             <img src="{{ post.artwork_image.url }}" alt="{{ post.title }} Artwork Image">
+            <p>Likes: {{ post.likes.count }}</p>
             {% endif %}
 
-            <h3>Brush File: <a href="{{ post.brush_file.url }}">{{ post.brush_file.name }}</a></h3>
-
-            <p>Likes: {{ post.likes.count }}</p>
+            <a href="{% url 'edit_post' post.slug %}">Edit</a>
         </div>
         {% endfor %}
     </div>
     <div class="toggle-content" id="saved_artworks_content">
         {% if saved_artworks %}
-
+        {% for saved_artwork in saved_artworks %}
         <div>
-            {% for saved_artwork in saved_artworks %}
-            <div>
-                <h1>{{ post.title }}</h1>
-                {% if post.artwork_image %}
-                <img src="{{ post.artwork_image.url }}" alt="{{ brush.name }} Brush Image">
-                {% else %}
-                <img src="{% static 'static/temp_images/github.png' %}" alt="Placeholder Image">
-                {% endif %}
-                <h3>Brush File: <a href="{{ post.brush_file.url }}">{{ post.brush_file.name }}</a>
-                </h3>
-            </div>
-            {% endfor %}
+            <h1>{{ saved_artwork.title }}</h1>
+            {% if saved_artwork.artwork_image %}
+            <img src="{{ saved_artwork.artwork_image.url }}" alt="{{ saved_artwork.name }} Brush Image">
+            {% else %}
+            <img src="{% static 'temp_images/github.png' %}" alt="Placeholder Image">
+            {% endif %}
         </div>
-
-        {% else %}
-        <p>No saved brushes yet.</p>
+        {% endfor %}
         {% endif %}
     </div>
 </div>

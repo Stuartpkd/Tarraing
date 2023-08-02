@@ -70,13 +70,13 @@ class PostEdit(View):
     def get(self, request, slug, *args, **kwargs):
         post = get_object_or_404(Post, slug=slug)
 
-    if request.user != post.author:
-        return HttpResponseForbidden("You do not have "
-                                     "permission to edit this.")
+        if request.user != post.author:
+            return HttpResponseForbidden("You do not have "
+                                         "permission to edit this.")
 
-    form = ArtworkUploadForm(instance=post)
+        form = ArtworkUploadForm(instance=post)
 
-    return render(request, "post_edit.html", {"form": form, "post": post})
+        return render(request, "edit_post.html", {"form": form, "post": post})
 
     def post(self, request, slug, *args, **kwargs):
         post = get_object_or_404(Post, slug=slug)
@@ -85,12 +85,12 @@ class PostEdit(View):
             return HttpResponseForbidden("You do not have "
                                          "permission to edit this.")
 
-        form = YourPostFormHere(request.POST, instance=post)
+        form = ArtworkUploadForm(request.POST, instance=post)
         if form.is_valid():
             form.save()
             return redirect("post_detail", slug=slug)
 
-        return render(request, "post_edit.html", {"form": form, "post": post})
+        return render(request, "edit_post.html", {"form": form, "post": post})
 
 
 class PostLike(View):
@@ -121,8 +121,8 @@ class Upload(View):
         posts = Post.objects.all()
         artwork_upload_form = ArtworkUploadForm(request.POST, request.FILES)
 
-        if Artwork_upload_form.is_valid():
-            upload = Artwork_upload_form.save(commit=False)
+        if artwork_upload_form.is_valid():
+            upload = artwork_upload_form.save(commit=False)
             upload.author = self.request.user
             upload.save()
             return redirect(reverse('home'))

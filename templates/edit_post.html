@@ -1,19 +1,21 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Upload Brush</h1>
+<h1>Edit Post</h1>
 <form method="POST" action="{% url 'edit_post' post.slug %}">
     {% csrf_token %}
     <label for="title">Title:</label>
-    {{ form.title.as_widget(attrs={'value': post.title}) }}
+    <input type="text" name="title" value="{{ post.title }}">
 
     <label for="content">Description</label>
-    {{ form.content.as_widget(attrs={'value': post.content}) }}
+    <textarea name="content">{{ post.content }}</textarea>
 
     <label for="artwork_image">Artwork Image:</label>
-    {{ form.artwork_image.as_widget(attrs={'value': post.artwork_image.url}) }}
+    <input type="file" name="artwork_image">
+    {% if post.artwork_image %}
+    <img src="{{ post.artwork_image.url }}" alt="{{ post.title }} Artwork Image">
+    {% endif %}
 
     <button type="submit">{% if post.id %}Update{% else %}Post{% endif %}</button>
-
 </form>
 {% endblock %}

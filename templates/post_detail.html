@@ -12,7 +12,7 @@
     <p>{{ post.content }}</p>
 
     {% if post.artwork_image %}
-    <img src="{{ post._image.url }}" alt="{{ brush.name }} Brush Image">
+    <img src="{{ post_image.url }}" alt="{{ brush.name }} Brush Image">
     {% else %}
     <img src="{% static 'static/temp_images/github.png' %}" alt="Placeholder Image">
     {% endif %}
@@ -21,7 +21,7 @@
     </h3>
     {% if user.is_authenticated %}
     {% if not has_saved_artwork %}
-    <form method="post" action="{% url 'save_brush' post.slug %}">
+    <form method="post" action="{% url 'save_artwork' post.slug %}">
         {% csrf_token %}
         <button type="submit">Save Brush</button>
     </form>
