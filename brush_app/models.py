@@ -11,14 +11,14 @@ class Post(models.Model):
     title = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(max_length=100, unique=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE,
-                               related_name="brush_posts")
+                               related_name="artwork_posts")
     content = models.TextField()
-    brush_image = CloudinaryField('image', default='placeholder')
+    artwork_image = CloudinaryField('image', default='placeholder')
     created_on = models.DateTimeField(auto_now_add=True)
     likes = models.ManyToManyField(User,
-                                   related_name='brush_likes', blank=True)
-    brush = CloudinaryField('brush_file', default='placeholder')
-    saved_brushes = models.ManyToManyField('SavedBrush', related_name='post_saved')
+                                   related_name='artwork_likes', blank=True)
+    saved_artworks = models.ManyToManyField('SavedArtwork',
+                                            related_name='art_saved')
 
     class Meta:
         ordering = ['-created_on']
@@ -35,9 +35,10 @@ class Post(models.Model):
         super(Post, self).save(*args, **kwargs)
 
 
-class SavedBrush(models.Model):
+class SavedArtwork(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='savedbrush_set')
+    post = models.ForeignKey(Post, on_delete=models.CASCADE,
+                             related_name='savedartwork_set')
 
     def __str__(self):
         return f"{self.user.username} - {self.post.title}"
@@ -70,7 +71,7 @@ class Profile(models.Model):
         return self.user.username
 
     def update_likes_count(self):
-        self.num_likes = self.user.brush_likes.count()
+        self.num_likes = self.user.artwork_likes.count()
 
     def update_posts_count(self):
         self.num_posts = self.user.posts.count()

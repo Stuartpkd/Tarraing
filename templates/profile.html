@@ -16,8 +16,8 @@
 <div class="toggle-switch">
     <input type="radio" id="my_posts_tab" name="content_switch" checked>
     <label for="my_posts_tab">My Posts</label>
-    <input type="radio" id="saved_brushes_tab" name="content_switch">
-    <label for="saved_brushes_tab">Saved Brushes</label>
+    <input type="radio" id="saved_artworks_tab" name="content_switch">
+    <label for="saved_artworks_tab">Saved Artworks</label>
 
     <div class="toggle-content" id="my_posts_content">
         {% for post in user_posts %}
@@ -25,8 +25,8 @@
             <h2>{{ post.title }}</h2>
             <p>{{ post.content }}</p>
 
-            {% if post.brush_image %}
-            <img src="{{ post.brush_image.url }}" alt="{{ post.title }} Brush Image">
+            {% if post.artwork_image %}
+            <img src="{{ post.artwork_image.url }}" alt="{{ post.title }} Artwork Image">
             {% endif %}
 
             <h3>Brush File: <a href="{{ post.brush_file.url }}">{{ post.brush_file.name }}</a></h3>
@@ -35,15 +35,15 @@
         </div>
         {% endfor %}
     </div>
-    <div class="toggle-content" id="saved_brushes_content">
-        {% if saved_brushes %}
+    <div class="toggle-content" id="saved_artworks_content">
+        {% if saved_artworks %}
 
         <div>
-            {% for saved_brush in saved_brushes %}
+            {% for saved_artwork in saved_artworks %}
             <div>
                 <h1>{{ post.title }}</h1>
-                {% if post.brush_image %}
-                <img src="{{ post.brush_image.url }}" alt="{{ brush.name }} Brush Image">
+                {% if post.artwork_image %}
+                <img src="{{ post.artwork_image.url }}" alt="{{ brush.name }} Brush Image">
                 {% else %}
                 <img src="{% static 'static/temp_images/github.png' %}" alt="Placeholder Image">
                 {% endif %}
