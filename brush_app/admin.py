@@ -35,4 +35,3 @@ class SavedBrushAdmin(admin.ModelAdmin):
     list_display = ('user', 'post')
     search_fields = ('user__username', 'post__title')
     list_filter = ('user', 'post')
-

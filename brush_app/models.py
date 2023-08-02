@@ -4,6 +4,7 @@ from django.dispatch import receiver
 from django.utils.text import slugify
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
+from cloudinary import CloudinaryResource
 
 
 class Post(models.Model):
