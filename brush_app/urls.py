@@ -1,7 +1,7 @@
 from . import views
 from django.urls import path
 
-from .views import PostEdit
+from .views import PostEdit, PostDelete
 
 
 urlpatterns = [

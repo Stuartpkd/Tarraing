@@ -103,7 +103,8 @@ class PostDelete(View):
 
         post.delete()
 
-        return redirect("profile")
+        return redirect(reverse('profile',
+                                kwargs={'username': request.user.username}))
 
 
 class PostLike(View):

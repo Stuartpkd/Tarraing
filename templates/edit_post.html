@@ -16,7 +16,7 @@
     <img src="{{ post.artwork_image.url }}" alt="{{ post.title }} Artwork Image">
     {% endif %}
 
-    <button type="submit">{% if post.id %}Update{% else %}Post{% endif %}</button>
+    <button type="submit">Save</button>
 </form>
 
 <form method="POST" action="{% url 'delete_post' post.slug %}">
