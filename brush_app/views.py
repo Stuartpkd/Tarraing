@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.db.models import Count
 from django.views import generic, View
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponseForbidden
 from .models import Post, Profile, SavedArtwork
 from .forms import CommentForm, ArtworkUploadForm
 
@@ -64,6 +64,33 @@ class PostDetail(View):
                 "comment_form": CommentForm()
             },
         )
+
+
+class PostEdit(View):
+    def get(self, request, slug, *args, **kwargs):
+        post = get_object_or_404(Post, slug=slug)
+
+    if request.user != post.author:
+        return HttpResponseForbidden("You do not have "
+                                     "permission to edit this.")
+
+    form = ArtworkUploadForm(instance=post)
+
+    return render(request, "post_edit.html", {"form": form, "post": post})
+
+    def post(self, request, slug, *args, **kwargs):
+        post = get_object_or_404(Post, slug=slug)
+
+        if request.user != post.author:
+            return HttpResponseForbidden("You do not have "
+                                         "permission to edit this.")
+
+        form = YourPostFormHere(request.POST, instance=post)
+        if form.is_valid():
+            form.save()
+            return redirect("post_detail", slug=slug)
+
+        return render(request, "post_edit.html", {"form": form, "post": post})
 
 
 class PostLike(View):

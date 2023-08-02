@@ -8,6 +8,7 @@ urlpatterns = [
     path('like/<slug:slug>/', views.PostLike.as_view(), name='post_like'),
     path('upload/', views.Upload.as_view(), name='upload'),
     path('<slug:slug>/', views.PostDetail.as_view(), name='post_detail'),
-    path('<slug:post_slug>/save_artwork/', views.save_artwork, name='save_artwork'),
+    path('<slug:post_slug>/save_artwork/', views.save_artwork,
+         name='save_artwork'),
     path('', views.PostList.as_view(), name='home'),
 ]
