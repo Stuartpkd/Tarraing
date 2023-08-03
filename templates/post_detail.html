@@ -57,6 +57,12 @@
         {% csrf_token %}
         <button type="submit">Comment</button>
     </form>
+    {% if user.is_authenticated and comment.author == user %}
+    <a href="{% url 'edit_comment' comment.id %}">Edit</a>
+    <form method="POST" action="{% url 'delete_comment' comment.id %}">
+        {% csrf_token %}
+        <button type="submit">Delete</button>
+    </form>
     {% endif %}
 </div>
 {% endblock %}
