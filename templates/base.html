@@ -38,10 +38,9 @@
             <li>
                 <form method="get" action="{% url 'search_posts' %}">
                     {% csrf_token %}
-                    {{ search_form.search_query }}
+                    {{ form.search_query }}
                     <button type="submit">Search</button>
                 </form>
-
             </li>
         </ul>
     </nav>

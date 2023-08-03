@@ -3,13 +3,19 @@ from django.db.models import Count
 from django.views import generic, View
 from django.http import HttpResponseRedirect, HttpResponseForbidden
 from .models import Post, Profile, SavedArtwork, Comment
-from .forms import CommentForm, ArtworkUploadForm
+from .forms import CommentForm, ArtworkUploadForm, SearchForm
 
 
 class PostList(generic.ListView):
     model = Post
     template_name = 'index.html'
     paginate_by = 6
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = SearchForm()
+        print(context)
+        return context
 
 
 class PostDetail(View):
@@ -70,13 +76,14 @@ class PostDetail(View):
 
 def search_posts(request):
     query = request.GET.get('q')
+    form = SearchForm(request.GET)
+
     if query:
         results = Post.objects.filter(title__icontains=query)
     else:
-        results: None
-    
-    return render(request, 'search_results.html', {'results': results})
+        results = None
 
+    return render(request, 'search_results.html', {'results': results, 'form': form})
 
 
 class CommentEdit(View):
