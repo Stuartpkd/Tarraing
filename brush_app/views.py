@@ -66,6 +66,20 @@ class PostDetail(View):
         )
 
 
+class CommentEdit(View):
+    def get(self, request, comment_id, *args, **kwargs):
+        comment = get_object_or_404(Comment, id=comment_id)
+
+        if request.user != comment.author:
+            return HttpResponseForbidden("You do not have "
+                                         "permission to edit this comment.")
+
+        form = CommentForm(instance=comment)
+
+        return render(request, "post_view.html", {"form": form,
+                                                  "comment": comment})
+
+
 class PostEdit(View):
     def get(self, request, slug, *args, **kwargs):
         post = get_object_or_404(Post, slug=slug)
