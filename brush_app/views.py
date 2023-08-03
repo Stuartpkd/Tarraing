@@ -95,6 +95,18 @@ class CommentEdit(View):
                                                   "comment": comment})
 
 
+class CommentDelete(view):
+    def post(self, request, comment_id, *args, **kwargs):
+        comment = get_object_or_404(Comment, id=comment_id)
+
+        if request.user != comment.author:
+            return HttpResponseForbidden("You do not have permission"
+                                         " to delete this comment.")
+        
+        comment.delete()
+        return redirect("post_detail", slug=comment.post.slug)
+
+
 class PostEdit(View):
     def get(self, request, slug, *args, **kwargs):
         post = get_object_or_404(Post, slug=slug)
