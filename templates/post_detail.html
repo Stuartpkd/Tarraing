@@ -30,7 +30,6 @@
     <p>Please log in to save this brush.</p>
     {% endif %}
 
-
     <div class="likes-comments">
         <h4>Likes: {{ post.likes.count }}</h4>
         <h4>Comments: {{ post.comments.count }}</h4>
@@ -52,34 +51,36 @@
 
     {% if user.is_authenticated %}
     <h3>Comments:</h3>
+    <div class="card-body">
+
+        {% for comment in comments %}
+        <div class="comments">
+            <p class="font-weight-bold">
+
+                {{ comment.name }}
+                <span class=" text-muted font-weight-normal">
+
+                    {{ comment.created_on }}
+                </span> wrote:
+            </p>
+
+            {{ comment.body | linebreaks }}
+            {% if user.is_authenticated and comment.name == user.username %}
+            <a href="{% url 'edit_comment' comment.id %}">Edit</a>
+            <form method="POST" action="{% url 'delete_comment' comment.id %}">
+                {% csrf_token %}
+                <button type="submit">Delete</button>
+            </form>
+            {% endif %}
+        </div>
+
+        {% endfor %}
+    </div>
     <form method="post" action="">
         {{ comment_form | crispy }}
         {% csrf_token %}
         <button type="submit">Comment</button>
     </form>
-    {% if user.is_authenticated and comment.author == user %}
-    <a href="{% url 'edit_comment' comment.id %}">Edit</a>
-    <form method="POST" action="{% url 'delete_comment' comment.id %}">
-        {% csrf_token %}
-        <button type="submit">Delete</button>
-    </form>
     {% endif %}
-    <div class="pagination">
-        <span class="step-links">
-            {% if comments.has_previous %}
-            <a href="?page=1">&laquo; first</a>
-            <a href="?page={{ comments.previous_page_number }}">previous</a>
-            {% endif %}
-
-            <span class="current">
-                Page {{ comments.number }} of {{ comments.paginator.num_pages }}.
-            </span>
-
-            {% if comments.has_next %}
-            <a href="?page={{ comments.next_page_number }}">next</a>
-            <a href="?page={{ comments.paginator.num_pages }}">last &raquo;</a>
-            {% endif %}
-        </span>
-    </div>
 </div>
 {% endblock %}

@@ -1,9 +1,8 @@
 from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.db.models import Count
-from django.core.paginator import Paginator
 from django.views import generic, View
 from django.http import HttpResponseRedirect, HttpResponseForbidden
-from .models import Post, Profile, SavedArtwork
+from .models import Post, Profile, SavedArtwork, Comment
 from .forms import CommentForm, ArtworkUploadForm
 
 
@@ -19,9 +18,6 @@ class PostDetail(View):
         print(slug)
         post = get_object_or_404(Post, slug=slug)
         comments = post.comments.filter().order_by('created_on')
-        paginator = Paginator(comments, 8)
-        page_number = request.GET.get('page')
-        page_obj = paginator.get_page(page_number)
         has_saved_artwork = False
         if request.user.is_authenticated:
             has_saved_artwork = post.saved_artworks.filter(user=request.user).exists()
@@ -35,7 +31,8 @@ class PostDetail(View):
                 "comments": comments,
                 "liked": liked,
                 "has_saved_artwork": has_saved_artwork,
-                "comment_form": CommentForm()
+                "comment_form": CommentForm(),
+                "user": request.user
             },
         )
 
@@ -65,7 +62,8 @@ class PostDetail(View):
                 "post": post,
                 "comments": comments,
                 "liked": liked,
-                "comment_form": CommentForm()
+                "comment_form": CommentForm(),
+                "user": request.user
             },
         )
 
@@ -74,19 +72,22 @@ class CommentEdit(View):
     def get(self, request, comment_id, *args, **kwargs):
         comment = get_object_or_404(Comment, id=comment_id)
 
-        if request.user != comment.author:
+        print(f"request.user: {request.user}")
+        print(f"comment.name: {comment.name}")
+
+        if request.user.username != comment.name:
             return HttpResponseForbidden("You do not have "
                                          "permission to edit this comment.")
 
         form = CommentForm(instance=comment)
 
-        return render(request, "post_view.html", {"form": form,
-                                                  "comment": comment})
+        return render(request, "post_detail.html", {"form": form,
+                                                    "comment": comment})
 
     def post(self, request, comment_id, *args, **kwargs):
         comment = get_object_or_404(Comment, id=comment_id)
 
-        if request.user != comment.author:
+        if request.user.username != comment.name:
             return HttpResponseForbidden("You do not have "
                                          "permission to edit this comment.")
             
@@ -95,15 +96,15 @@ class CommentEdit(View):
                 form.save()
                 return redirect("post_detail", slug=comment.post.slug)
 
-        return render(request, "post_view.html", {"form": form,
-                                                  "comment": comment})
+        return render(request, "post_detail.html", {"form": form,
+                                                    "comment": comment})
 
 
-class CommentDelete(view):
+class CommentDelete(View):
     def post(self, request, comment_id, *args, **kwargs):
         comment = get_object_or_404(Comment, id=comment_id)
 
-        if request.user != comment.author:
+        if request.user.username != comment.name:
             return HttpResponseForbidden("You do not have permission"
                                          " to delete this comment.")
         
@@ -121,7 +122,7 @@ class PostEdit(View):
 
         form = ArtworkUploadForm(instance=post)
 
-        return render(request, "edit_post.html", {"form": form, "post": post})
+        return render(request, "post_detail.html", {"form": form, "post": post})
 
     def post(self, request, slug, *args, **kwargs):
         post = get_object_or_404(Post, slug=slug)
@@ -135,7 +136,7 @@ class PostEdit(View):
             form.save()
             return redirect("post_detail", slug=slug)
 
-        return render(request, "edit_post.html", {"form": form, "post": post})
+        return render(request, "post_detail.html", {"form": form, "post": post})
 
 
 class PostDelete(View):
