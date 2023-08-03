@@ -68,6 +68,17 @@ class PostDetail(View):
         )
 
 
+def search_posts(request):
+    query = request.GET.get('q')
+    if query:
+        results = Post.objects.filter(title__icontains=query)
+    else:
+        results: None
+    
+    return render(request, 'search_results.html', {'results': results})
+
+
+
 class CommentEdit(View):
     def get(self, request, comment_id, *args, **kwargs):
         comment = get_object_or_404(Comment, id=comment_id)
