@@ -36,7 +36,13 @@
             </li>
             {% endif %}
             <li>
-                <a href="#">Search</a>
+                <a href="#">
+                    <form method="get" action="{% url 'search_posts' %}">
+                        {% csrf_token %}
+                        {{ search_form.search_query }}
+                        <button type="submit">Search</button>
+                    </form>
+                </a>
             </li>
         </ul>
     </nav>
