@@ -72,32 +72,29 @@ class CommentEdit(View):
     def get(self, request, comment_id, *args, **kwargs):
         comment = get_object_or_404(Comment, id=comment_id)
 
-        print(f"request.user: {request.user}")
-        print(f"comment.name: {comment.name}")
-
         if request.user.username != comment.name:
             return HttpResponseForbidden("You do not have "
                                          "permission to edit this comment.")
 
         form = CommentForm(instance=comment)
 
-        return render(request, "post_detail.html", {"form": form,
-                                                    "comment": comment})
+        return render(request, "edit_comment.html", {"form": form,
+                                                     "comment": comment})
 
     def post(self, request, comment_id, *args, **kwargs):
         comment = get_object_or_404(Comment, id=comment_id)
 
         if request.user.username != comment.name:
-            return HttpResponseForbidden("You do not have "
-                                         "permission to edit this comment.")
-            
-            form = CommentForm(request.POST, instance=comment)
-            if form.is_valid():
-                form.save()
-                return redirect("post_detail", slug=comment.post.slug)
+            return HttpResponseForbidden("You do not have permission "
+                                         "to edit this comment.")
 
-        return render(request, "post_detail.html", {"form": form,
-                                                    "comment": comment})
+        form = CommentForm(request.POST, instance=comment)
+        if form.is_valid():
+            form.save()
+            return redirect("post_detail", slug=comment.post.slug)
+
+        return render(request, "edit_comment.html",
+                      {"form": form, "comment": comment})
 
 
 class CommentDelete(View):
@@ -122,7 +119,8 @@ class PostEdit(View):
 
         form = ArtworkUploadForm(instance=post)
 
-        return render(request, "post_detail.html", {"form": form, "post": post})
+        return render(request, "post_detail.html",
+                      {"form": form, "post": post})
 
     def post(self, request, slug, *args, **kwargs):
         post = get_object_or_404(Post, slug=slug)
@@ -136,7 +134,8 @@ class PostEdit(View):
             form.save()
             return redirect("post_detail", slug=slug)
 
-        return render(request, "post_detail.html", {"form": form, "post": post})
+        return render(request, "post_detail.html",
+                      {"form": form, "post": post})
 
 
 class PostDelete(View):
