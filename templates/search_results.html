@@ -1,9 +1,21 @@
 {% if results %}
 <h1>Search Results</h1>
 <ul>
-    {% for post in results %}
-    <li><a href="{% url 'post_detail' post.slug %}">{{ post.title }}</a></li>
-    {% endfor %}
+    <div class="">
+        {% for post in object_list %}
+        <a href="{% url 'post_detail' post.slug %}">
+            <div class="post">
+                <h2>{{ post.title }}</h2>
+                {% if post.artwork_image %}
+                <img src="{{ post.artwork_image.url }}" alt="{{ brush.name }} Brush Image">
+                {% else %}
+                <img src="{% static 'static/temp_images/github.png' %}" alt="Placeholder Image">
+                {% endif %}
+                <p>{{ post.content }}</p>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
 </ul>
 {% else %}
 <p>No posts found matching the search query.</p>
