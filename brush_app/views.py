@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.db.models import Count
+from django.core.paginator import Paginator
 from django.views import generic, View
 from django.http import HttpResponseRedirect, HttpResponseForbidden
 from .models import Post, Profile, SavedArtwork
@@ -18,6 +19,9 @@ class PostDetail(View):
         print(slug)
         post = get_object_or_404(Post, slug=slug)
         comments = post.comments.filter().order_by('created_on')
+        paginator = Paginator(comments, 8)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
         has_saved_artwork = False
         if request.user.is_authenticated:
             has_saved_artwork = post.saved_artworks.filter(user=request.user).exists()
