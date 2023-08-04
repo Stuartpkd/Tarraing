@@ -4,9 +4,31 @@ body {
     ;
 }
 
+/* Anchor tags */
+
+a {
+    color: aliceblue;
+    text-decoration: none !important;
+    font-family: 'Space Grotesk';
+}
+
+/* H1 */
+
+h1 {
+    font-weight: 500;
+}
+
+/* H2 */
+
+h2 {
+    font-weight: 400;
+}
+
 /* Buttons */
 
 button {
+    color: aliceblue;
+    font-family: 'Space Grotesk';
     background: linear-gradient(90deg, rgba(216, 131, 244, 1) 0%, rgba(178, 74, 213, 1) 100%);
     border-radius: 16px;
     min-width: 100px;
