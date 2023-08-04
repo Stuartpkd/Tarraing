@@ -38,16 +38,44 @@ a {
     font-family: 'Space Grotesk';
 }
 
+
 /* H1 */
 
 h1 {
+    color: aliceblue;
     font-weight: 500;
+    font-family: 'Space Grotesk';
 }
 
 /* H2 */
 
 h2 {
+    color: aliceblue;
     font-weight: 400;
+    font-family: 'Space Grotesk';
+}
+
+/* H3 */
+
+h3 {
+    color: aliceblue;
+    font-weight: 300;
+    font-family: 'Space Grotesk';
+}
+
+/* H4 */
+
+h4 {
+    color: aliceblue;
+    font-weight: 300;
+    font-family: 'Space Grotesk';
+}
+
+/* Post detail */
+
+.post>p {
+    color: aliceblue;
+    font-weight: 300;
 }
 
 /* Buttons */
