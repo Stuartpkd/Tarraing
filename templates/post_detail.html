@@ -60,8 +60,13 @@
                 {{ comment.name }}
                 <span class=" text-muted font-weight-normal">
 
-                    {{ comment.created_on }}
-                </span> wrote:
+                    <p>
+                        {{ comment.created_on }}
+                    </p>
+                </span>
+                <p>
+                    wrote:
+                </p>
             </p>
 
             {{ comment.body | linebreaks }}

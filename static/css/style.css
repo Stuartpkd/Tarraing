@@ -78,6 +78,14 @@ h4 {
     font-weight: 300;
 }
 
+/* Comments */
+
+.comments>p {
+    color: aliceblue;
+    font-weight: 300;
+    font-family: 'Space Grotesk';
+}
+
 /* Buttons */
 
 button {
