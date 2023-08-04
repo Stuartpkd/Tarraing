@@ -4,6 +4,32 @@ body {
     ;
 }
 
+/* Nav */
+
+/* Overiding bootstrap classes */
+.bg-light {
+    background-color: transparent !important;
+}
+
+.btn-outline-success {
+    color: aliceblue;
+    font-family: 'Space Grotesk';
+    background: linear-gradient(90deg, rgba(216, 131, 244, 1) 0%, rgba(178, 74, 213, 1) 100%);
+    border-radius: 16px;
+    min-width: 100px;
+    min-height: 50px;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: aliceblue;
+}
+
+.navbar-light .navbar-brand {
+    color: aliceblue;
+}
+
 /* Anchor tags */
 
 a {
