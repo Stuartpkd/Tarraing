@@ -80,7 +80,9 @@ h4 {
 
 /* Comments */
 
-.comments>p {
+
+
+.comments-made {
     color: aliceblue;
     font-weight: 300;
     font-family: 'Space Grotesk';
