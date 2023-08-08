@@ -1,10 +1,14 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
+{% if user.is_authenticated %}
 <h1>Edit Comment</h1>
 <form method="post">
     {% csrf_token %}
     {{ form | crispy }}
     <button type="submit">Update Comment</button>
 </form>
+{% else %}
+<h1>Please create an account or login to view this content.</h1>
+<button><a href="{% url 'account_signup' %}"></a></button>
 {% endblock %}
