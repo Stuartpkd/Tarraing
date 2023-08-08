@@ -26,7 +26,7 @@
                         <h3>Image File: <a href="{{ post.brush_file.url }}">{{ post.brush_file.name }}</a></h3>
                     </div>
                     <div class="col-md-6">
-                        <!-- Save Brush form -->
+
                         {% if user.is_authenticated %}
                         {% if not has_saved_artwork %}
                         <form method="post" action="{% url 'save_artwork' post.slug %}">
@@ -35,7 +35,7 @@
                         </form>
                         {% endif %}
                         {% else %}
-                        <p>Please log in to save this brush.</p>
+                        <p>Please log in to save this artwork.</p>
                         {% endif %}
 
                         <div class="likes-comments">
@@ -43,7 +43,6 @@
                             <h4>Comments: {{ post.comments.count }}</h4>
                         </div>
 
-                        <!-- Like/Unlike buttons -->
                         {% if user.is_authenticated %}
                         <form method="POST" action="{% url 'post_like' post.slug %}">
                             {% csrf_token %}
@@ -61,7 +60,7 @@
             </div>
         </div>
 
-        <!-- Comments section on the right for larger screens -->
+
         {% if user.is_authenticated %}
         <div class="col-lg-4 mt-4 mt-lg-0">
             <div class="comments">

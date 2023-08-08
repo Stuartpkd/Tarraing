@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, reverse, redirect
-from django.db.models import Count
+from django.db.models import Count, Q
 from django.views import generic, View
 from django.http import HttpResponseRedirect, HttpResponseForbidden
 from .models import Post, Profile, SavedArtwork, Comment
@@ -77,11 +77,21 @@ class PostDetail(View):
 def search_posts(request):
     query = request.GET.get('q')
     form = SearchForm(request.GET)
+    results = None
 
-    if query:
-        results = Post.objects.filter(title__icontains=query)
+    print(query)
+
+    if query is not None:
+        args = Q(title__icontains=query)
+        results = Post.objects.filter(args)
+        print(results)
     else:
         results = None
+
+    # if query:
+    #     results = Post.objects.filter(title__icontains=query)
+    # else:
+    #     results = None
 
     return render(request, 'search_results.html', {'results': results, 'form': form})
 
