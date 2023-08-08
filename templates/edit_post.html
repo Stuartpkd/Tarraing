@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% if user.is_authenticated %}
 <h1>Edit Post</h1>
 <form method="POST" action="{% url 'edit_post' post.slug %}">
     {% csrf_token %}
@@ -23,4 +24,8 @@
     {% csrf_token %}
     <button type="submit">Delete</button>
 </form>
+{% else %}
+<h1>Please create an account or login to view this content.</h1>
+<button><a href="{% url 'account_signup' %}"></a></button>
+{% endif %}
 {% endblock %}

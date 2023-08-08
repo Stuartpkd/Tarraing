@@ -5,6 +5,7 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
+{% if user.is_authenticated %}
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-lg-8">
@@ -98,4 +99,8 @@
         {% endif %}
     </div>
 </div>
+{% else %}
+<h1>Please create an account or login to view this content.</h1>
+<button><a href="{% url 'account_signup' %}"></a></button>
+{% endif %}
 {% endblock %}
