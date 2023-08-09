@@ -89,11 +89,6 @@ def search_posts(request):
     else:
         results = None
 
-    # if query:
-    #     results = Post.objects.filter(title__icontains=query)
-    # else:
-    #     results = None
-
     return render(request, 'search_results.html', {'results': results, 'form': form})
 
 
@@ -194,9 +189,16 @@ class PostLike(View):
 
 
 class Upload(CreateView):
-    model = Upload
+    model = Post
     fields = ['title', 'content', 'artwork_image']
     template_name = 'upload_form.html'
+    success_url = '/'
+
+    def form_valid(self, form):
+        post = form.save(commit=False)  
+        post.author = self.request.user
+        post.save() 
+        return super().form_valid(form)
 
 
 class ProfileView(View):
