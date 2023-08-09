@@ -32,11 +32,14 @@
                         {% if not has_saved_artwork %}
                         <form method="post" action="{% url 'save_artwork' post.slug %}">
                             {% csrf_token %}
-                            <button type="submit" class="btn btn-primary">Save Brush</button>
+                            <button type="submit" class="btn btn-primary">Save Artwork</button>
                         </form>
                         {% endif %}
                         {% else %}
-                        <p>Please log in to save this artwork.</p>
+                        <form method="post" action="{% url 'unsave_artwork' post.slug %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">Unsave Brush</button>
+                        </form>
                         {% endif %}
 
                         <div class="likes-comments">

@@ -3,18 +3,16 @@
 {% block content %}
 {% if user.is_authenticated %}
 <h1>Upload Brush</h1>
-<form method="POST" action="">
+
+<form method="POST" enctype="multipart/form-data">
+
+
     {% csrf_token %}
-    <label for="title">Title:</label>
-    {{ form.title }}
 
-    <label for="content">Description</label>
-    {{ form.content }}
 
-    <label for="artwork_image">Artwork Image:</label>
-    {{ form.artwork_image }}
+    {{ form.as_p }}
 
-    <button type="submit">Post</button>
+    <input type="submit" value="Submit">
 </form>
 {% else %}
 <h1>Please create an account or login to view this content.</h1>

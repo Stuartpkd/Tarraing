@@ -1,8 +1,9 @@
 from django.shortcuts import render, get_object_or_404, reverse, redirect
+from django.views.generic.edit import CreateView
 from django.db.models import Count, Q
 from django.views import generic, View
 from django.http import HttpResponseRedirect, HttpResponseForbidden
-from .models import Post, Profile, SavedArtwork, Comment
+from .models import Post, Profile, SavedArtwork, Comment, Upload
 from .forms import CommentForm, ArtworkUploadForm, SearchForm
 
 
@@ -192,30 +193,10 @@ class PostLike(View):
         return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
 
-class Upload(View):
-
-    def get(self, request, *args, **kwargs):
-        posts = Post.objects.all()
-        return render(
-            request,
-            "upload.html",
-            {
-                "form": ArtworkUploadForm()
-            },
-        )
-
-    def post(self, request, *args, **kwargs):
-        posts = Post.objects.all()
-        artwork_upload_form = ArtworkUploadForm(request.POST, request.FILES)
-
-        if artwork_upload_form.is_valid():
-            upload = artwork_upload_form.save(commit=False)
-            upload.author = self.request.user
-            upload.save()
-            return redirect(reverse('home'))
-        else:
-            return render(request, 'upload.html', {'ArtworkUploadform':
-                          Artwork_upload_form})
+class Upload(CreateView):
+    model = Upload
+    fields = ['title', 'content', 'artwork_image']
+    template_name = 'upload_form.html'
 
 
 class ProfileView(View):
@@ -247,4 +228,13 @@ def save_artwork(request, post_slug):
         if not has_saved_artwork:
             SavedArtwork.objects.create(user=request.user, post=post)
 
+    return redirect('post_detail', slug=post_slug)
+
+
+def unsave_artwork(request, post_slug):
+    post = get_object_or_404(Post, slug=post_slug)
+    
+    if request.user.is_authenticated:
+        SavedArtwork.objects.filter(user=request.user, post=post).delete()
+    
     return redirect('post_detail', slug=post_slug)

@@ -35,6 +35,12 @@ class Post(models.Model):
         super(Post, self).save(*args, **kwargs)
 
 
+class Upload(models.Model):
+    title = models.CharField(max_length=100, unique=True)
+    content = models.TextField(max_length=200, unique=True)
+    artwork_image = CloudinaryField('image', default='placeholder')
+
+
 class SavedArtwork(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE,
