@@ -5,6 +5,7 @@ from django.views import generic, View
 from django.http import HttpResponseRedirect, HttpResponseForbidden
 from .models import Post, Profile, SavedArtwork, Comment, Upload
 from .forms import CommentForm, ArtworkUploadForm, SearchForm
+import random
 
 
 class PostList(generic.ListView):
@@ -231,6 +232,12 @@ def save_artwork(request, post_slug):
             SavedArtwork.objects.create(user=request.user, post=post)
 
     return redirect('post_detail', slug=post_slug)
+
+
+def random_post_redirect(request):
+    all_posts = list(Post.objects.all())
+    random_post = random.choice(all_posts)
+    return redirect(reverse('post_detail', kwargs={'slug': random_post.slug}))
 
 
 def unsave_artwork(request, post_slug):

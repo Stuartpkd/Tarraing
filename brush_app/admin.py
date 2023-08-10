@@ -40,4 +40,3 @@ class SavedArtworkAdmin(admin.ModelAdmin):
 @admin.register(Upload)
 class UploadAdmin(admin.ModelAdmin):
     list_display = ('title', 'content', 'artwork_image')
-    

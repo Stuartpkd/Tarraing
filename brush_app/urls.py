@@ -1,7 +1,7 @@
 from . import views
 from django.urls import path
 
-from .views import PostEdit, PostDelete, CommentEdit, CommentDelete, Upload
+from .views import PostEdit, PostDelete, CommentEdit, CommentDelete, Upload, random_post_redirect
 
 
 urlpatterns = [
@@ -13,7 +13,8 @@ urlpatterns = [
     path('comment/<int:comment_id>/delete/', views.CommentDelete.as_view(), name='delete_comment'),
     path('search/', views.search_posts, name='search_posts'),
     path('like/<slug:slug>/', views.PostLike.as_view(), name='post_like'),
-    path('<slug:slug>/', views.PostDetail.as_view(), name='post_detail'),
+    path('post-detail/<slug:slug>/', views.PostDetail.as_view(), name='post_detail'),
+    path('random-post/', random_post_redirect, name='random_post_redirect'),
     path('<slug:post_slug>/save_artwork/', views.save_artwork,
          name='save_artwork'),
     path('<slug:post_slug>/unsave_artwork/', views.unsave_artwork, name='unsave_artwork'),
