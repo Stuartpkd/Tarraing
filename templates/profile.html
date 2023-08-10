@@ -3,55 +3,90 @@
 {% block content %}
 {% if user.is_authenticated %}
 
-<h1>{{ profile.user.username }}'s Profile</h1>
-
-{% if profile.profile_picture %}
-<img src="{{ profile.profile_picture.url }}" alt="">
-{% endif %}
-
-<p>Likes: {{ total_likes_count }}</p>
-<p>Posts: {{ total_posts_count }}</p>
-<p>Downloads: {{ profile.num_downloads }}</p>
-
-
-<div class="toggle-switch">
-    <input type="radio" id="my_posts_tab" name="content_switch" checked>
-    <label for="my_posts_tab">My Posts</label>
-    <input type="radio" id="saved_artworks_tab" name="content_switch">
-    <label for="saved_artworks_tab">Saved Artworks</label>
-
-    <div class="toggle-content" id="my_posts_content">
-        {% for post in user_posts %}
-        <div class="">
-            <h2>{{ post.title }}</h2>
-            <p>{{ post.content }}</p>
-
-            {% if post.artwork_image %}
-            <img src="{{ post.artwork_image.url }}" alt="{{ post.title }} Artwork Image">
-            <p>Likes: {{ post.likes.count }}</p>
-            {% endif %}
-
-            <a href="{% url 'edit_post' post.slug %}">Edit</a>
+<div class="container">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>{{ profile.user.username }}'s Profile</h1>
+            </div>
         </div>
-        {% endfor %}
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                {% if profile.profile_picture %}
+                <img src="{{ profile.profile_picture.url }}" alt="" class="img-fluid">
+                {% endif %}
+            </div>
+            <div class="col-md-8">
+                <p>Likes: {{ total_likes_count }}</p>
+                <p>Posts: {{ total_posts_count }}</p>
+                <p>Downloads: {{ profile.num_downloads }}</p>
+            </div>
+        </div>
     </div>
-    <div class="toggle-content" id="saved_artworks_content">
-        {% if saved_artworks %}
-        {% for saved_artwork in saved_artworks %}
-        <div>
-            <h1>{{ saved_artwork.title }}</h1>
-            {% if saved_artwork.artwork_image %}
-            <img src="{{ saved_artwork.artwork_image.url }}" alt="{{ saved_artwork.name }} Brush Image">
-            {% else %}
-            <img src="{% static 'temp_images/github.png' %}" alt="Placeholder Image">
-            {% endif %}
+
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="toggle-switch">
+                <input type="radio" id="my_posts_tab" name="content_switch" checked>
+                <label for="my_posts_tab">My Posts</label>
+                <input type="radio" id="saved_artworks_tab" name="content_switch">
+                <label for="saved_artworks_tab">Saved Artworks</label>
+            </div>
+
+            <div class="toggle-content" id="my_posts_content">
+                <div class="row">
+                    {% for post in user_posts %}
+                    <div class="col-md-3">
+                        <div class="">
+                            <h2>{{ post.title }}</h2>
+                            <p>{{ post.content }}</p>
+
+                            {% if post.artwork_image %}
+                            <img src="{{ post.artwork_image.url }}" alt="{{ post.title }} Artwork Image"
+                                class="img-fluid">
+                            <p>Likes: {{ post.likes.count }}</p>
+                            {% endif %}
+
+                            <a href="{% url 'edit_post' post.slug %}" class="btn btn-primary">Edit</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="toggle-content" id="saved_artworks_content">
+                <div class="row">
+                    {% if saved_artworks %}
+                    {% for saved_artwork in saved_artworks %}
+                    <div class="col-md-3">
+                        <div>
+                            <h1>{{ saved_artwork.title }}</h1>
+                            {% if saved_artwork.artwork_image %}
+                            <img src="{{ saved_artwork.artwork_image.url }}" alt="{{ saved_artwork.name }} Brush Image"
+                                class="img-fluid">
+                            {% else %}
+                            <img src="{% static 'temp_images/github.png' %}" alt="Placeholder Image" class="img-fluid">
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
         </div>
-        {% endfor %}
-        {% endif %}
     </div>
 </div>
+
 {% else %}
-<h1>Please create an account or login to view this content.</h1>
-<button><a href="{% url 'account_signup' %}">Sign Up</a></button>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Please create an account or login to view this content.</h1>
+            <button><a href="{% url 'account_signup' %}" class="btn btn-primary">Sign Up</a></button>
+        </div>
+    </div>
+</div>
 {% endif %}
 {% endblock %}
