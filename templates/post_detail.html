@@ -25,8 +25,7 @@
                         {% endif %}
 
                         <h3>Image File:</h3>
-                        <a href="{{ post.artwork_image.url }}" class="btn btn-primary" download>Download</a>
-
+                        <a href="{% url 'download_artwork' post.slug %}" class="btn btn-primary" download>Download</a>
                     </div>
                     <div class="col-md-6">
 

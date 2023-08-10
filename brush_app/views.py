@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.views.generic.edit import CreateView
 from django.db.models import Count, Q
 from django.views import generic, View
-from django.http import HttpResponseRedirect, HttpResponseForbidden
+from django.http import HttpResponseRedirect, HttpResponseForbidden, FileResponse, HttpResponse
 from .models import Post, Profile, SavedArtwork, Comment, Upload
 from .forms import CommentForm, ArtworkUploadForm, SearchForm
 import random
@@ -91,6 +91,24 @@ def search_posts(request):
         results = None
 
     return render(request, 'search_results.html', {'results': results, 'form': form})
+
+
+def download_artwork(request, post_slug):
+    post = get_object_or_404(Post, slug=post_slug)
+
+    if post.artwork_image:
+        image_format = post.artwork_image.format
+        public_id = post.artwork_image.public_id
+
+        download_url = f"https://res.cloudinary.com/YOUR_CLOUD_NAME/image/upload/{public_id}.{image_format}"
+
+        response = HttpResponse()
+        response['Content-Disposition'] = f'attachment; filename="{post.title}.{image_format}"'
+        response['X-Accel-Redirect'] = download_url  # For nginx usage
+
+        return response
+    else:
+        return HttpResponseNotFound("Artwork not found")
 
 
 class CommentEdit(View):

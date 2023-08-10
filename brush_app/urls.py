@@ -1,7 +1,7 @@
 from . import views
 from django.urls import path
 
-from .views import PostEdit, PostDelete, CommentEdit, CommentDelete, Upload, random_post_redirect
+from .views import PostEdit, PostDelete, CommentEdit, CommentDelete, Upload, random_post_redirect, download_artwork
 
 
 urlpatterns = [
@@ -15,6 +15,7 @@ urlpatterns = [
     path('like/<slug:slug>/', views.PostLike.as_view(), name='post_like'),
     path('post-detail/<slug:slug>/', views.PostDetail.as_view(), name='post_detail'),
     path('random-post/', random_post_redirect, name='random_post_redirect'),
+    path('download/<slug:post_slug>/', download_artwork, name='download_artwork'),
     path('<slug:post_slug>/save_artwork/', views.save_artwork,
          name='save_artwork'),
     path('<slug:post_slug>/unsave_artwork/', views.unsave_artwork, name='unsave_artwork'),
