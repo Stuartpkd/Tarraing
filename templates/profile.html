@@ -63,9 +63,9 @@
                     <div class="col-md-3">
                         <div>
                             <h1>{{ saved_artwork.title }}</h1>
-                            {% if saved_artwork.artwork_image %}
-                            <img src="{{ saved_artwork.artwork_image.url }}" alt="{{ saved_artwork.name }} Brush Image"
-                                class="img-fluid">
+                            {% if saved_artwork.post.artwork_image %}
+                            <img src="{{ saved_artwork.post.artwork_image.url }}"
+                                alt="{{ saved_artwork.name }} Brush Image" class="img-fluid">
                             {% else %}
                             <img src="{% static 'temp_images/github.png' %}" alt="Placeholder Image" class="img-fluid">
                             {% endif %}
