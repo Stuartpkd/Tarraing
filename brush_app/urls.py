@@ -16,9 +16,8 @@ urlpatterns = [
     path('post-detail/<slug:slug>/', views.PostDetail.as_view(), name='post_detail'),
     path('random-post/', random_post_redirect, name='random_post_redirect'),
     path('download/<slug:post_slug>/', download_artwork, name='download_artwork'),
-    path('<slug:post_slug>/save_artwork/', views.save_artwork,
-         name='save_artwork'),
-    path('<slug:post_slug>/unsave_artwork/', views.unsave_artwork, name='unsave_artwork'),
+    path('save-post/<slug:post_slug>/', views.save_post, name='save_post'),
+    path('unsave-post/<slug:post_slug>/', views.unsave_post, name='unsave_post'),
     path('upload', Upload.as_view(), name='upload'),
     path('', views.PostList.as_view(), name='home'),
 ]

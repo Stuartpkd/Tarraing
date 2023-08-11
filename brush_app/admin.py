@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post, Comment, Profile, SavedArtwork, Upload
+from .models import Post, Comment, Profile, SavedArtwork, Upload, SavedPost
 from django_summernote.admin import SummernoteModelAdmin
 
 
@@ -40,3 +40,11 @@ class SavedArtworkAdmin(admin.ModelAdmin):
 @admin.register(Upload)
 class UploadAdmin(admin.ModelAdmin):
     list_display = ('title', 'content', 'artwork_image')
+
+
+@admin.register(SavedPost)
+class SavedPostAdmin(admin.ModelAdmin):
+    list_display = ('user', 'post', 'saved_at')
+    list_filter = ('user', 'post', 'saved_at')
+    search_fields = ('user__username', 'post__title')
+    readonly_fields = ('saved_at',)

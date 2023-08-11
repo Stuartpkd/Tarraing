@@ -28,7 +28,7 @@ class PostDetail(View):
         comments = post.comments.filter().order_by('created_on')
         has_saved_artwork = False
         if request.user.is_authenticated:
-            has_saved_artwork = post.saved_artworks.filter(user=request.user).exists()
+            has_saved_artwork = SavedArtwork.objects.filter(user=request.user, post=post).exists()
         liked = post.likes.filter(id=request.user.id).exists()
 
         return render(
@@ -104,8 +104,7 @@ def download_artwork(request, post_slug):
 
         response = HttpResponse()
         response['Content-Disposition'] = f'attachment; filename="{post.title}.{image_format}"'
-        response['X-Accel-Redirect'] = download_url  # For nginx usage
-
+        response['X-Accel-Redirect'] = download_url  
         return response
     else:
         return HttpResponseNotFound("Artwork not found")
@@ -240,16 +239,27 @@ class ProfileView(View):
                                            'saved_artworks': saved_artworks})
 
 
-def save_artwork(request, post_slug):
+def save_post(request, post_slug):
     post = get_object_or_404(Post, slug=post_slug)
+    
+    if not request.user.saved_posts.filter(post=post).exists():
+        SavedPost.objects.create(user=request.user, post=post)
+        request.user.profile.update_saved_posts_count()
+        return JsonResponse({'message': 'Post saved successfully'})
 
-    if request.user.is_authenticated:
-        has_saved_artwork = SavedArtwork.objects.filter(user=request.user, post=post).exists()
+    return JsonResponse({'message': 'Post already saved'})
 
-        if not has_saved_artwork:
-            SavedArtwork.objects.create(user=request.user, post=post)
 
-    return redirect('post_detail', slug=post_slug)
+def unsave_post(request, post_slug):
+    post = get_object_or_404(Post, slug=post_slug)
+    saved_post = request.user.saved_posts.filter(post=post).first()
+
+    if saved_post:
+        saved_post.delete()
+        request.user.profile.update_saved_posts_count()
+        return JsonResponse({'message': 'Post unsaved successfully'})
+
+    return JsonResponse({'message': 'Post not saved'})
 
 
 def random_post_redirect(request):
@@ -258,10 +268,3 @@ def random_post_redirect(request):
     return redirect(reverse('post_detail', kwargs={'slug': random_post.slug}))
 
 
-def unsave_artwork(request, post_slug):
-    post = get_object_or_404(Post, slug=post_slug)
-    
-    if request.user.is_authenticated:
-        SavedArtwork.objects.filter(user=request.user, post=post).delete()
-    
-    return redirect('post_detail', slug=post_slug)

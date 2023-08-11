@@ -17,8 +17,6 @@ class Post(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     likes = models.ManyToManyField(User,
                                    related_name='artwork_likes', blank=True)
-    saved_artworks = models.ManyToManyField('SavedArtwork',
-                                            related_name='art_saved')
 
     class Meta:
         ordering = ['-created_on']
@@ -33,6 +31,18 @@ class Post(models.Model):
         if not self.slug:
             self.slug = slugify(self.title)
         super(Post, self).save(*args, **kwargs)
+
+
+class SavedPost(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    saved_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('user', 'post')
+
+    def __str__(self):
+        return f"{self.user.username} saved {self.post.title}"
 
 
 class Upload(models.Model):
