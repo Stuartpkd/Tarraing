@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.views.generic.edit import CreateView
 from django.db.models import Count, Q
 from django.views import generic, View
-from django.http import HttpResponseRedirect, HttpResponseForbidden, FileResponse, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponseForbidden, FileResponse, HttpResponse, JsonResponse
 from .models import Post, Profile, SavedArtwork, Comment, Upload
 from .forms import CommentForm, ArtworkUploadForm, SearchForm
 import random
@@ -242,24 +242,20 @@ class ProfileView(View):
 def save_post(request, post_slug):
     post = get_object_or_404(Post, slug=post_slug)
     
-    if not request.user.saved_posts.filter(post=post).exists():
-        SavedPost.objects.create(user=request.user, post=post)
-        request.user.profile.update_saved_posts_count()
-        return JsonResponse({'message': 'Post saved successfully'})
-
-    return JsonResponse({'message': 'Post already saved'})
+    if not request.user.savedartwork_set.filter(post=post).exists():  
+        SavedArtwork.objects.create(user=request.user, post=post)
+        
+    return redirect('post_detail', slug=post.slug)
 
 
 def unsave_post(request, post_slug):
     post = get_object_or_404(Post, slug=post_slug)
-    saved_post = request.user.saved_posts.filter(post=post).first()
+    saved_post = request.user.savedartwork_set.filter(post=post).first()  
 
     if saved_post:
         saved_post.delete()
-        request.user.profile.update_saved_posts_count()
-        return JsonResponse({'message': 'Post unsaved successfully'})
-
-    return JsonResponse({'message': 'Post not saved'})
+        
+    return redirect('post_detail', slug=post.slug)
 
 
 def random_post_redirect(request):

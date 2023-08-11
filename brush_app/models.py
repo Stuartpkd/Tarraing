@@ -33,18 +33,6 @@ class Post(models.Model):
         super(Post, self).save(*args, **kwargs)
 
 
-class SavedPost(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    saved_at = models.DateTimeField(auto_now_add=True)
-
-    class Meta:
-        unique_together = ('user', 'post')
-
-    def __str__(self):
-        return f"{self.user.username} saved {self.post.title}"
-
-
 class Upload(models.Model):
     title = models.CharField(max_length=100, unique=True)
     content = models.TextField(max_length=200, unique=True)
