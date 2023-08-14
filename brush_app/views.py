@@ -104,6 +104,7 @@ def download_artwork(request, post_slug):
         response = HttpResponse()
         response['Content-Disposition'] = f'attachment; filename="{post.title}.{image_format}"'
         response['X-Accel-Redirect'] = download_url
+        messages.success(request, "Artwork downloading.")
         return response
     else:
         return HttpResponseNotFound("Artwork not found")
