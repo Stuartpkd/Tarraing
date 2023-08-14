@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.views.generic.edit import CreateView
 from django.db.models import Count, Q
 from django.views import generic, View
-from django.http import HttpResponseRedirect, HttpResponseForbidden, FileResponse, HttpResponse, JsonResponse
+from django.http import HttpResponseRedirect, HttpResponseForbidden, FileResponse, HttpResponse
 from .models import Post, Profile, SavedArtwork, Comment, Upload
 from .forms import CommentForm, ArtworkUploadForm, SearchForm
 import random
@@ -23,12 +23,12 @@ class PostList(generic.ListView):
 class PostDetail(View):
 
     def get(self, request, slug, *args, **kwargs):
-        print(slug)
         post = get_object_or_404(Post, slug=slug)
         comments = post.comments.filter().order_by('created_on')
         has_saved_artwork = False
         if request.user.is_authenticated:
-            has_saved_artwork = SavedArtwork.objects.filter(user=request.user, post=post).exists()
+            has_saved_artwork = SavedArtwork.objects.filter(user=request.user,
+                                                            post=post).exists()
         liked = post.likes.filter(id=request.user.id).exists()
 
         return render(
@@ -90,7 +90,8 @@ def search_posts(request):
     else:
         results = None
 
-    return render(request, 'search_results.html', {'results': results, 'form': form})
+    return render(request, 'search_results.html', {'results':
+                                                   results, 'form': form})
 
 
 def download_artwork(request, post_slug):
@@ -104,7 +105,7 @@ def download_artwork(request, post_slug):
 
         response = HttpResponse()
         response['Content-Disposition'] = f'attachment; filename="{post.title}.{image_format}"'
-        response['X-Accel-Redirect'] = download_url  
+        response['X-Accel-Redirect'] = download_url
         return response
     else:
         return HttpResponseNotFound("Artwork not found")
@@ -146,7 +147,7 @@ class CommentDelete(View):
         if request.user.username != comment.name:
             return HttpResponseForbidden("You do not have permission"
                                          " to delete this comment.")
-        
+
         comment.delete()
         return redirect("post_detail", slug=comment.post.slug)
 
@@ -161,7 +162,7 @@ class PostEdit(View):
 
         form = ArtworkUploadForm(instance=post)
 
-        return render(request, "post_detail.html",
+        return render(request, "edit_post.html",
                       {"form": form, "post": post})
 
     def post(self, request, slug, *args, **kwargs):
@@ -213,9 +214,9 @@ class Upload(CreateView):
     success_url = '/'
 
     def form_valid(self, form):
-        post = form.save(commit=False)  
+        post = form.save(commit=False)
         post.author = self.request.user
-        post.save() 
+        post.save()
         return super().form_valid(form)
 
 
@@ -241,26 +242,26 @@ class ProfileView(View):
 
 def save_post(request, post_slug):
     post = get_object_or_404(Post, slug=post_slug)
-    
-    if not request.user.savedartwork_set.filter(post=post).exists():  
+
+    if not request.user.savedartwork_set.filter(post=post).exists():
         SavedArtwork.objects.create(user=request.user, post=post)
-        
-    return redirect('post_detail', slug=post.slug)
+        return redirect('post_detail', slug=post_slug)
+
+    return redirect('post_detail', slug=post_slug)
 
 
 def unsave_post(request, post_slug):
     post = get_object_or_404(Post, slug=post_slug)
-    saved_post = request.user.savedartwork_set.filter(post=post).first()  
+    saved_post = request.user.savedartwork_set.filter(post=post).first()
 
     if saved_post:
         saved_post.delete()
-        
-    return redirect('post_detail', slug=post.slug)
+        return redirect('post_detail', slug=post_slug)
+
+    return redirect('post_detail', slug=post_slug)
 
 
 def random_post_redirect(request):
     all_posts = list(Post.objects.all())
     random_post = random.choice(all_posts)
     return redirect(reverse('post_detail', kwargs={'slug': random_post.slug}))
-
-

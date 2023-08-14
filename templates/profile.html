@@ -12,9 +12,12 @@
         </div>
         <div class="row">
             <div class="col-md-4 mb-4">
-                {% if profile.profile_picture %}
-                <img src="{{ profile.profile_picture.url }}" alt="" class="img-fluid">
-                {% endif %}
+                <img src="{{ profile.profile_picture.url }}" alt="{{ profile.user.username }}'s Profile Picture">
+
+                <h2>Update Profile Picture</h2>
+                <form method="post" enctype="multipart/form-data" action=>
+
+
             </div>
             <div class="col-md-8">
                 <p>Likes: {{ total_likes_count }}</p>

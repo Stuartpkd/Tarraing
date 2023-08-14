@@ -1,4 +1,4 @@
-from .models import Comment, Post
+from .models import Comment, Post, Profile
 from django import forms
 
 
@@ -16,3 +16,9 @@ class ArtworkUploadForm(forms.ModelForm):
 
 class SearchForm(forms.Form):
     search_query = forms.CharField(label='Search Posts', max_length=100)
+
+
+class ProfilePictureForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['profile_picture']
