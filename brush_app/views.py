@@ -240,6 +240,20 @@ class ProfileView(View):
                                            'saved_artworks': saved_artworks})
 
 
+def upload_profile_picture(request):
+    profile = Profile.objects.get(user=request.user)
+    if request.method == 'POST':
+        form = ProfilePictureForm(request.POST,
+                                  request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+    else:
+        form = ProfilePictureForm(instance=profile)
+
+    return render(request, 'upload_profile_picture.html', {'form': form})
+
+
 def save_post(request, post_slug):
     post = get_object_or_404(Post, slug=post_slug)
 
