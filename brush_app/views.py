@@ -88,6 +88,7 @@ def search_posts(request):
         results = Post.objects.filter(args)
         print(results)
     else:
+        messages.warning('No posts matched your search.')
         results = None
 
     return render(request, 'search_results.html', {'results':
