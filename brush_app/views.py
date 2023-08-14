@@ -4,7 +4,7 @@ from django.db.models import Count, Q
 from django.views import generic, View
 from django.http import HttpResponseRedirect, HttpResponseForbidden, FileResponse, HttpResponse
 from .models import Post, Profile, SavedArtwork, Comment, Upload
-from .forms import CommentForm, ArtworkUploadForm, SearchForm
+from .forms import CommentForm, ArtworkUploadForm, SearchForm, ProfilePictureForm
 import random
 
 
@@ -247,7 +247,8 @@ def upload_profile_picture(request):
                                   request.FILES, instance=profile)
         if form.is_valid():
             form.save()
-            return redirect('profile')
+            return redirect('profile', username=request.user.username)
+
     else:
         form = ProfilePictureForm(instance=profile)
 
