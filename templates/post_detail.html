@@ -30,7 +30,7 @@
                     </div>
                     <div class="col-md-6">
                         {% if user.is_authenticated %}
-                        {% if post in user.savedartwork_set.all %}
+                        {% if has_saved_artwork %}
                         <form method="post" action="{% url 'unsave_post' post.slug %}">
                             {% csrf_token %}
                             <button type="submit" class="btn btn-danger">Unsave Artwork</button>

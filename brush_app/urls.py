@@ -7,7 +7,6 @@ from .views import PostEdit, PostDelete, CommentEdit, CommentDelete, Upload, ran
 urlpatterns = [
     path('profile/<str:username>/', views.ProfileView.as_view(),
          name='profile'),
-
     path('post/<slug:slug>/edit/', PostEdit.as_view(), name='edit_post'),
     path('post/<slug:slug>/delete/', PostDelete.as_view(), name='delete_post'),
     path('comment/<int:comment_id>/edit/', views.CommentEdit.as_view(), name='edit_comment'),
