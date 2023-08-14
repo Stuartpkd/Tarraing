@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.views.generic.edit import CreateView
+from django.contrib import messages
 from django.db.models import Count, Q
 from django.views import generic, View
 from django.http import HttpResponseRedirect, HttpResponseForbidden, FileResponse, HttpResponse
@@ -81,14 +82,10 @@ def search_posts(request):
     form = SearchForm(request.GET)
     results = None
 
-    print(query)
-
     if query is not None:
         args = Q(title__icontains=query)
         results = Post.objects.filter(args)
-        print(results)
     else:
-        messages.warning('No posts matched your search.')
         results = None
 
     return render(request, 'search_results.html', {'results':
