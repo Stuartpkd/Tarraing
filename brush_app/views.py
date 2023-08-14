@@ -154,13 +154,14 @@ class CommentDelete(View):
 
 def report_comment(request, post_id, slug, comment_id):
     comment = Comment.objects.get(pk=comment_id)
-    post = get_object_or_404(Post, id=post_id, slug=slug)
+    post = get_object_or_404(Post, id=post_id, slug=slug) 
     if request.method == 'POST':
         form = ReportCommentForm(request.POST)
         if form.is_valid():
             comment.reported = True
+            comment.reported_reason = form.cleaned_data['reason']
             comment.save()
-            return redirect('post_detail', slug=post.slug) 
+            return redirect('post_detail', slug=post.slug)
     else:
         form = ReportCommentForm()
 
