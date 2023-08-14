@@ -49,7 +49,7 @@ label {
 a {
     color: aliceblue;
     text-decoration: none !important;
-    font-family: 'Space Grotesk';
+    font-family: 'Montserrat';
 }
 
 
@@ -58,7 +58,7 @@ a {
 h1 {
     color: aliceblue;
     font-weight: 500;
-    font-family: 'Space Grotesk';
+    font-family: 'Monteserrat';
 }
 
 /* H2 */
@@ -83,6 +83,27 @@ h4 {
     color: aliceblue;
     font-weight: 300;
     font-family: 'Space Grotesk';
+}
+
+/* Base */
+
+.logo-title {
+    font-family: 'Montserrat';
+    font-weight: 900;
+}
+
+.nav-response {
+    transition: transform 0.3s;
+}
+
+.nav-response:hover {
+    color: aliceblue !important;
+    transform: scale(1.1);
+}
+
+.nav-link:hover {
+    color: aliceblue !important;
+    transform: scale(1.1);
 }
 
 /* Post detail */
