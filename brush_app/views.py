@@ -12,7 +12,7 @@ import random
 class PostList(generic.ListView):
     model = Post
     template_name = 'index.html'
-    paginate_by = 6
+    paginate_by = 12
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
