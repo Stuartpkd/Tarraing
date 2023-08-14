@@ -4,7 +4,7 @@ from django.db.models import Count, Q
 from django.views import generic, View
 from django.http import HttpResponseRedirect, HttpResponseForbidden, FileResponse, HttpResponse
 from .models import Post, Profile, SavedArtwork, Comment, Upload
-from .forms import CommentForm, ArtworkUploadForm, SearchForm, ProfilePictureForm
+from .forms import CommentForm, ArtworkUploadForm, SearchForm, ProfilePictureForm, ReportCommentForm
 import random
 
 
@@ -150,6 +150,21 @@ class CommentDelete(View):
 
         comment.delete()
         return redirect("post_detail", slug=comment.post.slug)
+
+
+def report_comment(request, post_id, slug, comment_id):
+    comment = Comment.objects.get(pk=comment_id)
+    post = get_object_or_404(Post, id=post_id, slug=slug)
+    if request.method == 'POST':
+        form = ReportCommentForm(request.POST)
+        if form.is_valid():
+            comment.reported = True
+            comment.save()
+            return redirect('post_detail', slug=post.slug) 
+    else:
+        form = ReportCommentForm()
+
+    return render(request, 'report_comment.html', {'form': form, 'comment': comment, 'post': post})
 
 
 class PostEdit(View):

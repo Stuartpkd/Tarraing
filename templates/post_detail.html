@@ -86,6 +86,9 @@
                         </form>
                         {% endif %}
                     </p>
+                    <a href="{% url 'report_comment' comment.post.id comment.post.slug comment.id %}">Report Comment</a>
+
+
                 </div>
                 {% endfor %}
                 <form method="post" action="" class="mt-3">

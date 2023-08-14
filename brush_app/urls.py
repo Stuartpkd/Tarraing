@@ -1,7 +1,7 @@
 from . import views
 from django.urls import path
 
-from .views import PostEdit, PostDelete, CommentEdit, CommentDelete, Upload, random_post_redirect, download_artwork
+from .views import PostEdit, PostDelete, CommentEdit, CommentDelete, Upload, random_post_redirect, download_artwork, report_comment
 
 
 urlpatterns = [
@@ -12,6 +12,7 @@ urlpatterns = [
     path('post/<slug:slug>/delete/', PostDelete.as_view(), name='delete_post'),
     path('comment/<int:comment_id>/edit/', views.CommentEdit.as_view(), name='edit_comment'),
     path('comment/<int:comment_id>/delete/', views.CommentDelete.as_view(), name='delete_comment'),
+    path('report-comment/<int:post_id>/<slug:slug>/<int:comment_id>/', views.report_comment, name='report_comment'),
     path('search/', views.search_posts, name='search_posts'),
     path('like/<slug:slug>/', views.PostLike.as_view(), name='post_like'),
     path('post-detail/<slug:slug>/', views.PostDetail.as_view(), name='post_detail'),

@@ -56,6 +56,7 @@ class Comment(models.Model):
     body = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
     reported = models.BooleanField(default=False)
+    reported_reason = models.TextField(blank=True, null=True)
 
     class Meta:
         ordering = ['created_on']

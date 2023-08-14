@@ -8,6 +8,10 @@ class CommentForm(forms.ModelForm):
         fields = ('body',)
 
 
+class ReportCommentForm(forms.Form):
+    reason = forms.CharField(widget=forms.Textarea(attrs={'rows': 4}))
+
+
 class ArtworkUploadForm(forms.ModelForm):
     class Meta:
         model = Post
