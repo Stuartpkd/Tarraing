@@ -112,6 +112,15 @@ span {
     color: aliceblue;
 }
 
+.post {}
+
+.post-image {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    object-position: center;
+}
+
 /* Post detail */
 
 .post>p {
