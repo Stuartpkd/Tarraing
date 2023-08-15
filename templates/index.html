@@ -5,35 +5,31 @@
 {% block content %}
 <div class="container">
     <div class="row">
-        <div class="col-md-12 col-lg-9">
-            <div class="row">
-                {% for post in object_list %}
-                <div class="col-md-6 col-lg-3">
-                    <a href="{% url 'post_detail' post.slug %}">
-                        <div class="post">
-                            <h2>{{ post.title }}</h2>
-                            {% if post.artwork_image %}
-                            <div>
-                                <img src="{{ post.artwork_image.url }}" alt="{{ brush.name }} Brush Image"
-                                    class="post-image">
-                            </div>
-                            {% else %}
-                            <div>
-                                <img src="{% static 'static/temp_images/github.png' %}" alt="Placeholder Image"
-                                    class="post-image">
-                            </div>
-                            {% endif %}
-                            <p>{{ post.content }}</p>
+        <div class="row">
+            {% for post in object_list %}
+            <div class="col-md-6 col-lg-3">
+                <a href="{% url 'post_detail' post.slug %}">
+                    <div class="post">
+                        <h2>{{ post.title }}</h2>
+                        {% if post.artwork_image %}
+                        <div>
+                            <img src="{{ post.artwork_image.url }}" alt="{{ brush.name }} Brush Image"
+                                class="post-image">
                         </div>
-                    </a>
-                </div>
-                {% endfor %}
+                        {% else %}
+                        <div>
+                            <img src="{% static 'static/temp_images/github.png' %}" alt="Placeholder Image"
+                                class="post-image">
+                        </div>
+                        {% endif %}
+                    </div>
+                </a>
             </div>
+            {% endfor %}
         </div>
-
     </div>
 </div>
-<div class="col-md-12 col-lg-3">
+<div class="pagination justify-content-center">
     <span class="step-links">
         {% if page_obj.has_previous %}
         <a href="?page=1">&laquo; first</a>
