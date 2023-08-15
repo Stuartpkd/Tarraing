@@ -4,13 +4,14 @@
 
 {% block content %}
 <div class="container">
-    <div class="row">
+    <div class="">
         <div class="row">
             {% for post in object_list %}
-            <div class="col-md-6 col-lg-3">
-                <a href="{% url 'post_detail' post.slug %}">
+            <div class="col-md-6 col-lg-3 post-container">
+                <a href="{% url 'post_detail' post.slug %}" class="">
+                    <h2>{{ post.title }}</h2>
                     <div class="post">
-                        <h2>{{ post.title }}</h2>
+
                         {% if post.artwork_image %}
                         <div>
                             <img src="{{ post.artwork_image.url }}" alt="{{ brush.name }} Brush Image"
