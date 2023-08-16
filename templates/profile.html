@@ -5,7 +5,7 @@
 
 <div class="row">
     <div class="col-md-12">
-        <div class="col-md-4 mb-4">
+        <div class="mb-4 text-center">
             <h1>{{ profile.user.username }}'s Profile</h1>
             <div class="d-flex align-items-center justify-content-center">
                 <img src="{{ profile.profile_picture.url }}" alt="{{ profile.user.username }}'s Profile Picture"
@@ -28,66 +28,68 @@
 </div>
 
 
+<div class="row justify-content-center">
+    <div class="toggle-switch d-flex flex-row">
+        <input type="radio" id="my_posts_tab" name="content_switch" checked>
+        <label for="my_posts_tab" class="mr-3">My Posts</label>
+        <input type="radio" id="saved_artworks_tab" name="content_switch">
+        <label for="saved_artworks_tab">Saved Artworks</label>
+    </div>
+</div>
 
 
 <div class="row">
-    <div class="col-md-12">
-        <div class="toggle-switch">
-            <input type="radio" id="my_posts_tab" name="content_switch" checked>
-            <label for="my_posts_tab">My Posts</label>
-            <input type="radio" id="saved_artworks_tab" name="content_switch">
-            <label for="saved_artworks_tab">Saved Artworks</label>
-        </div>
-
-        <div class="container">
-            <div class="row justify-content-center">
-                {% for post in user_posts %}
-                <div class="mb-4">
-                    <a href="{% url 'post_detail' post.slug %}">
-                        <div class="post-container">
-                            <h2 class="post-title">{{ post.title }}</h2>
-                            <div class="post">
-                                {% if post.artwork_image %}
-                                <div>
-                                    <img src="{{ post.artwork_image.url }}" alt="{{ brush.name }} Brush Image"
-                                        class="post-image">
-                                </div>
-                                {% else %}
-                                <div>
-                                    <img src="{% static 'static/temp_images/github.png' %}" alt="Placeholder Image"
-                                        class="post-image">
-                                </div>
-                                <p>Likes: {{ post.likes.count }}</p>
-                                {% endif %}
+    <div class="container">
+        <div class="row justify-content-center">
+            {% for post in user_posts %}
+            <div class="mb-4">
+                <a href="{% url 'post_detail' post.slug %}">
+                    <div class="post-container">
+                        <h2 class="post-title">{{ post.title }}</h2>
+                        <div class="post">
+                            {% if post.artwork_image %}
+                            <div>
+                                <img src="{{ post.artwork_image.url }}" alt="{{ brush.name }} Brush Image"
+                                    class="post-image">
+                            </div>
+                            {% else %}
+                            <div>
+                                <img src="{% static 'static/temp_images/github.png' %}" alt="Placeholder Image"
+                                    class="post-image">
+                            </div>
+                            <p>Likes: {{ post.likes.count }}</p>
+                            {% endif %}
+                            <div class="edit-btn">
                                 <a href="{% url 'edit_post' post.slug %}" class="btn btn-primary">Edit</a>
                             </div>
                         </div>
-                    </a>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-
-        <div class="toggle-content" id="saved_artworks_content">
-            <div class="row">
-                {% if saved_artworks %}
-                {% for saved_artwork in saved_artworks %}
-                <div class="col-md-3">
-                    <div>
-                        <h1>{{ saved_artwork.post.title }}</h1>
-                        {% if saved_artwork.post.artwork_image %}
-                        <img src="{{ saved_artwork.post.artwork_image.url }}" alt="{{ saved_artwork.name }} Brush Image"
-                            class="img-fluid">
-                        {% else %}
-                        <img src="{% static 'temp_images/github.png' %}" alt="Placeholder Image" class="img-fluid">
-                        {% endif %}
                     </div>
-                </div>
-                {% endfor %}
-                {% endif %}
+                </a>
             </div>
+            {% endfor %}
         </div>
     </div>
+
+    <div class="toggle-content" id="saved_artworks_content">
+        <div class="row">
+            {% if saved_artworks %}
+            {% for saved_artwork in saved_artworks %}
+            <div class="col-md-3">
+                <div>
+                    <h1>{{ saved_artwork.post.title }}</h1>
+                    {% if saved_artwork.post.artwork_image %}
+                    <img src="{{ saved_artwork.post.artwork_image.url }}"
+                        alt="{{ saved_artwork.post.title }} Artwork Image" class="img-fluid">
+                    {% else %}
+                    <img src="{% static 'temp_images/github.png' %}" alt="Placeholder Image" class="img-fluid">
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>
 </div>
 
 
