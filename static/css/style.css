@@ -177,6 +177,11 @@ span {
     border-radius: 50%;
 }
 
+.profile-counts {
+    text-align: center;
+}
+
+
 /* Comments */
 
 .comments-made {

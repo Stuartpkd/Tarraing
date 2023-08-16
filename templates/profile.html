@@ -3,81 +3,93 @@
 {% block content %}
 {% if user.is_authenticated %}
 
-<div class="container">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h1>{{ profile.user.username }}'s Profile</h1>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4 mb-4">
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-4 mb-4">
+            <h1>{{ profile.user.username }}'s Profile</h1>
+            <div class="d-flex align-items-center justify-content-center">
                 <img src="{{ profile.profile_picture.url }}" alt="{{ profile.user.username }}'s Profile Picture"
                     class="profile-picture">
-                <a href="{% url 'upload_profile_picture' %}" class="btn btn-primary">Update Profile Picture</a>
             </div>
-            <div class="col-md-8">
-                <p>Likes: {{ total_likes_count }}</p>
-                <p>Posts: {{ total_posts_count }}</p>
-                <p>Downloads: {{ profile.num_downloads }}</p>
+            <div class="d-flex justify-content-center mt-2">
+                <a href="{% url 'upload_profile_picture' %}" class="btn btn-primary">Update Profile Picture</a>
             </div>
         </div>
     </div>
 
+</div>
+
+<div class="row justify-content-center">
+    <div class="profile-counts d-flex flex-row">
+        <p class="mr-3">Likes: {{ total_likes_count }}</p>
+        <p class="mr-3">Posts: {{ total_posts_count }}</p>
+        <p>Downloads: {{ profile.num_downloads }}</p>
+    </div>
+</div>
 
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="toggle-switch">
-                <input type="radio" id="my_posts_tab" name="content_switch" checked>
-                <label for="my_posts_tab">My Posts</label>
-                <input type="radio" id="saved_artworks_tab" name="content_switch">
-                <label for="saved_artworks_tab">Saved Artworks</label>
-            </div>
 
-            <div class="toggle-content" id="my_posts_content">
-                <div class="row">
-                    {% for post in user_posts %}
-                    <div class="col-md-3">
-                        <div class="">
-                            <h2>{{ post.title }}</h2>
-                            <p>{{ post.content }}</p>
 
-                            {% if post.artwork_image %}
-                            <img src="{{ post.artwork_image.url }}" alt="{{ post.title }} Artwork Image"
-                                class="img-fluid">
-                            <p>Likes: {{ post.likes.count }}</p>
-                            {% endif %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="toggle-switch">
+            <input type="radio" id="my_posts_tab" name="content_switch" checked>
+            <label for="my_posts_tab">My Posts</label>
+            <input type="radio" id="saved_artworks_tab" name="content_switch">
+            <label for="saved_artworks_tab">Saved Artworks</label>
+        </div>
 
-                            <a href="{% url 'edit_post' post.slug %}" class="btn btn-primary">Edit</a>
+        <div class="container">
+            <div class="row justify-content-center">
+                {% for post in user_posts %}
+                <div class="mb-4">
+                    <a href="{% url 'post_detail' post.slug %}">
+                        <div class="post-container">
+                            <h2 class="post-title">{{ post.title }}</h2>
+                            <div class="post">
+                                {% if post.artwork_image %}
+                                <div>
+                                    <img src="{{ post.artwork_image.url }}" alt="{{ brush.name }} Brush Image"
+                                        class="post-image">
+                                </div>
+                                {% else %}
+                                <div>
+                                    <img src="{% static 'static/temp_images/github.png' %}" alt="Placeholder Image"
+                                        class="post-image">
+                                </div>
+                                <p>Likes: {{ post.likes.count }}</p>
+                                {% endif %}
+                                <a href="{% url 'edit_post' post.slug %}" class="btn btn-primary">Edit</a>
+                            </div>
                         </div>
-                    </div>
-                    {% endfor %}
+                    </a>
                 </div>
+                {% endfor %}
             </div>
+        </div>
 
-            <div class="toggle-content" id="saved_artworks_content">
-                <div class="row">
-                    {% if saved_artworks %}
-                    {% for saved_artwork in saved_artworks %}
-                    <div class="col-md-3">
-                        <div>
-                            <h1>{{ saved_artwork.title }}</h1>
-                            {% if saved_artwork.post.artwork_image %}
-                            <img src="{{ saved_artwork.post.artwork_image.url }}"
-                                alt="{{ saved_artwork.name }} Brush Image" class="img-fluid">
-                            {% else %}
-                            <img src="{% static 'temp_images/github.png' %}" alt="Placeholder Image" class="img-fluid">
-                            {% endif %}
-                        </div>
+        <div class="toggle-content" id="saved_artworks_content">
+            <div class="row">
+                {% if saved_artworks %}
+                {% for saved_artwork in saved_artworks %}
+                <div class="col-md-3">
+                    <div>
+                        <h1>{{ saved_artwork.post.title }}</h1>
+                        {% if saved_artwork.post.artwork_image %}
+                        <img src="{{ saved_artwork.post.artwork_image.url }}" alt="{{ saved_artwork.name }} Brush Image"
+                            class="img-fluid">
+                        {% else %}
+                        <img src="{% static 'temp_images/github.png' %}" alt="Placeholder Image" class="img-fluid">
+                        {% endif %}
                     </div>
-                    {% endfor %}
-                    {% endif %}
                 </div>
+                {% endfor %}
+                {% endif %}
             </div>
         </div>
     </div>
 </div>
+
 
 {% else %}
 <div class="container">
