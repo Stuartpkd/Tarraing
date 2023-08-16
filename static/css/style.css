@@ -21,6 +21,10 @@ label {
 /* Nav */
 
 /* Overiding bootstrap classes */
+.search-btn {
+    padding-left: 10px;
+}
+
 .bg-light {
     background-color: transparent !important;
 }
@@ -118,6 +122,10 @@ span {
 
 .post-container {
     margin: 20px;
+}
+
+.post-title {
+    max-width: 300px;
 }
 
 .post-container:hover {

@@ -3,15 +3,38 @@
 {% load static %}
 
 {% block content %}
-<div class="container">
-    <div class="">
-        <div class="row">
-            {% for post in object_list %}
-            <div class="col-md-6 col-lg-3 post-container">
-                <a href="{% url 'post_detail' post.slug %}" class="">
-                    <h2>{{ post.title }}</h2>
-                    <div class="post">
+<section class="hero-section">
+    <div class="hero-image">
+        <img src="{% static 'path_to_your_image.jpg' %}" alt="Digital Art">
+    </div>
+    <div class="hero-overlay">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h1>Discover and Share Digital Art</h1>
+                    <p>Join our community of digital artists and enthusiasts. Showcase your artwork, connect with fellow
+                        creators, and explore a world of creativity.</p>
+                    {% if user.is_authenticated %}
+                    <button><a href="{% url 'random_post_redirect' %}">Surprise Me</a></button>
+                    {% else %}
+                    <a href="{% url 'account_signup' %}" class="btn btn-primary">Get Started</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
+<div class="container">
+    <div class="row justify-content-center">
+        <!-- Add justify-content-center class -->
+        {% for post in object_list %}
+        <div class="mb-4">
+            <!-- Add columns for responsive layout -->
+            <a href="{% url 'post_detail' post.slug %}" class="">
+                <div class="post-container">
+                    <h2 class="post-title">{{ post.title }}</h2>
+                    <div class="post">
                         {% if post.artwork_image %}
                         <div>
                             <img src="{{ post.artwork_image.url }}" alt="{{ brush.name }} Brush Image"
@@ -24,12 +47,13 @@
                         </div>
                         {% endif %}
                     </div>
-                </a>
-            </div>
-            {% endfor %}
+                </div>
+            </a>
         </div>
+        {% endfor %}
     </div>
 </div>
+
 <div class="pagination justify-content-center">
     <span class="step-links">
         {% if page_obj.has_previous %}
