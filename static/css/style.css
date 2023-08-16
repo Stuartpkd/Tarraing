@@ -11,6 +11,14 @@ p {
     font-weight: 300;
 }
 
+/* Centering */
+
+.center-this {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+}
+
 /* Labels */
 
 label {
@@ -147,13 +155,7 @@ span {
     font-weight: 300;
 }
 
-/* Sign up */
-
-.signup-form {
-    position: absolute;
-    top: 50%;
-    transform: translate(0, -50%);
-}
+/* Sign in */
 
 .sign-in {
     transition: transform 0.3s;
@@ -166,27 +168,9 @@ span {
 
 /* Sign out */
 
-.sign-out-block {
-    position: absolute;
-    top: 50%;
-    transform: translate(0, -50%);
-}
-
 /* Please create acc / Sign in */
 
-.please-sign-in {
-    position: absolute;
-    top: 50%;
-    transform: translate(0, -50%);
-}
-
 /* Upload */
-
-.upload-form {
-    position: absolute;
-    top: 50%;
-    transform: translate(0, -50%);
-}
 
 /* Profile*/
 
