@@ -172,6 +172,14 @@ span {
     transform: translate(0, -50%);
 }
 
+/* Please create acc / Sign in */
+
+.please-sign-in {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+}
+
 /* Upload */
 
 .upload-form {

@@ -9,7 +9,15 @@
     <button type="submit">Update Comment</button>
 </form>
 {% else %}
-<h1>Please create an account or login to view this content.</h1>
-<button><a href="{% url 'account_signup' %}">Sign Up</a></button>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 please-sign-in">
+            <h1 class="text-center">Please create an account or login to view this content.</h1>
+            <div class="text-center">
+                <a href="{% url 'account_signup' %}" class="btn btn-primary">Sign Up</a>
+            </div>
+        </div>
+    </div>
+</div>
 {% endif %}
 {% endblock %}
