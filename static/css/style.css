@@ -99,6 +99,13 @@ h4 {
 
 /* Base */
 
+.hero-overlay {
+    background: url("https://res.cloudinary.com/dsp78l5kf/image/upload/v1692202439/Hero_image_jzlqr8.svg") center center no-repeat;
+    min-height: 100vh;
+    object-fit: fill;
+    background-size: cover;
+}
+
 .logo-title {
     font-family: 'Montserrat';
     font-weight: 900;
