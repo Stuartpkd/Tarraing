@@ -29,14 +29,12 @@
 
 
 <div class="row justify-content-center">
-    <div class="toggle-switch d-flex flex-row tab">
-        <button class="tablinks" onclick="openTab(event, 'post-list')">Posts</button>
-        <button class="tablinks" onclick="openTab(event, 'saved-artwork-list')">Saved Artwork</button>
-    </div>
+    <button id="post-btn">Posts</button>
+    <button id="artwork-btn">Saved Artwork</button>
 </div>
 
 
-<div class="row tabcontent" id="post-list">
+<div class="row" id="post-list">
     <div class="container">
         <div class="row justify-content-center">
             {% for post in user_posts %}
@@ -67,16 +65,16 @@
 </div>
 
 
-<div class="tabcontent" id="saved-artwork-list">
+<div class="row hide" id="saved-artwork-list">
     <div class="row">
         {% if saved_artworks %}
         {% for saved_artwork in saved_artworks %}
-        <div class="col-md-3">
+        <div>
             <div>
                 <h1>{{ saved_artwork.post.title }}</h1>
                 {% if saved_artwork.post.artwork_image %}
                 <img src="{{ saved_artwork.post.artwork_image.url }}" alt="{{ saved_artwork.post.title }} Artwork Image"
-                    class="img-fluid">
+                    class="saved-artwork-image">
                 {% else %}
                 <img src="{% static 'temp_images/github.png' %}" alt="Placeholder Image" class="img-fluid">
                 {% endif %}

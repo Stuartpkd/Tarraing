@@ -138,7 +138,6 @@ span {
     height: 300px;
     object-fit: cover;
     object-position: center;
-
 }
 
 /* Post detail */
@@ -185,21 +184,25 @@ span {
     padding-top: 20px;
 }
 
-/* Change background color of buttons on hover */
+
 .tab button:hover {
     background-color: #ddd;
 }
 
-/* Create an active/current tablink class */
+
 .tab button.active {
     background-color: #ccc;
 }
 
-.tabcontent {
+.hide {
     display: none;
-    padding: 6px 12px;
-    border: 1px solid #ccc;
-    border-top: none;
+}
+
+.saved-artwork-image {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    object-position: center;
 }
 
 /* Comments */
