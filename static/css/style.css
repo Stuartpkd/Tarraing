@@ -166,6 +166,14 @@ span {
 
 /* Sign up */
 
+/* Upload */
+
+.upload-form {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+}
+
 /* Profile*/
 
 .profile-picture {
