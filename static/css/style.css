@@ -156,6 +156,14 @@ span {
     transform: translate(0, -50%);
 }
 
+.sign-in {
+    transition: transform 0.3s;
+}
+
+.sign-in:hover {
+    color: aliceblue !important;
+    transform: scale(1.1);
+}
 
 /* Comments */
 
