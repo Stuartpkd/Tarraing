@@ -27,10 +27,8 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <!-- Add justify-content-center class -->
         {% for post in object_list %}
         <div class="mb-4">
-            <!-- Add columns for responsive layout -->
             <a href="{% url 'post_detail' post.slug %}" class="">
                 <div class="post-container">
                     <h2 class="post-title">{{ post.title }}</h2>

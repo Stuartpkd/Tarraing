@@ -148,6 +148,15 @@ span {
     font-weight: 300;
 }
 
+/* Sign up */
+
+.signup-form {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+}
+
+
 /* Comments */
 
 .comments-made {
