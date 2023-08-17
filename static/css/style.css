@@ -204,6 +204,10 @@ span {
     background-color: #8f00f0;
 }
 
+.post-detail-image {
+    max-height: 600px;
+}
+
 /* Sign in */
 
 .sign-in {

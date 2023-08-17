@@ -11,12 +11,13 @@
                 <img src="{{ profile.profile_picture.url }}" alt="{{ profile.user.username }}'s Profile Picture"
                     class="profile-picture">
             </div>
+            {% if user == profile.user %}
             <div class="d-flex justify-content-center mt-2">
                 <a href="{% url 'upload_profile_picture' %}" class="btn btn-primary">Update Profile Picture</a>
             </div>
+            {% endif %}
         </div>
     </div>
-
 </div>
 
 <div class="row justify-content-center">
@@ -27,12 +28,12 @@
     </div>
 </div>
 
-
 <div class="row justify-content-center">
     <button id="post-btn">Posts</button>
+    {% if user == profile.user %}
     <button id="artwork-btn">Saved Artwork</button>
+    {% endif %}
 </div>
-
 
 <div class="row" id="post-list">
     <div class="container">
@@ -55,19 +56,20 @@
                             </div>
                             {% endif %}
                 </a>
+                {% if user == post.author %}
                 <div class="edit-btn">
                     <a href="{% url 'edit_post' post.slug %}" class="btn btn-primary">Edit</a>
                 </div>
+                {% endif %}
             </div>
         </div>
     </div>
     {% endfor %}
 </div>
 
-
 <div class="row hide" id="saved-artwork-list">
     <div class="row">
-        {% if saved_artworks %}
+        {% if saved_artworks and user == profile.user %}
         {% for saved_artwork in saved_artworks %}
         <div>
             <div>

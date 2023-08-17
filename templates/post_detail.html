@@ -11,13 +11,15 @@
     <div class="col-lg-7">
         <div class="post">
             <h2>{{ post.title }}</h2>
-            <h3>{{ post.author }}</h3>
+            <h3><a href="{% url 'profile' username=post.author.username %}">{{ post.author }}</a></h3>
+
             <h4>{{ post.created_on }}</h4>
             <p>{{ post.content }}</p>
 
             <div class="mt-4">
                 {% if post.artwork_image %}
-                <img src="{{ post.artwork_image.url }}" alt="{{ brush.name }} Brush Image" class="img-fluid">
+                <img src="{{ post.artwork_image.url }}" alt="{{ brush.name }} Brush Image"
+                    class="img-fluid post-detail-image">
                 {% else %}
                 <img src="{% static 'static/temp_images/github.png' %}" alt="Placeholder Image" class="img-fluid">
                 {% endif %}
