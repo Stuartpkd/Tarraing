@@ -278,3 +278,9 @@ button {
     box-shadow: none !important;
     border: none !important;
 }
+
+/* Footer */
+
+.footer-container {
+    padding: 20px 0;
+}
