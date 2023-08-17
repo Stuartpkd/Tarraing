@@ -31,7 +31,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['8000-stuartpkd-tarraing-u67c9e0zt5e.ws-eu101.gitpod.io', 'tarraing-c85f2002eff7.herokuapp.com', 'localhost', '8000-stuartpkd-tarraing-u67c9e0zt5e.ws-eu103.gitpod.io']  # NOQA
+ALLOWED_HOSTS = ['8000-stuartpkd-tarraing-u67c9e0zt5e.ws-eu101.gitpod.io', 'tarraing-c85f2002eff7.herokuapp.com', 'localhost', '8000-stuartpkd-tarraing-u67c9e0zt5e.ws-eu104.gitpod.io']  # NOQA
 
 
 # Application definition
