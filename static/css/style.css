@@ -200,6 +200,10 @@ span {
     font-weight: 300;
 }
 
+.comments-made {
+    background-color: #8f00f0;
+}
+
 /* Sign in */
 
 .sign-in {
