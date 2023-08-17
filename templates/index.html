@@ -6,21 +6,25 @@
 <section class="hero-section">
     <div class="hero-overlay">
         <div class="container">
-            <div class="row">
-                <div class="col-md-6 center-this">
-                    <h1>Discover and Share Digital Art</h1>
-                    <p>Join our community of digital artists and enthusiasts. Showcase your artwork, connect with fellow
+            <div class="row position-absolute bottom-left">
+                <div class="col-md-9 hero-text-block">
+                    <h1 class="hero-title">Discover and Share Digital Art</h1>
+                    <p class="hero-content">Join our community of digital artists and enthusiasts. Showcase your
+                        artwork, connect with fellow
                         creators, and explore a world of creativity.</p>
                     {% if user.is_authenticated %}
-                    <button><a href="{% url 'random_post_redirect' %}">Surprise Me</a></button>
+                    <button class="hero-btn"><a href="{% url 'random_post_redirect' %}">Surprise Me</a></button>
                     {% else %}
-                    <a href="{% url 'account_signup' %}" class="btn btn-primary">Get Started</a>
+                    <a href="{% url 'account_signup' %}" class="btn btn-primary hero-btn">Sign Up Now</a>
                     {% endif %}
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+
+
 
 <div class="container">
     <div class="row justify-content-center">
@@ -52,17 +56,17 @@
 <div class="pagination justify-content-center">
     <span class="step-links">
         {% if page_obj.has_previous %}
-        <a href="?page=1">&laquo; first</a>
-        <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        <a href="?page=1" class="pagination-text">&laquo; first</a>
+        <a href="?page={{ page_obj.previous_page_number }}" class="pagination-text">previous</a>
         {% endif %}
 
         <span class="current">
-            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            <p class="pagination-text">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</p>
         </span>
 
         {% if page_obj.has_next %}
-        <a href="?page={{ page_obj.next_page_number }}">next</a>
-        <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        <a href="?page={{ page_obj.next_page_number }}" class="pagination-text">next</a>
+        <a href="?page={{ page_obj.paginator.num_pages }}" class="pagination-text">last &raquo;</a>
         {% endif %}
     </span>
 </div>

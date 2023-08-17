@@ -4,6 +4,10 @@ body {
     ;
 }
 
+.body-test {
+    width: 100vw;
+}
+
 /* P */
 
 p {
@@ -26,7 +30,33 @@ label {
     font-weight: 300;
 }
 
-/* Nav */
+/* Hero Section */
+
+.hero-title {
+    font-weight: 700;
+}
+
+.hero-content {
+    font-family: Montserrat;
+    font-weight: 400;
+}
+
+.hero-btn {
+    color: aliceblue;
+    font-family: 'Montserrat';
+    font-weight: 400;
+    background: linear-gradient(90deg, rgba(216, 131, 244, 1) 0%, rgba(178, 74, 213, 1) 100%);
+    border-radius: 16px;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+.bottom-left {
+    margin-left: 30px;
+    margin-bottom: 45px;
+    bottom: 0;
+    left: 0;
+}
 
 /* Overiding bootstrap classes */
 .search-btn {
@@ -39,9 +69,10 @@ label {
 
 .btn-outline-success {
     color: aliceblue;
-    font-family: 'Space Grotesk';
+    font-family: 'Montserrat';
+    font-weight: 400;
     background: linear-gradient(90deg, rgba(216, 131, 244, 1) 0%, rgba(178, 74, 213, 1) 100%);
-    border-radius: 16px;
+    border-radius: 50px;
     min-width: 60px;
     min-height: 30px;
     box-shadow: none !important;
@@ -49,6 +80,8 @@ label {
 }
 
 .navbar-light .navbar-nav .nav-link {
+    font-family: 'Montserrat';
+    font-weight: 400;
     color: aliceblue;
 }
 
@@ -112,6 +145,7 @@ h4 {
 }
 
 .nav-response {
+    padding: 0 5px;
     transition: transform 0.3s;
 }
 
@@ -122,7 +156,6 @@ h4 {
 
 .nav-link:hover {
     color: aliceblue !important;
-    transform: scale(1.1);
 }
 
 .posts {
@@ -153,6 +186,11 @@ span {
     height: 300px;
     object-fit: cover;
     object-position: center;
+}
+
+.pagination-text {
+    font-family: Montserrat;
+    font-weight: 500;
 }
 
 /* Post detail */
@@ -232,7 +270,7 @@ span {
 
 button {
     color: aliceblue;
-    font-family: 'Space Grotesk';
+    font-family: 'Montserrat';
     background: linear-gradient(90deg, rgba(216, 131, 244, 1) 0%, rgba(178, 74, 213, 1) 100%);
     border-radius: 16px;
     min-width: 100px;
