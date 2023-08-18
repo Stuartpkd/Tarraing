@@ -225,13 +225,12 @@ class Upload(CreateView):
     model = Post
     fields = ['title', 'content', 'artwork_image']
     template_name = 'upload_form.html'
-    success_url = '/'
 
     def form_valid(self, form):
         post = form.save(commit=False)
         post.author = self.request.user
         post.save()
-        return super().form_valid(form)
+        return redirect('post_detail', slug=post.slug)
 
 
 class ProfileView(View):
