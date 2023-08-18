@@ -59,6 +59,7 @@ label {
     margin-bottom: 45px;
     bottom: 0;
     left: 0;
+    max-width: 90vw;
 }
 
 /* Overiding bootstrap classes */
