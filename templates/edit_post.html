@@ -2,28 +2,40 @@
 
 {% block content %}
 {% if user.is_authenticated %}
-<h1>Edit Post</h1>
-<form method="POST" action="{% url 'edit_post' post.slug %}">
-    {% csrf_token %}
-    <label for="title">Title:</label>
-    <input type="text" name="title" value="{{ post.title }}">
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <h1 class="text-center">Edit Post</h1>
+            <form method="POST" action="{% url 'edit_post' post.slug %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="title">Title:</label>
+                    <input type="text" class="form-control" name="title" value="{{ post.title }}">
+                </div>
 
-    <label for="content">Description</label>
-    <textarea name="content">{{ post.content }}</textarea>
+                <div class="form-group">
+                    <label for="content">Description:</label>
+                    <textarea class="form-control" name="content">{{ post.content }}</textarea>
+                </div>
 
-    <label for="artwork_image">Artwork Image:</label>
-    <input type="file" name="artwork_image">
-    {% if post.artwork_image %}
-    <img src="{{ post.artwork_image.url }}" alt="{{ post.title }} Artwork Image">
-    {% endif %}
+                <div class="form-group">
+                    <label for="artwork_image">Artwork Image:</label>
+                    <input type="file" class="form-control-file" name="artwork_image">
+                    {% if post.artwork_image %}
+                    <img src="{{ post.artwork_image.url }}" alt="{{ post.title }} Artwork Image" class="img-fluid mt-2">
+                    {% endif %}
+                </div>
 
-    <button type="submit">Save</button>
-</form>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </form>
 
-<form method="POST" action="{% url 'delete_post' post.slug %}">
-    {% csrf_token %}
-    <button type="submit">Delete</button>
-</form>
+            <form method="POST" action="{% url 'delete_post' post.slug %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger mt-2">Delete</button>
+            </form>
+        </div>
+    </div>
+</div>
 {% else %}
 <div class="container">
     <div class="row justify-content-center">
