@@ -47,7 +47,9 @@ label {
 .hero-btn {
     color: aliceblue;
     font-family: Montserrat;
-    font-weight: 400;
+    font-weight: 600;
+    width: 120px;
+    height: 50px;
     background: linear-gradient(90deg, rgba(216, 131, 244, 1) 0%, rgba(178, 74, 213, 1) 100%);
     border-radius: 16px;
     box-shadow: none !important;
@@ -123,7 +125,7 @@ h2 {
 h3 {
     color: aliceblue;
     font-weight: 300;
-    font-family: 'Space Grotesk';
+    font-family: Montserrat;
 }
 
 /* H4 */
@@ -131,7 +133,7 @@ h3 {
 h4 {
     color: aliceblue;
     font-weight: 300;
-    font-family: 'Space Grotesk';
+    font-family: Montserrat;
 }
 
 /* Base */
@@ -199,9 +201,42 @@ span {
 
 /* Post detail */
 
+.post-detail-title {
+    font-weight: 700;
+}
+
+.post-detail-author {
+    font-weight: 400;
+    transition: transform 0.3s;
+}
+
+.post-detail-author:hover {
+    color: aliceblue !important;
+    text-decoration: none !important;
+    transform: scale(1.1);
+}
+
+.post-detail-btn {
+    padding: 15px;
+}
+
+.count {
+    font-family: Montserrat;
+}
+
+.post>h4 {
+    font-family: Montserrat;
+    font-weight: 200 !important;
+}
+
 .post>p {
     color: aliceblue;
-    font-weight: 300;
+    font-weight: 500;
+}
+
+.textarea {
+    min-height: 30px;
+    min-width: 40px;
 }
 
 .comments-made {
@@ -210,6 +245,7 @@ span {
 
 .post-detail-image {
     max-height: 600px;
+    border-radius: 10px;
 }
 
 /* Sign in */
@@ -302,8 +338,6 @@ button {
     font-family: 'Montserrat';
     background: linear-gradient(90deg, rgba(216, 131, 244, 1) 0%, rgba(178, 74, 213, 1) 100%);
     border-radius: 10px;
-    min-width: 80px;
-    min-height: 30px;
     box-shadow: none !important;
     border: none !important;
 }

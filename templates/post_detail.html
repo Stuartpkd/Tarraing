@@ -10,14 +10,15 @@
 
     <div class="col-lg-7">
         <div class="post">
-            <a href="{% url 'home' %}" class="btn btn-link btn-back">
-                <i class="fas fa-arrow-left"></i> Back to Home
+            <a href="{% url 'home' %}">
+                <i class="fas fa-arrow-left"></i>
             </a>
-            <h2>{{ post.title }}</h2>
-            <h3><a href="{% url 'profile' username=post.author.username %}">{{ post.author }}</a></h3>
+            <h2 class="post-detail-title">{{ post.title }}</h2>
+            <h3><a href="{% url 'profile' username=post.author.username %}"
+                    class="post-detail-author">{{ post.author }}</a></h3>
 
-            <h4>{{ post.created_on }}</h4>
-            <p>{{ post.content }}</p>
+            <h4 class="created-date">{{ post.created_on }}</h4>
+            <p class="content-post">{{ post.content }}</p>
 
             <div class="mt-4">
                 {% if post.artwork_image %}
@@ -28,40 +29,60 @@
                 {% endif %}
             </div>
 
-            <!-- Save/Unsave Artwork -->
+            <!-- Buttons -->
             <div class="row">
                 {% if user.is_authenticated %}
                 {% if has_saved_artwork %}
                 <form method="post" action="{% url 'unsave_post' post.slug %}">
                     {% csrf_token %}
-                    <button type="submit" class="btn btn-danger">Unsave Artwork</button>
+                    <div class="post-detail-btn">
+                        <a href="#" onclick="this.closest('form').submit(); return false;">
+                            <i class="fas fa-bookmark"></i>
+                        </a>
+                    </div>
                 </form>
                 {% else %}
                 <form method="post" action="{% url 'save_post' post.slug %}">
                     {% csrf_token %}
-                    <button type="submit" class="btn btn-primary">Save Artwork</button>
+                    <div class="post-detail-btn">
+                        <a href="#" onclick="this.closest('form').submit(); return false;">
+                            <i class="far fa-bookmark"></i>
+                        </a>
+                    </div>
                 </form>
                 {% endif %}
                 {% endif %}
                 {% if liked %}
                 <form method="POST" action="{% url 'post_like' post.slug %}">
                     {% csrf_token %}
-                    <button type="submit" class="btn btn-danger" value="{{post.slug}}">Unlike</button>
+                    <div class="post-detail-btn">
+                        <a href="#" onclick="this.closest('form').submit(); return false;">
+                            <i class="fas fa-heart"></i>
+                        </a>
+                    </div>
                 </form>
                 {% else %}
                 <form method="POST" action="{% url 'post_like' post.slug %}">
                     {% csrf_token %}
-                    <button type="submit" class="btn btn-success" value="{{post.slug}}">Like</button>
+                    <div class="post-detail-btn">
+                        <a href="#" onclick="this.closest('form').submit(); return false;">
+                            <i class="far fa-heart"></i>
+                        </a>
+                    </div>
                 </form>
                 {% endif %}
-                <a href="{% url 'download_artwork' post.slug %}" class="btn btn-primary" download>Download</a>
-            </div>
-
-            <!-- Likes and Comments -->
-
-            <div class="row">
-                <h4>Likes: {{ post.likes.count }}</h4>
-                <h4>Comments: {{ post.comments.count }}</h4>
+                <div class="post-detail-btn">
+                    <a href="{% url 'download_artwork' post.slug %}" download>
+                        <i class="fas fa-download"></i>
+                    </a>
+                </div>
+                <div class="post-detail-btn">
+                    <i class="fas fa-heart text-white"></i> <span class="text-white count">{{ post.likes.count }}</span>
+                </div>
+                <div class="post-detail-btn">
+                    <i class="fas fa-comment text-white"></i> <span
+                        class="text-white count">{{ post.comments.count }}</span>
+                </div>
             </div>
         </div>
     </div>
