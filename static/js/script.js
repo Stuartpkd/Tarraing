@@ -20,3 +20,9 @@ function displayPosts() {
     savedArtworks.classList.add("hide");
     posts.classList.remove("hide");
 }
+
+
+
+function confirmDelete() {
+    return confirm("Are you sure you want to delete this post?");
+}
