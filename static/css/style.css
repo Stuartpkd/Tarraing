@@ -11,8 +11,9 @@ body {
 /* P */
 
 p {
+    font-family: Montserrat;
     color: aliceblue;
-    font-weight: 300;
+    font-weight: 500;
 }
 
 /* Centering */
@@ -27,7 +28,9 @@ p {
 
 label {
     color: aliceblue;
-    font-weight: 300;
+    font-family: Montserrat;
+    font-weight: 500;
+
 }
 
 /* Hero Section */
@@ -43,7 +46,7 @@ label {
 
 .hero-btn {
     color: aliceblue;
-    font-family: 'Montserrat';
+    font-family: Montserrat;
     font-weight: 400;
     background: linear-gradient(90deg, rgba(216, 131, 244, 1) 0%, rgba(178, 74, 213, 1) 100%);
     border-radius: 16px;
@@ -69,7 +72,7 @@ label {
 
 .btn-outline-success {
     color: aliceblue;
-    font-family: 'Montserrat';
+    font-family: Montserrat;
     font-weight: 400;
     background: linear-gradient(90deg, rgba(216, 131, 244, 1) 0%, rgba(178, 74, 213, 1) 100%);
     border-radius: 50px;
@@ -80,7 +83,7 @@ label {
 }
 
 .navbar-light .navbar-nav .nav-link {
-    font-family: 'Montserrat';
+    font-family: Montserrat;
     font-weight: 400;
     color: aliceblue;
 }
@@ -94,7 +97,7 @@ label {
 a {
     color: aliceblue;
     text-decoration: none !important;
-    font-family: 'Montserrat';
+    font-family: Montserrat;
 }
 
 
@@ -102,8 +105,8 @@ a {
 
 h1 {
     color: aliceblue;
-    font-weight: 500;
-    font-family: 'Monteserrat';
+    font-weight: 700;
+    font-family: Montserrat;
 }
 
 /* H2 */
@@ -111,7 +114,7 @@ h1 {
 h2 {
     color: aliceblue;
     font-weight: 400;
-    font-family: 'Space Grotesk';
+    font-family: Montserrat;
 }
 
 /* H3 */
@@ -219,9 +222,29 @@ span {
     transform: scale(1.1);
 }
 
-/* Sign out */
 
-/* Please create acc / Sign in */
+
+/* Please create acc / Sign in / Sign out / Sign up */
+
+.sign-up-form {
+    padding: 20px;
+}
+
+.sign-up {
+    font-weight: 600;
+    text-decoration: underline;
+    transition: transform 0.3s !important;
+}
+
+.sign-up:hover {
+    color: aliceblue;
+    transform: scale(1.1) !important;
+}
+
+.signup>label {
+    font-family: Montserrat;
+    font-weight: 800;
+}
 
 /* Upload */
 
@@ -242,7 +265,6 @@ span {
 .edit-btn {
     padding-top: 20px;
 }
-
 
 .tab button:hover {
     background-color: #ddd;
@@ -271,8 +293,6 @@ span {
     font-weight: 300;
     font-family: 'Space Grotesk';
 }
-
-
 
 /* Buttons */
 
