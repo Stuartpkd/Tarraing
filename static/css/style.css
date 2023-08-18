@@ -226,7 +226,7 @@ span {
 
 /* Please create acc / Sign in / Sign out / Sign up */
 
-.sign-up-form {
+.form-box {
     padding: 20px;
 }
 
@@ -300,9 +300,9 @@ button {
     color: aliceblue;
     font-family: 'Montserrat';
     background: linear-gradient(90deg, rgba(216, 131, 244, 1) 0%, rgba(178, 74, 213, 1) 100%);
-    border-radius: 16px;
-    min-width: 100px;
-    min-height: 50px;
+    border-radius: 10px;
+    min-width: 80px;
+    min-height: 30px;
     box-shadow: none !important;
     border: none !important;
 }
