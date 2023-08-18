@@ -10,6 +10,9 @@
 
     <div class="col-lg-7">
         <div class="post">
+            <a href="{% url 'home' %}" class="btn btn-link btn-back">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
             <h2>{{ post.title }}</h2>
             <h3><a href="{% url 'profile' username=post.author.username %}">{{ post.author }}</a></h3>
 
