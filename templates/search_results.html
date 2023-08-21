@@ -8,7 +8,7 @@
 
 {% if results %}
 
-<h1>Search Results</h1>
+<h2>Search Results:</h2>
 <ul>
     <div class="">
         {% for post in results %}
@@ -16,12 +16,11 @@
             <div class="post">
                 <h2>{{ post.title }}</h2>
                 {% if post.artwork_image %}
-                <img src="{{ post.artwork_image.url }}" alt="{{ brush.name }} Brush Image">
+                <img src="{{ post.artwork_image.url }}" alt="{{ brush.name }} Brush Image" class="post-image">
                 {% else %}
                 <img src="https://res.cloudinary.com/dsp78l5kf/image/upload/v1692635713/Placeholder_image_smqv1p.svg"
                     alt="Placeholder Image">
                 {% endif %}
-                <p>{{ post.content }}</p>
             </div>
         </a>
         {% endfor %}
