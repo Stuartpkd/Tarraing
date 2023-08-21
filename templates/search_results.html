@@ -8,24 +8,29 @@
 
 {% if results %}
 
-<h2>Search Results:</h2>
-<ul>
-    <div class="">
+<h1 class="text-center mt-4">Search Results:</h1>
+<div class="container">
+    <div class="row justify-content-center">
         {% for post in results %}
-        <a href="{% url 'post_detail' post.slug %}">
-            <div class="post">
-                <h2>{{ post.title }}</h2>
-                {% if post.artwork_image %}
-                <img src="{{ post.artwork_image.url }}" alt="{{ brush.name }} Brush Image" class="post-image">
-                {% else %}
-                <img src="https://res.cloudinary.com/dsp78l5kf/image/upload/v1692635713/Placeholder_image_smqv1p.svg"
-                    alt="Placeholder Image">
-                {% endif %}
-            </div>
-        </a>
+        <div class="col-lg-4 col-md-6 mb-4">
+            <a href="{% url 'post_detail' post.slug %}" class="text-decoration-none">
+                <div class="post-card">
+                    <h2 class="post-title">{{ post.title }}</h2>
+                    <div class="post-image-container">
+                        {% if post.artwork_image %}
+                        <img src="{{ post.artwork_image.url }}" alt="{{ brush.name }} Brush Image" class="post-image">
+                        {% else %}
+                        <img src="https://res.cloudinary.com/dsp78l5kf/image/upload/v1692635713/Placeholder_image_smqv1p.svg"
+                            alt="Placeholder Image">
+                        {% endif %}
+                    </div>
+                </div>
+            </a>
+        </div>
         {% endfor %}
     </div>
-</ul>
+</div>
+
 {% else %}
 <div class="center-this-container">
     <h2>No posts found matching the search query.</h2>
