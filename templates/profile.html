@@ -55,10 +55,14 @@
                                     class="post-image">
                             </div>
                             {% endif %}
+                        </div>
+                    </div>
                 </a>
                 {% if user == post.author %}
                 <div class="edit-btn">
-                    <a href="{% url 'edit_post' post.slug %}" class="btn btn-primary">Edit</a>
+                    <button>
+                        <a href="{% url 'edit_post' post.slug %}" class="">Edit</a>
+                    </button>
                 </div>
                 {% endif %}
             </div>

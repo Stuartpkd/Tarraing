@@ -244,6 +244,7 @@ class ProfileView(View):
         total_posts_count = user_posts.count()
 
         saved_artworks = SavedArtwork.objects.filter(user=request.user)
+
         print(saved_artworks)
 
         return render(request,

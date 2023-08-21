@@ -10,17 +10,22 @@ savedArtworkBtn.addEventListener("click", displayArtworks);
 postsBtn.addEventListener("click", displayPosts);
 
 function displayArtworks() {
-    console.log("artworks")
-    savedArtworks.classList.remove("hide");
-    posts.classList.add("hide");
+    if (savedArtworks.classList.contains('hide')) {
+        savedArtworks.classList.remove("hide");
+        posts.classList.add('hide');
+    } else {
+
+    }
 }
 
 function displayPosts() {
-    console.log("posts")
-    savedArtworks.classList.add("hide");
-    posts.classList.remove("hide");
-}
+    if (posts.classList.contains('hide')) {
+        posts.classList.remove('hide');
+        savedArtworks.classList.add('hide');
+    } else {
 
+    }
+}
 
 
 function confirmDelete() {
