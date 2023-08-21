@@ -18,7 +18,8 @@
                 {% if post.artwork_image %}
                 <img src="{{ post.artwork_image.url }}" alt="{{ brush.name }} Brush Image">
                 {% else %}
-                <img src="{% static 'static/temp_images/github.png' %}" alt="Placeholder Image">
+                <img src="https://res.cloudinary.com/dsp78l5kf/image/upload/v1692635713/Placeholder_image_smqv1p.svg"
+                    alt="Placeholder Image">
                 {% endif %}
                 <p>{{ post.content }}</p>
             </div>
@@ -28,7 +29,7 @@
 </ul>
 {% else %}
 <div class="center-this-container">
-    <p>No posts found matching the search query.</p>
+    <h2>No posts found matching the search query.</h2>
 </div>
 
 

@@ -8,8 +8,13 @@
         <div class="mb-4 text-center">
             <h1>{{ profile.user.username }}'s Profile</h1>
             <div class="d-flex align-items-center justify-content-center">
+                {% if profile.profile_picture %}
                 <img src="{{ profile.profile_picture.url }}" alt="{{ profile.user.username }}'s Profile Picture"
                     class="profile-picture">
+                {% else %}
+                <img src="cloudinary.com/dsp78l5kf/image/upload/v1692635713/Profile_placeholder_a7fkn6.svg"
+                    alt="Placeholder Image" class="profile-picture">
+                {% endif %}
             </div>
             {% if user == profile.user %}
             <div class="d-flex justify-content-center mt-2 profile-btn-container">
@@ -41,6 +46,7 @@
 
 <div class="container" id="post-list">
     <div class="row justify-content-center">
+        {% if user_posts %}
         {% for post in user_posts %}
         <div class="col-lg-4 col-md-6 mb-4">
             <a href="{% url 'post_detail' post.slug %}" class="text-decoration-none">
@@ -49,8 +55,7 @@
                     {% if post.artwork_image %}
                     <img src="{{ post.artwork_image.url }}" alt="{{ brush.name }} Brush Image" class="post-image">
                     {% else %}
-                    <img src="{% static 'static/temp_images/github.png' %}" alt="Placeholder Image"
-                        class="card-img-top">
+                    <img src="{% static 'temp_images/github.png' %}" alt="Placeholder Image" class="card-img-top">
                     {% endif %}
                     <div>
                         {% if user == post.author %}
@@ -63,8 +68,14 @@
             </a>
         </div>
         {% endfor %}
+        {% else %}
+        <div class="col-12 text-center">
+            <p>You have no uploads yet.</p>
+        </div>
+        {% endif %}
     </div>
 </div>
+
 
 
 <div class="container">
@@ -85,9 +96,14 @@
             </a>
         </div>
         {% endfor %}
+        {% else %}
+        <div class="col-12 text-center">
+            <p>You have no saved artworks yet.</p>
+        </div>
         {% endif %}
     </div>
 </div>
+
 
 {% else %}
 <div class="container">
