@@ -20,8 +20,9 @@ button {
     border: none !important;
 }
 
-button:hover {
-    color: #d43df9;
+.btn:hover {
+    transition: transform 0.3s;
+    transform: scale(1.1);
 }
 
 /* P */
@@ -64,8 +65,6 @@ label {
     color: aliceblue;
     font-family: Montserrat;
     font-weight: 600;
-    width: 120px;
-    height: 50px;
     background: linear-gradient(90deg, rgba(216, 131, 244, 1) 0%, rgba(178, 74, 213, 1) 100%);
     border-radius: 16px;
     box-shadow: none !important;
@@ -310,6 +309,7 @@ span {
     object-fit: cover;
     object-position: center;
     border-radius: 50%;
+    padding: 10px 0;
 }
 
 .profile-btn-container {
@@ -346,8 +346,18 @@ span {
 }
 
 .edit-btn {
-    width: 120px;
-    height: 50px;
+    color: aliceblue;
+    font-family: Montserrat;
+    font-weight: 600;
+    background: linear-gradient(90deg, rgba(216, 131, 244, 1) 0%, rgba(178, 74, 213, 1) 100%);
+    text-decoration: none !important;
+    border-radius: 16px;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+.switch-container {
+    padding: 10px 0;
 }
 
 .switch-btn-style {
@@ -360,10 +370,6 @@ span {
     border-radius: 16px;
     box-shadow: none !important;
     border: none !important;
-}
-
-.switch-btn:active {
-    color: #02ffae;
 }
 
 .switch-btn {

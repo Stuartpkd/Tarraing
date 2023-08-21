@@ -13,8 +13,8 @@
             </div>
             {% if user == profile.user %}
             <div class="d-flex justify-content-center mt-2 profile-btn-container">
-                <button><a href="{% url 'upload_profile_picture' %}" class="profile-pic-btn">Update Profile
-                        Picture</a></button>
+                <a href="{% url 'upload_profile_picture' %}" class="btn btn-primary profile-pic-btn">Update Profile
+                    Picture</a>
             </div>
             {% endif %}
         </div>
@@ -28,7 +28,7 @@
     </div>
 </div>
 
-<div class="row justify-content-center">
+<div class="row justify-content-center switch-container">
     <div class="switch-btn">
         <button id="post-btn" class="switch-btn-style">Posts</button>
     </div>
@@ -55,7 +55,7 @@
                     <div>
                         {% if user == post.author %}
                         <div class="edit-btn-container">
-                            <button class="edit-btn"><a href="{% url 'edit_post' post.slug %}">Edit</a></button>
+                            <a href="{% url 'edit_post' post.slug %}" class="edit-btn btn btn-primary">Edit</a>
                         </div>
                         {% endif %}
                     </div>
