@@ -1,13 +1,13 @@
 body {
     background: rgb(40, 40, 93);
     background: linear-gradient(90deg, rgba(40, 40, 93, 1) 0%, rgba(23, 21, 41, 1) 100%);
-    ;
+    height: 100%;
+    margin: 0;
 }
 
 .body-test {
     width: 100vw;
 }
-
 
 /* Buttons */
 
@@ -43,6 +43,14 @@ p {
 }
 
 /* Centering */
+
+.center-this-container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
 
 .center-this {
     position: absolute;

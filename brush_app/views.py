@@ -82,14 +82,13 @@ def search_posts(request):
     form = SearchForm(request.GET)
     results = None
 
-    if query is not None:
+    if query:
         args = Q(title__icontains=query)
         results = Post.objects.filter(args)
     else:
-        results = None
+        results = []
 
-    return render(request, 'search_results.html', {'results':
-                                                   results, 'form': form})
+    return render(request, 'search_results.html', {'results': results, 'form': form})
 
 
 def download_artwork(request, post_slug):
