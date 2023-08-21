@@ -243,9 +243,7 @@ class ProfileView(View):
                                                  ('likes'))['total_likes']
         total_posts_count = user_posts.count()
 
-        saved_artworks = SavedArtwork.objects.filter(user=request.user)
-
-        print(saved_artworks)
+        saved_artworks = SavedArtwork.objects.filter(user__id=request.user.id)
 
         return render(request,
                       self.template_name, {'profile': profile,

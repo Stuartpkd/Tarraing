@@ -20,6 +20,15 @@ button {
     border: none !important;
 }
 
+.btn {
+    color: aliceblue;
+    font-family: 'Montserrat';
+    background: linear-gradient(90deg, rgba(216, 131, 244, 1) 0%, rgba(178, 74, 213, 1) 100%);
+    border-radius: 10px;
+    box-shadow: none !important;
+    border: none !important;
+}
+
 .btn:hover {
     transition: transform 0.3s;
     transform: scale(1.1);
@@ -273,8 +282,14 @@ span {
     min-width: 40px;
 }
 
-.comments-made {
-    background-color: #8f00f0;
+.comment-btns {
+    padding: 10px;
+}
+
+.comment-body {
+    padding: 10px;
+    background-color: #9900fd;
+    border-radius: 10px;
 }
 
 .post-detail-image {
@@ -292,8 +307,6 @@ span {
     color: aliceblue !important;
     transform: scale(1.1);
 }
-
-
 
 /* Please create acc / Sign in / Sign out / Sign up */
 
@@ -318,6 +331,10 @@ span {
 }
 
 /* Upload */
+
+.form-container {
+    padding: 20px;
+}
 
 /* Profile*/
 
@@ -421,8 +438,7 @@ span {
 /* Footer */
 
 .footer {
-    position: fixed;
-    left: 0;
+    position: absolute;
     bottom: 0;
     width: 100%;
     color: white;

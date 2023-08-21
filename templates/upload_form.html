@@ -3,14 +3,14 @@
 {% block content %}
 <div class="container">
     <div class="row justify-content-center">
-        <div class="center-this">
+        <div class="center-this form-container">
             {% if user.is_authenticated %}
-            <h1 class="text-center">Upload Artwork</h1>
+            <h2 class="text-center">Upload Artwork</h2>
             <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form.as_p }}
                 <div class="text-center">
-                    <input type="submit" class="btn btn-primary" value="Submit">
+                    <input type="submit" class="btn button" value="Submit">
                 </div>
             </form>
             {% else %}
