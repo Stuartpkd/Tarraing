@@ -10,9 +10,11 @@
 
     <div class="col-lg-7">
         <div class="post">
-            <a href="{% url 'home' %}">
-                <i class="fas fa-arrow-left"></i>
-            </a>
+            <div class="text-right">
+                <a href="{% url 'home' %}" class="ml-auto">
+                    <i class="fas fa-arrow-left fa-2x btn"></i>
+                </a>
+            </div>
             <h2 class="post-detail-title">{{ post.title }}</h2>
             <h3><a href="{% url 'profile' username=post.author.username %}"
                     class="post-detail-author">{{ post.author }}</a></h3>
@@ -30,14 +32,14 @@
             </div>
 
             <!-- Buttons -->
-            <div class="row">
+            <div class="row btn-container">
                 {% if user.is_authenticated %}
                 {% if has_saved_artwork %}
                 <form method="post" action="{% url 'unsave_post' post.slug %}">
                     {% csrf_token %}
                     <div class="post-detail-btn">
                         <a href="#" onclick="this.closest('form').submit(); return false;">
-                            <i class="fas fa-bookmark"></i>
+                            <i class="fas fa-bookmark post-icon"></i>
                         </a>
                     </div>
                 </form>
@@ -46,7 +48,7 @@
                     {% csrf_token %}
                     <div class="post-detail-btn">
                         <a href="#" onclick="this.closest('form').submit(); return false;">
-                            <i class="far fa-bookmark"></i>
+                            <i class="far fa-bookmark post-icon"></i>
                         </a>
                     </div>
                 </form>
@@ -57,7 +59,7 @@
                     {% csrf_token %}
                     <div class="post-detail-btn">
                         <a href="#" onclick="this.closest('form').submit(); return false;">
-                            <i class="fas fa-heart"></i>
+                            <i class="fas fa-heart post-icon"></i>
                         </a>
                     </div>
                 </form>
@@ -66,21 +68,22 @@
                     {% csrf_token %}
                     <div class="post-detail-btn">
                         <a href="#" onclick="this.closest('form').submit(); return false;">
-                            <i class="far fa-heart"></i>
+                            <i class="far fa-heart post-icon"></i>
                         </a>
                     </div>
                 </form>
                 {% endif %}
                 <div class="post-detail-btn">
                     <a href="{% url 'download_artwork' post.slug %}" download>
-                        <i class="fas fa-download"></i>
+                        <i class="fas fa-download post-icon"></i>
                     </a>
                 </div>
                 <div class="post-detail-btn">
-                    <i class="fas fa-heart text-white"></i> <span class="text-white count">{{ post.likes.count }}</span>
+                    <i class="fas fa-heart text-white post-icon"></i> <span
+                        class="text-white count">{{ post.likes.count }}</span>
                 </div>
                 <div class="post-detail-btn">
-                    <i class="fas fa-comment text-white"></i> <span
+                    <i class="fas fa-comment text-white post-icon"></i> <span
                         class="text-white count">{{ post.comments.count }}</span>
                 </div>
             </div>
@@ -89,7 +92,7 @@
     <div class="col-lg-5 mt-4">
         <div class="comments">
             <h3>Comments:</h3>
-            <div class="card-body">
+            <div>
                 <form method="post" action="" class="mt-3">
                     {{ comment_form | crispy }}
                     {% csrf_token %}

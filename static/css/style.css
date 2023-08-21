@@ -217,6 +217,14 @@ span {
 
 /* Post detail */
 
+.arrow-icon {
+    position: fixed;
+    top: 0;
+    right: 0;
+    margin: 20px;
+    font-size: 24px;
+}
+
 .post-detail-title {
     font-weight: 700;
 }
@@ -232,12 +240,22 @@ span {
     transform: scale(1.1);
 }
 
+.btn-container {
+    padding-top: 10px;
+}
+
+.post-icon {
+    font-size: 20px;
+}
+
 .post-detail-btn {
     padding: 15px;
 }
 
 .count {
     font-family: Montserrat;
+    font-weight: 500;
+    font-size: 17px;
 }
 
 .post>h4 {
