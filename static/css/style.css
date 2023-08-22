@@ -9,6 +9,37 @@ body {
     width: 100vw;
 }
 
+/* Pop ups */
+
+.alert {
+    display: none;
+    padding: 15px;
+    background: linear-gradient(90deg, rgba(216, 131, 244, 1) 0%, rgba(178, 74, 213, 1) 100%);
+    color: white;
+    font-size: 16px;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    width: 80%;
+    max-width: 300px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Custom styling for the close button in the Bootstrap alert */
+.btn-close {
+    color: aliceblue;
+    font-size: 1.5rem;
+    line-height: 1;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    cursor: pointer;
+}
+
 /* Buttons */
 
 button {

@@ -13,10 +13,12 @@
                     <input type="submit" class="btn button" value="Submit">
                 </div>
             </form>
-            <div class="alert" id="warning-alert" style="display: none;">
-                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert" id="warning-alert"
+                style="display: none;">
                 File size exceeds 1MB. Please choose a smaller file.
+                <button type="button" class="btn-close" aria-label="Close"></button>
             </div>
+
             {% else %}
             <div class="container">
                 <div class="row justify-content-center">

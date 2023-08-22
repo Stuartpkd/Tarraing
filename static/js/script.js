@@ -68,3 +68,17 @@ document.getElementById('upload-form').addEventListener('submit', async function
         console.error('Error:', error);
     }
 });
+
+function closeCommentSuccessAlert() {
+    const commentSuccessAlert = document.getElementById('comment-success-alert');
+    commentSuccessAlert.style.display = 'none';
+}
+
+
+function handleCommentSubmission() {
+
+
+
+    const commentSuccessAlert = document.getElementById('comment-success-alert');
+    commentSuccessAlert.style.display = 'block';
+}
