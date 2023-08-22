@@ -3,7 +3,7 @@ from django.views.generic.edit import CreateView
 from django.contrib import messages
 from django.db.models import Count, Q
 from django.views import generic, View
-from django.http import HttpResponseRedirect, HttpResponseForbidden, FileResponse, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponseForbidden, FileResponse, HttpResponse, JsonResponse
 from .models import Post, Profile, SavedArtwork, Comment, Upload
 from .forms import CommentForm, ArtworkUploadForm, SearchForm, ProfilePictureForm, ReportCommentForm
 import random
@@ -185,15 +185,15 @@ class PostEdit(View):
             return HttpResponseForbidden("You do not have "
                                          "permission to edit this.")
 
-        form = ArtworkUploadForm(request.POST, instance=post)
+        form = ArtworkUploadForm(request.POST, request.FILES, instance=post)
         if form.is_valid():
             form.save()
             return redirect("post_detail", slug=slug)
+        else:
+            return render(request, "edit_post.html",
+                          {"form": form, "post": post})
 
-        return render(request, "post_detail.html",
-                      {"form": form, "post": post})
-
-
+        
 class PostDelete(View):
     def post(self, request, slug, *args, **kwargs):
         post = get_object_or_404(Post, slug=slug)
@@ -226,6 +226,11 @@ class Upload(CreateView):
     template_name = 'upload_form.html'
 
     def form_valid(self, form):
+        artwork_image = form.cleaned_data.get('artwork_image')
+        
+        if artwork_image and artwork_image.size > 1024 * 1024:  # 1MB in bytes
+            return JsonResponse({'error': 'The uploaded image is too large. Please upload an image under 1MB.'})
+        
         post = form.save(commit=False)
         post.author = self.request.user
         post.save()

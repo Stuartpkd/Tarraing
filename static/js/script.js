@@ -33,3 +33,31 @@ setTimeout(function () {
     let alert = new bootstrap.Alert(messages);
     alert.close();
 }, 2500);
+
+
+document.getElementById('upload-form').addEventListener('submit', async function (event) {
+    event.preventDefault(); // Prevent the default form submission behavior
+
+    const form = event.target;
+    const formData = new FormData(form);
+
+    try {
+        const response = await fetch(form.action, {
+            method: 'POST',
+            body: formData
+        });
+
+        if (response.ok) {
+            // Handle successful response
+            window.location.href = response.url; // Redirect to the new post's page
+        } else {
+            const data = await response.json();
+            if (data.error) {
+                // Display pop-up error message
+                alert(data.error);
+            }
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+});

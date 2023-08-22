@@ -15,14 +15,13 @@
                     {% if user.is_authenticated %}
                     <a href="{% url 'random_post_redirect' %}" class="btn hero-btn">Surprise Me</a>
                     {% else %}
-                    <a href="{% url 'account_signup' %}" class="btn btn-primary hero-btn">Sign Up Now</a>
+                    <a href="{% url 'account_signup' %}" class="btn btn-primary hero-btn">Sign Up</a>
                     {% endif %}
                 </div>
             </div>
         </div>
     </div>
 </section>
-
 
 
 
@@ -39,8 +38,8 @@
                             <img src="{{ post.artwork_image.url }}" alt="Artwork Image" class="post-image">
                         </div>
                         {% else %}
-                        <div class="post-image">
-                            <img src="static/placeholder/post_placeholder.svg" alt="Placeholder Image"
+                        <div>
+                            <img src="/static/placeholder/post_placeholder.svg" alt="Placeholder Image"
                                 class="post-image">
                         </div>
                         {% endif %}

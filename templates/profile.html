@@ -12,8 +12,7 @@
                 <img src="{{ profile.profile_picture.url }}" alt="{{ profile.user.username }}'s Profile Picture"
                     class="profile-picture">
                 {% else %}
-                <img src="cloudinary.com/dsp78l5kf/image/upload/v1692635713/Profile_placeholder_a7fkn6.svg"
-                    alt="Placeholder Image" class="profile-picture">
+                <img src="/static/placeholder/profile_placeholder.svg" alt="Placeholder Image" class="profile-picture">
                 {% endif %}
             </div>
             {% if user == profile.user %}
