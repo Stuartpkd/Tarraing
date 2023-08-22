@@ -36,13 +36,12 @@
                     <div class="post">
                         {% if post.artwork_image %}
                         <div>
-                            <img src="{{ post.artwork_image.url }}" alt="{{ brush.name }} Brush Image"
-                                class="post-image">
+                            <img src="{{ post.artwork_image.url }}" alt="Artwork Image" class="post-image">
                         </div>
                         {% else %}
-                        <div>
-                            <img src="https://res.cloudinary.com/dsp78l5kf/image/upload/v1692635713/Placeholder_image_smqv1p.svg"
-                                alt="Placeholder Image" class="post-image">
+                        <div class="post-image">
+                            <img src="static/placeholder/post_placeholder.svg" alt="Placeholder Image"
+                                class="post-image">
                         </div>
                         {% endif %}
                     </div>
