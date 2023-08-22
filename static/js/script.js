@@ -36,10 +36,18 @@ setTimeout(function () {
 
 
 document.getElementById('upload-form').addEventListener('submit', async function (event) {
-    event.preventDefault(); // Prevent the default form submission behavior
+    event.preventDefault();
 
     const form = event.target;
     const formData = new FormData(form);
+
+
+    const fileInput = form.querySelector('input[type="file"]');
+    if (fileInput.files.length > 0 && fileInput.files[0].size > 1024 * 1024) {
+        const alertBox = document.getElementById('warning-alert');
+        alertBox.style.display = 'block';
+        return;
+    }
 
     try {
         const response = await fetch(form.action, {
@@ -48,12 +56,11 @@ document.getElementById('upload-form').addEventListener('submit', async function
         });
 
         if (response.ok) {
-            // Handle successful response
-            window.location.href = response.url; // Redirect to the new post's page
-        } else {
+
+            window.location.href = response.url;
             const data = await response.json();
             if (data.error) {
-                // Display pop-up error message
+
                 alert(data.error);
             }
         }

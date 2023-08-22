@@ -13,6 +13,10 @@
                     <input type="submit" class="btn button" value="Submit">
                 </div>
             </form>
+            <div class="alert" id="warning-alert" style="display: none;">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                File size exceeds 1MB. Please choose a smaller file.
+            </div>
             {% else %}
             <div class="container">
                 <div class="row justify-content-center">
@@ -28,4 +32,5 @@
         </div>
     </div>
 </div>
+<script src="{% static 'script.js' %}"></script>
 {% endblock %}
