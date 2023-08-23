@@ -223,10 +223,13 @@ class Upload(CreateView):
 
     def form_valid(self, form):
         artwork_image = form.cleaned_data.get('artwork_image')
-        
-        if artwork_image and artwork_image.size > 1024 * 1024:  # 1MB in bytes
+
+        if not artwork_image:
+            return JsonResponse({'error': 'Please upload an image for your artwork.'})
+
+        if artwork_image.size > 1024 * 1024:  # 1MB in bytes
             return JsonResponse({'error': 'The uploaded image is too large. Please upload an image under 1MB.'})
-        
+
         post = form.save(commit=False)
         post.author = self.request.user
         post.save()

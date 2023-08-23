@@ -41,10 +41,15 @@ document.getElementById('upload-form').addEventListener('submit', async function
     const form = event.target;
     const formData = new FormData(form);
 
-
     const fileInput = form.querySelector('input[type="file"]');
-    if (fileInput.files.length > 0 && fileInput.files[0].size > 1024 * 1024) {
-        const alertBox = document.getElementById('warning-alert');
+    if (fileInput.files.length > 0) {
+        if (fileInput.files[0].size > 1024 * 1024) {
+            const alertBox = document.getElementById('warning-alert-file');
+            alertBox.style.display = 'block';
+            return;
+        }
+    } else {
+        const alertBox = document.getElementById('warning-alert-image');
         alertBox.style.display = 'block';
         return;
     }
@@ -56,11 +61,9 @@ document.getElementById('upload-form').addEventListener('submit', async function
         });
 
         if (response.ok) {
-
             window.location.href = response.url;
             const data = await response.json();
             if (data.error) {
-
                 alert(data.error);
             }
         }
@@ -68,6 +71,7 @@ document.getElementById('upload-form').addEventListener('submit', async function
         console.error('Error:', error);
     }
 });
+
 
 function closeCommentSuccessAlert() {
     const commentSuccessAlert = document.getElementById('comment-success-alert');
