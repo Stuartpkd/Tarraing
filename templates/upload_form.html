@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="center-this form-container">
@@ -13,11 +14,13 @@
                     <input type="submit" class="btn button" value="Submit">
                 </div>
             </form>
-            <div class="text-center">
-                <p>Accepted file types: PNG, JPEG</p>
-            </div>
-            <div class="text-center">
-                <p>Accepted file size: 1mb</p>
+            <div>
+                <div class="text-center">
+                    <p>Accepted file types: PNG, JPEG</p>
+                </div>
+                <div class="text-center">
+                    <p>Accepted file size: 1mb</p>
+                </div>
             </div>
             <div class="modal" id="error-modal" tabindex="-1" aria-labelledby="error-modal-label" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
@@ -51,4 +54,32 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.getElementById('upload-form').addEventListener('submit', async function (event) {
+        event.preventDefault();
+
+        const form = event.target;
+        const formData = new FormData(form);
+
+        try {
+            const response = await fetch(form.action, {
+                method: 'POST',
+                body: formData
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                if (data.error) {
+                    const modal = new bootstrap.Modal(document.getElementById('error-modal'));
+                    const modalBody = document.querySelector('#error-modal .modal-body');
+                    modalBody.textContent = data.error;
+                    modal.show();
+                }
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    });
+</script>
 {% endblock %}

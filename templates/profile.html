@@ -3,6 +3,32 @@
 {% block content %}
 {% if user.is_authenticated %}
 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let savedArtworkBtn = document.getElementById("artwork-btn");
+        let postsBtn = document.getElementById("post-btn");
+        let posts = document.getElementById("post-list");
+        let savedArtworks = document.getElementById("saved-artwork-list");
+
+        savedArtworkBtn.addEventListener("click", displayArtworks);
+        postsBtn.addEventListener("click", displayPosts);
+
+        function displayArtworks() {
+            if (savedArtworks.classList.contains('hide')) {
+                savedArtworks.classList.remove("hide");
+                posts.classList.add('hide');
+            }
+        }
+
+        function displayPosts() {
+            if (posts.classList.contains('hide')) {
+                posts.classList.remove('hide');
+                savedArtworks.classList.add('hide');
+            }
+        }
+    });
+</script>
+
 <div class="row">
     <div class="col-md-12">
         <div class="mb-4 text-center">
@@ -75,8 +101,6 @@
     </div>
 </div>
 
-
-
 <div class="container">
     <div class="row hide" id="saved-artwork-list">
         {% if saved_artworks and user == profile.user %}
@@ -103,7 +127,6 @@
     </div>
 </div>
 
-
 {% else %}
 <div class="container">
     <div class="row justify-content-center">
@@ -115,5 +138,6 @@
         </div>
     </div>
 </div>
+
 {% endif %}
 {% endblock %}
