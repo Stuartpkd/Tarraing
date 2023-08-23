@@ -7,6 +7,10 @@ from cloudinary.models import CloudinaryField
 from cloudinary import CloudinaryResource
 
 
+from django.utils.text import slugify
+import random
+import string
+
 class Post(models.Model):
     title = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(max_length=100, unique=True)
@@ -27,10 +31,18 @@ class Post(models.Model):
     def number_of_likes(self):
         return self.likes.count()
 
+    def generate_unique_slug(self):
+        base_slug = slugify(self.title)
+        random_suffix = ''.join(random.choices(string.ascii_lowercase + string.digits, k=6))
+        return f"{base_slug}-{random_suffix}"
+
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.title)
-        super(Post, self).save(*args, **kwargs)
+            unique_slug = self.generate_unique_slug()
+            while Post.objects.filter(slug=unique_slug).exists():
+                unique_slug = self.generate_unique_slug()
+            self.slug = unique_slug
+        super().save(*args, **kwargs)
 
 
 class Upload(models.Model):
