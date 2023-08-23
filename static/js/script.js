@@ -28,13 +28,6 @@ function confirmDelete() {
 }
 
 
-setTimeout(function () {
-    let messages = document.getElementById('msg');
-    let alert = new bootstrap.Alert(messages);
-    alert.close();
-}, 2500);
-
-
 document.getElementById('upload-form').addEventListener('submit', async function (event) {
     event.preventDefault();
 
@@ -44,14 +37,10 @@ document.getElementById('upload-form').addEventListener('submit', async function
     const fileInput = form.querySelector('input[type="file"]');
     if (fileInput.files.length > 0) {
         if (fileInput.files[0].size > 1024 * 1024) {
-            const alertBox = document.getElementById('warning-alert-file');
+            const alertBox = document.getElementById('warning-alert');
             alertBox.style.display = 'block';
             return;
         }
-    } else {
-        const alertBox = document.getElementById('warning-alert-image');
-        alertBox.style.display = 'block';
-        return;
     }
 
     try {
@@ -80,9 +69,6 @@ function closeCommentSuccessAlert() {
 
 
 function handleCommentSubmission() {
-
-
-
     const commentSuccessAlert = document.getElementById('comment-success-alert');
     commentSuccessAlert.style.display = 'block';
 }
