@@ -229,9 +229,10 @@ class Upload(CreateView):
 
         allowed_image_types = ['image/jpeg', 'image/png']
         if artwork_image.content_type not in allowed_image_types:
-            return JsonResponse({'error': 'Please upload a valid image file (JPEG, PNG).'})
+            return JsonResponse({'error': 'Please upload a valid image file (JPEG, PNG)'})
 
-        if artwork_image.size > 1024 * 1024:  # 1MB in bytes
+        max_file_size = 1024 * 1024  # 1MB in bytes
+        if artwork_image.size > max_file_size:
             return JsonResponse({'error': 'The uploaded image is too large. Please upload an image under 1MB.'})
 
         post = form.save(commit=False)

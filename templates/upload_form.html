@@ -13,11 +13,23 @@
                     <input type="submit" class="btn button" value="Submit">
                 </div>
             </form>
-            <div class="alert alert-danger alert-dismissible fade show" role="alert" id="warning-alert"
-                style="display: none;">
-                File size exceeds 1MB. Please choose a smaller file.
-                <button type="button" class="btn-close" aria-label="Close"></button>
+            <div class="modal" id="error-modal" tabindex="-1" aria-labelledby="error-modal-label" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="error-modal-label">Error</h5>
+                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Error message will be displayed here -->
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
             </div>
+
             {% else %}
             <div class="container">
                 <div class="row justify-content-center">
