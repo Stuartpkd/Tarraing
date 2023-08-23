@@ -227,6 +227,10 @@ class Upload(CreateView):
         if not artwork_image:
             return JsonResponse({'error': 'Please upload an image for your artwork.'})
 
+        allowed_image_types = ['image/jpeg', 'image/png']
+        if artwork_image.content_type not in allowed_image_types:
+            return JsonResponse({'error': 'Please upload a valid image file (JPEG, PNG).'})
+
         if artwork_image.size > 1024 * 1024:  # 1MB in bytes
             return JsonResponse({'error': 'The uploaded image is too large. Please upload an image under 1MB.'})
 
