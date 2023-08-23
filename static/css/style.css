@@ -145,8 +145,6 @@ label {
     font-weight: 400;
     background: linear-gradient(90deg, rgba(216, 131, 244, 1) 0%, rgba(178, 74, 213, 1) 100%);
     border-radius: 50px;
-    min-width: 60px;
-    min-height: 30px;
     box-shadow: none !important;
     border: none !important;
 }
@@ -235,6 +233,10 @@ h4 {
 }
 
 /* Index */
+
+.search-input {
+    width: 120px;
+}
 
 span {
     color: aliceblue;

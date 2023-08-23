@@ -54,7 +54,7 @@
                 <li class="nav-item">
                     <form class="form-inline my-2 my-lg-0" method="get" action="{% url 'search_posts' %}">
                         {% csrf_token %}
-                        <input type="text" name="q" placeholder="Search by title">
+                        <input type="text" name="q" placeholder="Search by title" class="search-input">
                         <div class="search-btn">
                             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                         </div>
