@@ -333,10 +333,6 @@ span {
     min-width: 40px;
 }
 
-.comment-btns {
-    padding: 10px;
-}
-
 .comment-body {
     padding: 10px;
     background-color: #9900fd;
@@ -481,9 +477,14 @@ span {
 /* Comments */
 
 .comments-made {
+    padding: 20px 0;
     color: aliceblue;
     font-weight: 300;
     font-family: 'Space Grotesk';
+}
+
+.comment-btns {
+    padding: 20px;
 }
 
 /* Footer */
