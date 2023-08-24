@@ -375,6 +375,13 @@ span {
     font-weight: 800;
 }
 
+/* Edit post */
+
+.delete-form {
+    position: inherit;
+    bottom: 43px;
+}
+
 /* Upload */
 
 .form-container {

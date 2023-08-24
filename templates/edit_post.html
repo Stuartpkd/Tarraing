@@ -13,30 +13,7 @@
                     <input type="submit" class="btn button" value="Submit">
                 </div>
             </form>
-            <!-- <form method="POST" action="{% url 'edit_post' post.slug %}" enctype="multipart/form-data">
-                {% csrf_token %}
-                <div class="form-group">
-                    <label for="title">Title:</label>
-                    <input type="text" class="form-control" name="title" value="{{ post.title }}">
-                </div>
-
-                <div class="form-group">
-                    <label for="content">Description:</label>
-                    <textarea class="form-control" name="content">{{ post.content }}</textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="artwork_image">Artwork Image:</label>
-                    <input type="file" class="form-control-file" name="artwork_image">
-                    {% if post.artwork_image %}
-                    <img src="{{ post.artwork_image.url }}" alt="{{ post.title }} Artwork Image" class="img-fluid mt-2">
-                    {% endif %}
-                </div>
-
-                <button type="submit" class="btn btn-primary">Save</button>
-            </form> -->
-
-            <form method="POST" action="{% url 'delete_post' post.slug %}">
+            <form method="POST" action="{% url 'delete_post' post.slug %}" class="delete-form">
                 {% csrf_token %}
                 <button type="submit" class="btn btn-danger mt-2" onclick="return confirmDelete()">Delete</button>
             </form>
@@ -54,7 +31,5 @@
         </div>
     </div>
 </div>
-
-
 {% endif %}
 {% endblock %}
