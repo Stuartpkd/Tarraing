@@ -3,8 +3,6 @@ function confirmDelete() {
 }
 
 
-
-
 function closeCommentSuccessAlert() {
     const commentSuccessAlert = document.getElementById('comment-success-alert');
     commentSuccessAlert.style.display = 'none';

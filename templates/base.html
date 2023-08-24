@@ -20,7 +20,7 @@
 </head>
 
 <body>
-
+    <!-- Nav element -->
     <nav class="navbar navbar-expand-md navbar-light bg-light">
         <a class="navbar-brand logo-title nav-response" href="{% url 'home' %}">Tarraing</a>
         <lottie-player src="https://lottie.host/d396ebaa-0b4c-4c6f-b74b-fd94d1af90e7/HE5OuqqnpK.json"
@@ -64,11 +64,13 @@
         </div>
     </nav>
 
+    <!-- Posts Container -->
     <main class="posts">
         {% block content %}
         {% endblock content %}
     </main>
 
+    <!-- Footer -->
     <footer class="footer text-white">
         <div class="container">
             <div class="row justify-content-center">

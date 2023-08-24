@@ -6,6 +6,7 @@
 
 {% block content %}
 {% if user.is_authenticated %}
+<!-- Post detail container -->
 <div class="container">
     <div class="col-lg-7 mx-auto">
         <div class="post">
@@ -88,6 +89,7 @@
             </div>
         </div>
     </div>
+    <!-- Comment section -->
     <div class="col-lg-7 mt-4 mx-auto">
         <div class="comments">
             <h3>Comments:</h3>
@@ -142,6 +144,7 @@
 
 </div>
 {% else %}
+<!-- Sign in warning -->
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6 center-this">

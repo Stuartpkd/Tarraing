@@ -3,6 +3,7 @@
 {% load static %}
 
 {% block content %}
+<!-- Hero section -->
 <section class="hero-section">
     <div class="hero-overlay">
         <div class="container">
@@ -23,8 +24,7 @@
     </div>
 </section>
 
-
-
+<!-- Post list -->
 <div class="container">
     <div class="row justify-content-center">
         {% for post in object_list %}
@@ -51,6 +51,7 @@
     </div>
 </div>
 
+<!-- Page pagination -->
 <div class="pagination justify-content-center">
     <span class="step-links">
         {% if page_obj.has_previous %}
@@ -71,6 +72,4 @@
         {% endif %}
     </span>
 </div>
-
-
 {% endblock %}

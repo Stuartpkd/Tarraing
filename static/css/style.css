@@ -1,3 +1,5 @@
+/* Body */
+
 body {
     background: rgb(40, 40, 93);
     background: linear-gradient(90deg, rgba(40, 40, 93, 1) 0%, rgba(23, 21, 41, 1) 100%);
@@ -7,8 +9,6 @@ body {
     display: flex;
     flex-direction: column;
 }
-
-
 
 /* Pop ups */
 
@@ -131,6 +131,7 @@ label {
 }
 
 /* Overiding bootstrap classes */
+
 .search-btn {
     padding-left: 10px;
 }
@@ -243,7 +244,6 @@ h4 {
 .nav-item.active .nav-link {
     text-decoration: underline;
 }
-
 
 /* Index */
 

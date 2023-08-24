@@ -2,6 +2,7 @@
 {% load crispy_forms_tags %}
 {% block content %}
 {% if user.is_authenticated %}
+<!-- Edit comment form -->
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6 center-this">
@@ -17,6 +18,7 @@
     </div>
 </div>
 {% else %}
+<!-- Sign in warning -->
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6 center-this">

@@ -2,6 +2,7 @@
 {% load static %}
 {% block content %}
 {% if user.is_authenticated %}
+<!-- Edit post form -->
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-lg-6">
@@ -21,6 +22,7 @@
         </div>
     </div>
 </div>
+<!-- Warning modal -->
 <div class="modal" id="error-modal" tabindex="-1" aria-labelledby="error-modal-label" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -37,6 +39,7 @@
     </div>
 </div>
 {% else %}
+<!-- Sign in warning -->
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6 center-this">
@@ -48,11 +51,9 @@
     </div>
 </div>
 
-
-
-
 {% endif %}
 
+<!-- Script for warning modal -->
 <script>
     document.getElementById('edit-form').addEventListener('submit', async function (event) {
         event.preventDefault();
