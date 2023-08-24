@@ -6,7 +6,7 @@
     <div class="row justify-content-center">
         <div class="col-lg-6">
             <h1 class="text-center">Edit Post</h1>
-            <form method="POST" enctype="multipart/form-data" id="upload-form">
+            <form method="POST" enctype="multipart/form-data" id="edit-form">
                 {% csrf_token %}
                 {{ form.as_p }}
                 <div class="text-center">
@@ -21,6 +21,21 @@
         </div>
     </div>
 </div>
+<div class="modal" id="error-modal" tabindex="-1" aria-labelledby="error-modal-label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="error-modal-label">Error</h5>
+            </div>
+            <div class="modal-body">
+                <!-- Error message will be displayed here -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 {% else %}
 <div class="container">
     <div class="row justify-content-center">
@@ -32,5 +47,37 @@
         </div>
     </div>
 </div>
+
+
+
+
 {% endif %}
+
+<script>
+    document.getElementById('edit-form').addEventListener('submit', async function (event) {
+        event.preventDefault();
+
+        const form = event.target;
+        const formData = new FormData(form);
+
+        try {
+            const response = await fetch(form.action, {
+                method: 'POST',
+                body: formData
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                if (data.error) {
+                    const modal = new bootstrap.Modal(document.getElementById('error-modal'));
+                    const modalBody = document.querySelector('#error-modal .modal-body');
+                    modalBody.textContent = data.error;
+                    modal.show();
+                }
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    });
+</script>
 {% endblock %}

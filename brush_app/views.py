@@ -182,7 +182,19 @@ class PostEdit(View):
                                          "permission to edit this.")
 
         form = ArtworkUploadForm(request.POST, request.FILES, instance=post)
+
         if form.is_valid():
+            artwork_image = form.cleaned_data.get('artwork_image')
+
+            if artwork_image:
+                allowed_image_types = ['image/jpeg', 'image/png']
+                if artwork_image.content_type not in allowed_image_types:
+                    return JsonResponse({'error': 'Please upload a valid image file (JPEG, PNG)'})
+
+                max_file_size = 1024 * 1024  # 1MB in bytes
+                if artwork_image.size > max_file_size:
+                    return JsonResponse({'error': 'The uploaded image is too large. Please upload an image under 1MB.'})
+
             form.save()
             return redirect("post_detail", slug=slug)
         else:
