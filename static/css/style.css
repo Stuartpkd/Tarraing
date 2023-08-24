@@ -172,6 +172,10 @@ a:hover {
     text-decoration: none !important;
 }
 
+li a:visited {
+    color: aliceblue !important;
+}
+
 /* H1 */
 
 h1 {
@@ -235,6 +239,11 @@ h4 {
 .posts {
     width: 100%;
 }
+
+.nav-item.active .nav-link {
+    text-decoration: underline;
+}
+
 
 /* Index */
 
@@ -378,8 +387,8 @@ span {
 /* Edit post */
 
 .delete-form {
-    position: inherit;
-    bottom: 43px;
+    position: absolute;
+    bottom: 0;
 }
 
 /* Upload */

@@ -13,9 +13,10 @@
                     <input type="submit" class="btn button" value="Submit">
                 </div>
             </form>
-            <form method="POST" action="{% url 'delete_post' post.slug %}" class="delete-form">
+            <form method="POST" action="{% url 'delete_post' post.slug %}">
                 {% csrf_token %}
-                <button type="submit" class="btn btn-danger mt-2" onclick="return confirmDelete()">Delete</button>
+                <button type="submit" class="btn btn-danger mt-2 delete-form"
+                    onclick="return confirmDelete()">Delete</button>
             </form>
         </div>
     </div>
