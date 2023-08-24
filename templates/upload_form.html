@@ -3,19 +3,19 @@
 {% block content %}
 
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="center-this form-container">
+    <div class="row justify-content-center upload-container">
+        <div class="col-md-6">
             {% if user.is_authenticated %}
             <h2 class="text-center">Upload Artwork</h2>
-            <form method="POST" enctype="multipart/form-data" id="upload-form">
+            <form method="POST" enctype="multipart/form-data" id="upload-form" class="form-input">
                 {% csrf_token %}
-                {{ form.as_p }}
+                {{ form.as_p|safe }}
                 <div class="text-center">
                     <input type="submit" class="btn button" value="Submit">
                 </div>
             </form>
             <div>
-                <div class="text-center">
+                <div class="text-center file-type">
                     <p>Accepted file types: PNG, JPEG</p>
                 </div>
                 <div class="text-center">
