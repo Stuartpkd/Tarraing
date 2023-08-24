@@ -165,8 +165,6 @@ a {
     color: aliceblue;
     text-decoration: none !important;
     font-family: Montserrat;
-    transition: transform 0.3s;
-    transform: scale(1.1);
 }
 
 a:hover {
