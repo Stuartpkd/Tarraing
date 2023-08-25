@@ -4,9 +4,9 @@
 {% block content %}
 <div class="container">
     <div class="row justify-content-center">
-        <div class="center-this">
+        <div class="center-this justify-content-center">
             <h2 class="text-center">Upload Profile Picture</h2>
-            <form class="text-center" method="post" enctype="multipart/form-data">
+            <form id="profile-pic-form" class="text-center" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form.as_p }}
                 <div class="text-center">

@@ -37,6 +37,7 @@ X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 # Application definition
 
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',

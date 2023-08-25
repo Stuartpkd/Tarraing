@@ -364,6 +364,19 @@ span {
 
 /* Please create acc / Sign in / Sign out / Sign up */
 
+.errorlist>li {
+    font-family: Montserrat;
+    color: aliceblue;
+}
+
+#id_email {
+    display: none;
+}
+
+label[for="id_email"] {
+    display: none;
+}
+
 .form-box {
     padding: 20px;
 }
@@ -503,6 +516,12 @@ span {
 .saved-artwork-link:hover {
     transition: transform 0.3s;
     transform: scale(1.1);
+}
+
+/* Profile Picture Upload */
+
+#profile-pic-form>p {
+    margin-left: 156px;
 }
 
 /* Comments */

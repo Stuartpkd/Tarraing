@@ -390,10 +390,10 @@ class PostEdit(View):
                                          'upload an image under 1MB.'})
 
             form.save()
-            return redirect("post_detail", slug=slug)
+            return JsonResponse({'redirect_url': reverse('post_detail', args=[slug])})
         else:
-            return render(request,
-                          "edit_post.html", {"form": form, "post": post})
+            errors = dict(form.errors.items())
+            return JsonResponse({'errors': errors})
 
 
 class PostDelete(View):
@@ -638,3 +638,4 @@ def random_post_redirect(request):
     all_posts = list(Post.objects.all())
     random_post = random.choice(all_posts)
     return redirect(reverse('post_detail', kwargs={'slug': random_post.slug}))
+
