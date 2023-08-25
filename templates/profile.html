@@ -92,7 +92,8 @@
                     {% if post.artwork_image %}
                     <img src="{{ post.artwork_image.url }}" alt="{{ brush.name }} Brush Image" class="post-image">
                     {% else %}
-                    <img src="{% static 'temp_images/github.png' %}" alt="Placeholder Image" class="card-img-top">
+                    <img src="https://res.cloudinary.com/dsp78l5kf/raw/upload/v1692701639/static/placeholder/profile_placeholder.2ff442e9a500.svg"
+                        alt="Placeholder Image" class="card-img-top">
                     {% endif %}
                     <div>
                         {% if user == post.author %}

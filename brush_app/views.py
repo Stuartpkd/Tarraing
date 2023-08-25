@@ -3,6 +3,7 @@ from django.views.generic.edit import CreateView
 from django.contrib import messages
 from django.db.models import Count, Q
 from django.views import generic, View
+from django.urls import reverse
 from django.http import (
     HttpResponseRedirect,
     HttpResponseForbidden,
@@ -503,7 +504,11 @@ class Upload(CreateView):
         post = form.save(commit=False)
         post.author = self.request.user
         post.save()
-        return redirect('post_detail', slug=post.slug)
+        return JsonResponse({'redirect_url': reverse('post_detail', args=[post.slug])})
+        
+    def form_invalid(self, form):
+        errors = dict(form.errors.items())
+        return JsonResponse({'errors': errors})
 
 
 class ProfileView(View):
@@ -562,13 +567,12 @@ def upload_profile_picture(request):
         request: The HTTP request object.
 
     Returns:
-        HttpResponse: A rendered template displaying
-        the profile picture upload form.
+        HttpResponse: A rendered template displaying the profile picture upload form.
     """
     profile = get_object_or_404(Profile, user=request.user)
 
     if request.method == 'POST':
-        form = ProfilePictureForm(request.POST,
+        form = ProfilePictureForm(request.POST, 
                                   request.FILES, instance=profile)
 
         if form.is_valid():

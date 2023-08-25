@@ -51,20 +51,19 @@ After thinking about the strategy for my site. I came up with a target audience,
 #### For This Sprint
 | id  |  Content | Label |
 | ------ | ------ | ------ |
-| [1](https://github.com/Stuartpkd/Tarraing/issues/13) | As an admin or moderator, I have special privileges and permissions to moderate user-generated content and manage users so that I can ensure the overall quality and integrity of the site. | Must Have |
-| [2](https://github.com/Stuartpkd/Tarraing/issues/11) | As a registered user, I have a profile page where I can view and manage my uploaded artwork and brushes, as well as see my collections, likes, comments, and other profile-related information. | Must Have |
-| [3](https://github.com/Stuartpkd/Tarraing/issues/3) | As a registered user, I can update the information and files of my uploaded artwork and brushes to reflect any changes or improvements. | Must Have |
-| [4](https://github.com/Stuartpkd/Tarraing/issues/1) | As a registered user, I can upload my artwork and brushes so that I can share them with the community. | Could Have |
-| [5](https://github.com/Stuartpkd/Tarraing/issues/9) | As a site user, I can click on an artwork to view its details, including the title, description, artist, upload date, and associated brushes so that I can learn further about the content. | Could Have |
-| [6](https://github.com/Stuartpkd/Tarraing/issues/2) | As a registered user, I can delete my uploaded artwork and brushes so that I can remove unwanted brushes and artwork from the site. | Must Have |
-| [7](https://github.com/Stuartpkd/Tarraing/issues/12) | As a site user, I can register for an account or log in using my credentials to access the full features of the site and interact with other users so that I can benefit from the full features of the site. | Must Have |
-| [8](https://github.com/Stuartpkd/Tarraing/issues/4) | As a registered user, I can like artwork and brushes that I find interesting or inspiring to show my appreciation. | Should Have |
-| [9](https://github.com/Stuartpkd/Tarraing/issues/14) | As a registered user, I can leave comments on artwork and brushes to provide feedback or engage in discussions with other users. | Must Have |
-| [11](https://github.com/Stuartpkd/Tarraing/issues/10) | As a site user, I can click on a brush to view its details, including the title, description, artist, upload date, and associated artwork so that I can learn further about the content. | Could Have |
-| [12](https://github.com/Stuartpkd/Tarraing/issues/8) | As a site user, I can search for specific artwork and brushes using keywords or filters to discover relevant content. | Could Have |
-| [13](https://github.com/Stuartpkd/Tarraing/issues/5) | As a registered user, I can create collections to curate and organize my favorite artwork and brushes in personalized collections. | Should Have |
-| [14](https://github.com/Stuartpkd/Tarraing/issues/6) | As a registered user, I can add artwork and brushes to my created collections to categorize and group related content. | Should Have |
-| [15](https://github.com/Stuartpkd/Tarraing/issues/7) | As a registered user, I can manage my collections by renaming them, changing descriptions, or reordering the artwork and brushes within them. | Must Have |
+| [1](https://github.com/Stuartpkd/Tarraing/issues/1) | As a registered user, I can upload my artwork so that I can share them with the community. | Needed |
+| [2](https://github.com/Stuartpkd/Tarraing/issues/2) | As a registered user, I can delete my uploaded artwork so that I can remove unwanted artwork from the site. | Needed |
+| [3](https://github.com/Stuartpkd/Tarraing/issues/3) | As a registered user, I can update the information and files of my uploaded artwork to reflect any changes or improvements. | Needed |
+| [4](https://github.com/Stuartpkd/Tarraing/issues/4) | As a registered user, I can like artwork that I find interesting or inspiring to show my appreciation. | Needed |
+| [6](https://github.com/Stuartpkd/Tarraing/issues/6) | As a registered user, I can add artwork to my saved artwork on my profile to collect and discover other artists on the site. | Nice to have |
+| [8](https://github.com/Stuartpkd/Tarraing/issues/8) | As a site user, I can search for specific artwork using keywords or filters to discover relevant content. | Needed |
+| [9](https://github.com/Stuartpkd/Tarraing/issues/9) | As a site user, I can click on an artwork to view its details, including the title, description, artist and upload date so that I can learn further about the content. | Needed |
+| [11](https://github.com/Stuartpkd/Tarraing/issues/11) | As a registered user, I have a profile page where I can view and manage my uploaded artwork, as well as see my saved posts, likes and other profile-related information. | Needed |
+| [12](https://github.com/Stuartpkd/Tarraing/issues/12) | As a site user, I can register for an account or log in using my credentials to access the full features of the site and interact with other users so that I can benefit from the full features of the site.| Needed |
+| [13](https://github.com/Stuartpkd/Tarraing/issues/13) | As an admin, I have special privileges and permissions to moderate user-generated content and manage users so that I can ensure the overall quality and integrity of the site. | Needed |
+| [14](https://github.com/Stuartpkd/Tarraing/issues/14) | As a registered user, I can leave comments on artwork to provide feedback or engage in discussions with other users. | Needed |
+| [15](https://github.com/Stuartpkd/Tarraing/issues/15) | As a user I can use the random post feature so that I can discover new artists. | Nice to have |
+| [16](https://github.com/Stuartpkd/Tarraing/issues/16) | AAs a user I can report a comment so that I can help maintain the friendly sense of community on the site. | Nice to have |
 
 \
 &nbsp;
@@ -324,7 +323,7 @@ This included:
 * Nest Hub and Hub Max
 
 I also opted to use the responsiveness option and checked the screens at the following width sizes:
-* 320px
+* 350px
 * 768px
 * 992px
 * 1400px

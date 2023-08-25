@@ -55,7 +55,6 @@
     </div>
 </div>
 
-<!-- Script for modal warning -->
 <script>
     document.getElementById('upload-form').addEventListener('submit', async function (event) {
         event.preventDefault();
@@ -69,18 +68,28 @@
                 body: formData
             });
 
-            if (response.ok) {
+            const contentType = response.headers.get('content-type');
+
+            if (contentType && contentType.includes('application/json')) {
                 const data = await response.json();
+
                 if (data.error) {
                     const modal = new bootstrap.Modal(document.getElementById('error-modal'));
                     const modalBody = document.querySelector('#error-modal .modal-body');
                     modalBody.textContent = data.error;
                     modal.show();
+                } else if (data.redirect_url) {
+                    window.location.href = data.redirect_url;
                 }
+            } else {
+                console.log("Received non-JSON response");
             }
         } catch (error) {
             console.error('Error:', error);
         }
     });
 </script>
+
+
+
 {% endblock %}
