@@ -261,6 +261,7 @@ span {
 
 .post-title {
     max-width: 300px;
+    word-wrap: break-word;
 }
 
 .post-container:hover {
