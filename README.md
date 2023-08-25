@@ -63,7 +63,7 @@ After thinking about the strategy for my site. I came up with a target audience,
 | [13](https://github.com/Stuartpkd/Tarraing/issues/13) | As an admin, I have special privileges and permissions to moderate user-generated content and manage users so that I can ensure the overall quality and integrity of the site. | Needed |
 | [14](https://github.com/Stuartpkd/Tarraing/issues/14) | As a registered user, I can leave comments on artwork to provide feedback or engage in discussions with other users. | Needed |
 | [15](https://github.com/Stuartpkd/Tarraing/issues/15) | As a user I can use the random post feature so that I can discover new artists. | Nice to have |
-| [16](https://github.com/Stuartpkd/Tarraing/issues/16) | AAs a user I can report a comment so that I can help maintain the friendly sense of community on the site. | Nice to have |
+| [16](https://github.com/Stuartpkd/Tarraing/issues/16) | AA a user I can report a comment so that I can help maintain the friendly sense of community on the site. | Nice to have |
 
 \
 &nbsp;

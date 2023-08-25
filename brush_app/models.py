@@ -142,7 +142,7 @@ class Comment(models.Model):
                              related_name='comments')
     name = models.CharField(max_length=80)
     email = models.EmailField()
-    body = models.TextField()
+    body = models.TextField(max_length=250)
     created_on = models.DateTimeField(auto_now_add=True)
     reported = models.BooleanField(default=False)
     reported_reason = models.TextField(blank=True, null=True)

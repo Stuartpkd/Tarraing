@@ -1,7 +1,10 @@
 function confirmDelete() {
-    return confirm("Are you sure you want to delete this post?");
+    return window.confirm("Are you sure you want to delete this post?");
 }
 
+function confirmDeleteComment() {
+    return window.confirm("Are you sure you want to delete this comment?");
+}
 
 function closeCommentSuccessAlert() {
     const commentSuccessAlert = document.getElementById('comment-success-alert');
