@@ -639,3 +639,6 @@ def random_post_redirect(request):
     random_post = random.choice(all_posts)
     return redirect(reverse('post_detail', kwargs={'slug': random_post.slug}))
 
+
+def custom_403_view(request, exception):
+    return render(request, '403.html', {}, status=403)
