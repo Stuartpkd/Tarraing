@@ -2,8 +2,11 @@ from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.views.generic.edit import CreateView
 from django.contrib import messages
 from django.db.models import Count, Q
+from django.core.files.uploadedfile import UploadedFile
 from django.views import generic, View
 from django.urls import reverse
+from cloudinary.models import CloudinaryResource
+from django.utils.text import slugify
 from django.http import (
     HttpResponseRedirect,
     HttpResponseForbidden,
@@ -319,78 +322,51 @@ def report_comment(request, post_id, slug, comment_id):
 
 
 class PostEdit(View):
-    """
-    View for editing a post.
-
-    Methods:
-        get(request, slug, *args, **kwargs):
-        Handles GET requests for editing a post.
-        post(request, slug, *args, **kwargs):
-        Handles POST requests for editing a post.
-    """
     def get(self, request, slug, *args, **kwargs):
-        """
-        Handles GET requests for editing a post.
-
-        Args:
-            request: The incoming HTTP request object.
-            slug: The slug of the post to be edited.
-            *args: Additional arguments.
-            **kwargs: Additional keyword arguments.
-
-        Returns:
-            HttpResponse: A rendered edit post page.
-        """
         post = get_object_or_404(Post, slug=slug)
-
         if request.user != post.author:
             return HttpResponseForbidden("You do not have "
                                          "permission to edit this.")
-
-        form = ArtworkUploadForm(instance=post)
-
+        form = ArtworkUploadForm(instance=post, is_required=False)
         return render(request, "edit_post.html", {"form": form, "post": post})
 
     def post(self, request, slug, *args, **kwargs):
-        """
-        Handles POST requests for editing a post.
-
-        Args:
-            request: The incoming HTTP request object.
-            slug: The slug of the post to be edited.
-            *args: Additional arguments.
-            **kwargs: Additional keyword arguments.
-
-        Returns:
-            HttpResponse:
-            A redirect to the post detail page after successful
-            edit or a rendered edit post page with errors.
-        """
         post = get_object_or_404(Post, slug=slug)
-
         if request.user != post.author:
             return HttpResponseForbidden("You do not have "
                                          "permission to edit this.")
 
-        form = ArtworkUploadForm(request.POST, request.FILES, instance=post)
+        form = ArtworkUploadForm(request.POST, request.FILES,
+                                 instance=post, is_required=False)
 
         if form.is_valid():
             artwork_image = form.cleaned_data.get('artwork_image')
 
             if artwork_image:
                 allowed_image_types = ['image/jpeg', 'image/png']
-                if artwork_image.content_type not in allowed_image_types:
-                    return JsonResponse({'error': 'Please upload '
-                                         'a valid image file (JPEG, PNG)'})
 
-                max_file_size = 1024 * 1024  # 1MB in bytes
-                if artwork_image.size > max_file_size:
-                    return JsonResponse({'error': 'The uploaded '
-                                         'image is too large. Please '
-                                         'upload an image under 1MB.'})
+                if isinstance(artwork_image, UploadedFile):
+                    if artwork_image.content_type not in allowed_image_types:
+                        return JsonResponse({'error': 'Please upload '
+                                             'a valid image file (JPEG, PNG)'})
 
-            form.save()
-            return JsonResponse({'redirect_url': reverse('post_detail', args=[slug])})
+                    max_file_size = 1024 * 1024  # 1MB in bytes
+                    if artwork_image.size > max_file_size:
+                        return JsonResponse({'error': 'The uploaded image is '
+                                             'too large. Please upload '
+                                             'an image under 1MB.'})
+
+                elif isinstance(artwork_image, CloudinaryResource):
+                    # Perform Cloudinary-specific checks here, if needed
+                    pass
+
+            # Update the title and slug
+            new_slug = post.generate_unique_slug()
+            post.slug = new_slug
+            post.save()
+
+            return JsonResponse({'redirect_url':
+                                 reverse('post_detail', args=[post.slug])})
         else:
             errors = dict(form.errors.items())
             return JsonResponse({'errors': errors})
@@ -503,9 +479,12 @@ class Upload(CreateView):
 
         post = form.save(commit=False)
         post.author = self.request.user
+        # Set the slug here
+        post.slug = post.generate_unique_slug()
         post.save()
-        return JsonResponse({'redirect_url': reverse('post_detail', args=[post.slug])})
-        
+        return JsonResponse({'redirect_url':
+                             reverse('post_detail', args=[post.slug])})
+
     def form_invalid(self, form):
         errors = dict(form.errors.items())
         return JsonResponse({'errors': errors})
@@ -567,12 +546,13 @@ def upload_profile_picture(request):
         request: The HTTP request object.
 
     Returns:
-        HttpResponse: A rendered template displaying the profile picture upload form.
+        HttpResponse:
+        A rendered template displaying the profile picture upload form.
     """
     profile = get_object_or_404(Profile, user=request.user)
 
     if request.method == 'POST':
-        form = ProfilePictureForm(request.POST, 
+        form = ProfilePictureForm(request.POST,
                                   request.FILES, instance=profile)
 
         if form.is_valid():

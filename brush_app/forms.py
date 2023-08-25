@@ -31,18 +31,11 @@ class ReportCommentForm(forms.Form):
 
 
 class ArtworkUploadForm(forms.ModelForm):
-    """
-    A form for uploading artwork with title, content, and image.
+    def __init__(self, *args, **kwargs):
+        is_required = kwargs.pop("is_required", True)
+        super(ArtworkUploadForm, self).__init__(*args, **kwargs)
+        self.fields['artwork_image'].required = is_required
 
-    Fields:
-        title (CharField): The title of the artwork.
-        content (CharField): A brief content description of the artwork.
-        artwork_image (FileField): The uploaded artwork image.
-
-    Meta:
-        model (Post): The Post model to use for the form.
-        fields (list): The fields from the Post model to include in the form.
-    """
     class Meta:
         model = Post
         fields = ['title', 'content', 'artwork_image']

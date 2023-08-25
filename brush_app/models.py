@@ -29,7 +29,7 @@ class Post(models.Model):
         save(*args, **kwargs): Overrides the save method to set a unique slug.
     """
 
-    title = models.CharField(max_length=100, unique=True)
+    title = models.CharField(max_length=100, unique=False)
     slug = models.SlugField(max_length=100, unique=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE,
                                related_name="artwork_posts")
@@ -64,12 +64,26 @@ class Post(models.Model):
     def save(self, *args, **kwargs):
         """
         Overrides the save method to set a unique slug if it's not provided.
+        Also, updates the slug if the title changes.
         """
+        # Check if the title has changed
+        if self.id:
+            old_post = Post.objects.get(pk=self.id)
+            if old_post.title != self.title:
+                self.slug = None  # Reset slug so it gets regenerated
+
         if not self.slug:
             unique_slug = self.generate_unique_slug()
-            while Post.objects.filter(slug=unique_slug).exists():
+            while (
+                Post.objects.filter(slug=unique_slug)
+                .exclude(id=self.id)
+                .exists()
+            ):
+                unique_slug = self.generate_unique_slug()
+
                 unique_slug = self.generate_unique_slug()
             self.slug = unique_slug
+
         super().save(*args, **kwargs)
 
 

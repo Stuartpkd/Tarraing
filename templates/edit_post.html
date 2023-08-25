@@ -62,6 +62,9 @@
         const formData = new FormData(form);
 
         try {
+            // Log the URL you are trying to hit
+            console.log("Fetching URL:", form.action);
+
             const response = await fetch(form.action, {
                 method: 'POST',
                 body: formData
@@ -84,8 +87,9 @@
                 console.log("Received non-JSON response");
             }
         } catch (error) {
-            console.error('Error:', error);
+            console.error('Fetch Error:', error);
         }
     });
 </script>
+
 {% endblock %}
