@@ -325,14 +325,79 @@ I created a random post button that allows users to discover new artists by brin
 
 ## Code Validation
 
-### Home page
-
-![Colours](docs/colours/colours.png)
-
 ### W3C HTML Validator
 
+All html code passed easily when it came to testing at the end of the project. I was sure to validate frequently during the creating of the templates.
+
+### Home page
+
+![Home page](docs/code-testing/Home-page.png)
+
+### Profile
+
+![Home page](docs/code-testing/Profile.png)
+
+### Upload
+
+![Home page](docs/code-testing/Upload.png)
+
+### Post detail
+
+![Home page](docs/code-testing/Post-detail.png)
+
+### Edit post
+
+![Home page](docs/code-testing/Edit-post.png)
+
+### Signup / login
+
+![Home page](docs/code-testing/Signup-Login.png)
 \
 &nbsp;
+
+### W3C CSS Validator
+
+My css passed as well when it came to testing as I was frequently testing it in the validator.
+
+![Css code validation](docs/code-testing/css.png)
+\
+&nbsp;
+
+### JS Hint
+
+Each of my javascript code blocks passed the validator without any major issues. 
+
+#### Confirm delete functions
+
+![Javascript validation](docs/code-testing/confirm-js.png)
+\
+&nbsp;
+
+These functions are in the js static folder and are used to ask the user to confirm deletion of posts and comments. It says they are unused but thats only because they are called in another template. Two of the scripts are placed in templates. Since they use event listeners, if I placed the javascript link in the base html, they would be called upon in all templates. This obviously caused a lot of console errors so the best way to combat this was to have them placed in their corresponding templates.
+
+![Javascript validation](docs/code-testing/switch-js.png)
+\
+&nbsp;
+
+The switch javascript passed without any issues. The only odd thing was that it would not work unless placed at the top of the template. I know this is unconventional, however it is the only way that the script would work then. This script hides and shows blocks of content which allows users to switch between their posts and saved artworks.
+
+![Javascript validation](docs/code-testing/error-js.png)
+
+This script awaits a json response from the upload/ edit view (this script is used both in the upload template and the edit post template). It then displays a modal bootstrap error depending on the json response sent by the view.
+\
+&nbsp;
+
+### CI Python checker
+
+![Python](docs/code-testing/python.png)
+
+I checked all of my python files with the Code Institute python checker and recieved no issues with any of the files. The NOQA tag was used in the settings.py file as when I tried to rearrange some of the code to avoid the character limit, python would get upset.
+
+### Lighthouse
+
+![Lighthouse](docs/code-testing/lighthouse.png)
+
+The website performed very well when it came to the lighthouse review. It had some issues with how cloudinary was naming image files for screen readers which in my opinion can be avoided with the title of the post.
 
 ## Responsiveness 
 The responsiveness of the design was manually checked using the Chrome Developer Tools for various screens.
@@ -351,9 +416,73 @@ I also opted to use the responsiveness option and checked the screens at the fol
 * 992px
 * 1400px
 
-No issues arose, due to the responsive design of the website with rem and % values.
+No issues arose, due to the simple layout of the site.
 \
 &nbsp;
+
+# Bugs
+
+## Bug 1: SVG glitches
+
+![Lighthouse](docs/bugs/Bug_1.png)
+\
+&nbsp;
+
+![Lighthouse](docs/bugs/Bug_1.1.png)
+\
+&nbsp;
+
+Parts of artwork exported from illustrator would be coloured black unless I exported them in a vert particular way. Some of Adobes finest work.
+
+## Bug 2: Placeholder issue
+
+![Bug 1](docs/bugs/bug_2.png)
+\
+&nbsp;
+
+![Bug 2](docs/bugs/Bug_2.1.png)
+\
+&nbsp;
+
+While trying to apply placeholders to the pages. I came across an issue where the post was not displaying the cloudinary link placeholder when it did not have an image supplied by a user. This was because the model provided its own placeholder which was not matched up properly. I solved this by just linking the placeholder in the html instead.
+
+## Bug 3:Comment duplication
+
+![Bug 3](docs/bugs/bug_3.png)
+\
+&nbsp;
+
+When a user would reload the page after posting a comment, the comment would get posted again. I fixed this by modifying the comment view. I made it so that the page redirects back to the post detail, otherwise the page would keep posting the same comment if the page reloaded.
+
+## Bug 4: 
+
+![Bug 4](docs/bugs/bug_4.png)
+\
+&nbsp;
+
+This javascript caused some issues when it came to redirecting the user to a post detail upon successful upload. The javascript would expect a json response however would not recieve it. So I then provided a check, to see what it was recieving. This then allowed it to redirect.
+
+## Bug 5: 
+
+![Bug 5](docs/bugs/bug_5.png)
+\
+&nbsp;
+
+I struggled to figure out how to select these parts of a form that was generated by django in the template. Since there was no html I had to go into the dev tools to see how to stop the parts of the form overflowing over the page.
+
+![Bug 6](docs/bugs/bug-6.png)
+\
+&nbsp;
+
+The slugs for post details are made from the posts title. Through manual testing I realised that errors occur when changing or creating a post with the same title as another. I solved this by generating a random slug for each post. That way names can be the same.
+
+## Known bugs
+
+![Bug 6](docs/bugs/bug_7.png)
+\
+&nbsp;
+
+The last bug I came cross through testing that I was not able to get rid of was to do with comments. If a user creates a comment that is one long uninterrupted string, it will extend off the side of the page. However if the comment is in just normal block sentences, it works just fine. 
 
 # Deployment
 
