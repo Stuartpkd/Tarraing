@@ -15,7 +15,6 @@ This is my coding repository dedicated to the Tarraing website. It is a digital 
    - [Target Audience](#target-audience)
    - [Objectives](#objectives)
 2. [User experience](#user-experience)
-  * [5 Layers](#5-layers)
 - [Strategy](#strategy)
   * [Target users](#target-users)
   * [What the user would look for](#what-the-user-would-look-for)
@@ -247,7 +246,7 @@ The skeleton provides a broad initial idea that is further refined and built on.
 \
 &nbsp;
 
-### Wirefames
+### Wireframes
 I began by crafting a mobile rendition to align with my mobile-first strategy, subsequently crafting versions for medium and large screens. It's crucial to maintain a straightforward layout that doesn't overshadow the artwork posts while ensuring the website's responsiveness across different screen sizes. The brushes still feature in the wire frames, but theyr structure and layout was still used in the final designs for the website.
 
 Basic wireframes can be found below (Note that these vary slightly from the final website design):
