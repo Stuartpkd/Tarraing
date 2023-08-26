@@ -53,7 +53,7 @@
 
 <!-- Page pagination -->
 <div class="pagination justify-content-center">
-    <span class="step-links">
+    <div class="step-links">
         {% if page_obj.has_previous %}
         <a href="?page=1" class="pagination-text"><i class="fas fa-caret-up"></i> first</a>
         <a href="?page={{ page_obj.previous_page_number }}" class="pagination-text"><i class="fas fa-caret-left"></i>
@@ -70,6 +70,6 @@
         <a href="?page={{ page_obj.paginator.num_pages }}" class="pagination-text">last <i
                 class="fas fa-caret-left"></i></a>
         {% endif %}
-    </span>
+    </div>
 </div>
 {% endblock %}

@@ -323,7 +323,12 @@ I created a random post button that allows users to discover new artists by brin
 
 # Testing
 
-## Code Validation 
+## Code Validation
+
+### Home page
+
+![Colours](docs/colours/colours.png)
+
 ### W3C HTML Validator
 
 \
