@@ -48,7 +48,6 @@ After thinking about the strategy for my site. I came up with a target audience,
 
 ### User Stories
 
-#### For This Sprint
 | id  |  Content | Label |
 | ------ | ------ | ------ |
 | [1](https://github.com/Stuartpkd/Tarraing/issues/1) | As a registered user, I can upload my artwork so that I can share them with the community. | Needed |
@@ -63,21 +62,14 @@ After thinking about the strategy for my site. I came up with a target audience,
 | [13](https://github.com/Stuartpkd/Tarraing/issues/13) | As an admin, I have special privileges and permissions to moderate user-generated content and manage users so that I can ensure the overall quality and integrity of the site. | Needed |
 | [14](https://github.com/Stuartpkd/Tarraing/issues/14) | As a registered user, I can leave comments on artwork to provide feedback or engage in discussions with other users. | Needed |
 | [15](https://github.com/Stuartpkd/Tarraing/issues/15) | As a user I can use the random post feature so that I can discover new artists. | Nice to have |
-| [16](https://github.com/Stuartpkd/Tarraing/issues/16) | AA a user I can report a comment so that I can help maintain the friendly sense of community on the site. | Nice to have |
-
-\
-&nbsp;
-#### For Future Sprints
-| id  |  Content | Label |
-| ------ | ------ | ------ |
-| [10](https://github.com/Grawnya/f1-dublin-race-ticket-booking-system/issues/10) | As a user, I can upload and share digital brushes along side my artwork, to give others the opportunity to use the tools I used. | Could Have |
+| [16](https://github.com/Stuartpkd/Tarraing/issues/16) | As a user I can report a comment so that I can help maintain the friendly sense of community on the site. | Nice to have |
 
 \
 &nbsp;
 ## Scope
 During the creation of the project, it came to my attention that the media management system I had settled on was not viable for the files I wanted to upload. A digital brush file contains an alpha matte (An image of a texture used for the brush). As well as some code that is particular to Photoshop and Procreate. Cloudinary would not accept this type of file unless I went through a complicated process of converting the brush files for Cloudinary. With keeping my minimal viable product in mind I decided to axe the brush sharing feature of the site and leave it for a future project or sprint. 
 
-In being just a digital art sharing site, I believe it still fulfilled its inital goal of allowing digital art enthusiasts to interact and share artwork with each other.
+In being just a digital art sharing site, I believe it still fulfilled its inital goal of allowing digital art enthusiasts to interact and share artwork with each other. Some naming conventions will still retain some brush themes, so please keep that in mind.
 \
 &nbsp;
 
@@ -94,7 +86,7 @@ This sprint covered the needed basic features of the site, as well as the evalua
 This sprint builds on Sprint 1:
 * Add more features to creating a post, allowing users to customise each one they make.
 * Add more defensive programming, to make sure users who have not signed up are not able to access all pages.
-* Add a "suprise me" feature, allowing users to discover random posts.
+* Add a "surprise me" feature, allowing users to discover random posts.
 \
 &nbsp;
 
@@ -103,6 +95,7 @@ Elements to add to the site in the future:
 * Add the feature of brush sharing and uploading.
 * Incorporate email confirmation.
 * Allow user to recover their password if they forget.
+* I would also like users to be able to reply to specific comments.
 \
 &nbsp;
 
@@ -119,9 +112,14 @@ For this project, 1 application was created:
 &nbsp;
 
 ### Project Databases
-4 databases can be found in the “brush_app” application, which enable the user to create the profile required to upload posts.
+5 databases can be found in the “brush_app” application, which enable the user to create the profile required to upload posts. I created a database in the begining to support the functionality created by my user stories. The first sql map is included here and was an over zealous approach to my goal. Through timing and scope my databases changed and morphed over the duration of creating it. The most up to date map is shown as well.
+\
+&nbsp;
 
-> ![Database Tables]()
+> ![Database Table 1](docs/database_schema/sql-map-1.png)
+\
+&nbsp;
+> ![Database Table 1](docs/database_schema/sql-map-2.png)
 \
 &nbsp;
 
@@ -129,22 +127,30 @@ For this project, 1 application was created:
 The Post model extends beyond the user's basic details and captures additional aspects such as the user-generated title, a user-friendly slug for readable URLs, the author's identification, post content, uploaded artwork image, creation date, and a feature enabling users to save posts to their profile, making it a comprehensive resource for engaging and sharing creative content.
 
 It can be broken down as follows:
-* `title` - A title the user makes for their post.
-* `slug` - A slug is a user-friendly text version of a resource's title used in URLs to make them readable and descriptive.
-* `author` - An identifier for the specific user who created this post.
-* `content` - A description of the post that the user creates.
-* `artwork_image` - The artwork the user uploads.
-* `created_on` - A date that the user created the post on.
-* `saved_artworks` - A feature allowing users to save a post to their profile.
+* `title` -  A character field limited to 100 characters that stores the title of the post. It is not required to be unique.
+* `slug` - A slug field with a maximum length of 100 characters that stores a URL-friendly representation of the title. The field must contain unique values.
+* `author` - A foreign key relation to the User model, representing the user who authored the post. It is set to cascade on deletion.
+* `content` - A text field that stores the content of the post.
+* `artwork_image` -  A CloudinaryField that stores the image of the artwork uploaded by the user.
+* `created_on` - A datetime field that stores the date and time when the post was created. This field is automatically populated on object creation.
+* `likes` - A many-to-many field relating to the User model, storing the users who have liked the post.
 \
 &nbsp;
+
+#### Upload
+The Upload model is designed to represent an uploaded artwork in a Django application. This model is streamlined with just three fields to store the essential attributes of an artwork: its title, content description, and image.
+
+It can be broken down as follows:
+* `title` - A character field with a maximum length of 100 characters that stores the title of the artwork. This field is required to contain unique values.
+* `content` - A text field limited to 200 characters that holds a brief content description of the artwork. Like the title, this field is also required to be unique.
+* `artwork_image` - A CloudinaryField that is used to store the image of the uploaded artwork. It has a default value of 'placeholder', which can presumably act as a placeholder image when an artwork image is not provided.
 
 #### SavedArtwork
 The Save model involves the specific user who wishes to save a post and the corresponding post they intend to save, forming a connection that enables users to retain and access their chosen content easily.
 
 It can be broken down as follows:
-* `user` - The user in question who is saving the post.
-* `post` - The post that they would like to save.
+* `user` -  A foreign key relation to the User model, representing the user who saved the artwork post. It is set to cascade on deletion.
+* `post` - A foreign key relation to the Post model, representing the saved artwork post. It is also set to cascade on deletion.
 \
 &nbsp;
 
@@ -152,10 +158,12 @@ It can be broken down as follows:
 Within the Comment model, details encompass the related post being commented upon, the commenter's username (represented as their name), an associated email, and the timestamp denoting when the comment was added.
 
 It can be broken down as follows:
-* `post` - The post that the user is commenting on.
-* `name` - The name of the commenter (This would be their username).
-* `email` - An email associated with the user.
-* `created_on` - The date the comment was made on.
+* `post` - A foreign key relation to the Post model, indicating which post the comment belongs to. It is set to cascade on deletion.
+* `name` - A character field limited to 80 characters, representing the name of the commenter.
+* `email` - An email field to store the email address of the commenter.
+* `created_on` - A text field limited to 250 characters, storing the content of the comment.
+* `reported` - A boolean field indicating whether the comment has been reported. Defaults to False.
+* `reported_reason` - A text field that optionally holds the reason for reporting the comment. It is nullable and can be left blank.
 \
 &nbsp;
 
@@ -163,12 +171,11 @@ It can be broken down as follows:
 The Profile model encompasses the profile's owner, an uploaded picture serving as their profile image, a slug connected to the user's profile page, accumulated counts for likes, posts, and downloads, collectively providing an overview of the user's engagement and activity on the platform.
 
 It can be broken down as follows:
-* `user` - The user who owns the profile.
-* `profile_picture` - An uploaded picture that the user has for their profile pciture.
-* `slug` - A slug that relates to the users profile page.
-* `num_likes` - A total number of likes the user has amassed.
-* `num_posts` - A total number of posts they have made.
-* `num_downloads` - A total number of downloads they have made.
+* `user` - A one-to-one relationship with the User model, representing the user associated with this profile. Deleting a user will also delete their corresponding profile due to the cascade on delete.
+* `profile_picture` - A CloudinaryField used to store the profile picture of the user.
+* `slug` - A slug field with a maximum length of 100 characters that serves as a URL-friendly representation of the user's username. This field must contain unique values.
+* `num_likes` - A positive integer field that stores the number of likes received by the user's artwork. Default value is 0.
+* `num_posts` - A positive integer field that stores the number of posts submitted by the user. Default value is 0.
 \
 &nbsp;
 
@@ -178,14 +185,15 @@ The skeleton provides a broad initial idea that is further refined and built on.
 &nbsp;
 
 ### Wirefames
-I began by crafting a mobile rendition to align with my mobile-first strategy, subsequently crafting versions for medium and large screens. It's crucial to maintain a straightforward layout that doesn't overshadow the artwork posts while ensuring the website's responsiveness across different screen sizes.
+I began by crafting a mobile rendition to align with my mobile-first strategy, subsequently crafting versions for medium and large screens. It's crucial to maintain a straightforward layout that doesn't overshadow the artwork posts while ensuring the website's responsiveness across different screen sizes. The brushes still feature in the wire frames, but theyr structure and layout was still used in the final designs for the website.
 
 Basic wireframes can be found below (Note that these vary slightly from the final website design):
 
-* [Home Page](docs/wireframes/home_page.png "Home Page")
-* [Profile](docs/wireframes/home_page.png "Profile")
-* [Upload](docs/wireframes/home_page.png "Upload")
-* [Signup](docs/wireframes/home_page.png "Signup")
+* [Home Page](docs/wireframes/Home-Page.pdf "Home Page")
+* [Profile](docs/wireframes/Profile.pdf "Profile")
+* [Upload](docs/wireframes/Upload.pdf "Upload")
+* [Signup](docs/wireframes/Login-Signup.pdf "Signup")
+* [Brushes](docs/wireframes/Login-Signup.pdf "Brushes")
 \
 &nbsp;
 
@@ -195,16 +203,22 @@ The surface plane primarily pertains to aesthetics and the interface, emphasizin
 &nbsp;
 
 ### Font
-The fonts used were found from google fonts.  They were sourced from [here]() and were used in suitable sections.
+The font used is called Montserrat, it has good readability and had a lot of weights to use for easier heirarchy. They were sourced from [here](https://fonts.google.com/specimen/Montserrat) and were used in suitable sections.
 
 ### Colours
 
+![Colours](docs/colours/colours.png)
+
+I've designed the site's color scheme to be minimalist yet visually intriguing. The subtle palette ensures that the artwork remains the focus, without any distractions. These careful color choices add to the user experience without overshadowing the art itself.
+\
+&nbsp;
+
 ### Responsive Screens
-The website's construction will commence with a focus on a compact 320px-width mobile screen, after which it will be adapted to fulfill the specifications for medium/tablet, large, and extra-large screens, as illustrated in the following table.
+The website's construction will commence with a focus on a compact 350px-width mobile screen, after which it will be adapted to fulfill the specifications for medium/tablet, large, and extra-large screens, as illustrated in the following table.
 
 | Screen Size   | Breakpoint |
 | -----------   | ---------- |
-| small/mobile  |    320px   |
+| small/mobile  |    350px   |
 | medium/tablet |    768px   |
 | large         |   992px    |
 | extra-large   |   1400+px  |
@@ -255,17 +269,20 @@ The saved artwork feature allows users to curate a personal collection of their 
 \
 &nbsp;
 
-### Delete posts
-The "Delete Posts" function empowers users to manage their content by removing specific posts from their profile or the platform, ensuring control and tidiness within their artistic showcase.
+### Delete/Edit posts
+The "Delete Posts" function empowers users to manage their content by removing specific posts from their profile or the platform, ensuring control and tidiness within their artistic showcase. They can also edit parts of the post if they wish.
+\
+&nbsp;
+
+### Random post
+I created a random post button that allows users to discover new artists by bringing them to a random post detail.
 \
 &nbsp;
 
 ### Error Pages
-404 and 500 error pages have been created as they are the most common errors that users will come across that the messages cannot account for.
+404 and 500 error pages have been created as they are the most common errors that users will come across that the messages cannot account for. A 403 was also created for a forbidden scenario, however I struggled to get this to work on the launched site.
 \
 &nbsp;
-
-This [404 template]() was created to fit the rest of the website’s style.
 
 # Technologies Used
 
@@ -284,9 +301,10 @@ This [404 template]() was created to fit the rest of the website’s style.
 * [Gitpod](https://www.gitpod.io/ "Gitpod") – Used as the development environment.
 * [GitHub](https://github.com/ "GitHub") – The project’s Version Control Management System.
 * [Heroku](https://www.heroku.com/ "Heroku") – To deploy the webpage.
-* [Balsamiq](https://balsamiq.com/wireframes/ "Balsamiq") – For the creation of associated wireframes.
+* [Illustrator](https://www.adobe.com/ie/products/illustrator/campaign/pricing.html?gclid=CjwKCAjwxaanBhBQEiwA84TVXPogNfGdqMqcbQ8FXjlOcbhv5YMqMEqN6UdeCt0m35siVj5JWbijqhoCHcgQAvD_BwE&mv=search&mv=search&mv2=paidsearch&sdid=GMCWY69B&ef_id=CjwKCAjwxaanBhBQEiwA84TVXPogNfGdqMqcbQ8FXjlOcbhv5YMqMEqN6UdeCt0m35siVj5JWbijqhoCHcgQAvD_BwE:G:s&s_kwcid=AL!3085!3!547974576454!e!!g!!illustrator!1426208079!56320331432&gad=1 "Illustrator") – For the creation of associated wireframes.
 * [DrawSQL](https://drawsql.app/ "DrawSQL") – For the creation of the database diagrams.
 * [CSSgradient](https://cssgradient.io/ "CSSgradient") – For the visualisation of gradients for the sites styling.
+* [LottieFiles](https://lottiefiles.com/ "LottieFiles") – This hosts the animated logo at the top of the screen.
 
 ## Styling
 * [Bootstrap](https://getbootstrap.com/ "Bootstrap") – To provide extra styling and out-of-the-box elements e.g. burger menu.
