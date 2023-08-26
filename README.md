@@ -478,7 +478,7 @@ The slugs for post details are made from the posts title. Through manual testing
 
 ## Known bugs
 
-![Bug 6](docs/bugs/bug_7.png)
+![Bug 7](docs/bugs/bug_7.png)
 \
 &nbsp;
 
