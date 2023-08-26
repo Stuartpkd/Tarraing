@@ -12,6 +12,56 @@ This is my coding repository dedicated to the Tarraing website. It is a digital 
 
 # Table of Contents
 
+# Table of Contents
+1. [Introduction](#introduction)
+   - [Purpose](#purpose)
+   - [Target Audience](#target-audience)
+   - [Objectives](#objectives)
+2. [User Experience (UX)](#user-experience)
+   - [User Stories](#user-stories)
+   - [Design Choices](#design-choices)
+   - [Wireframes](#wireframes)
+3. [Features](#features)
+   - [Implemented Features](#implemented-features)
+   - [Future Features](#future-features)
+4. [Data Models](#data-models)
+5. [Technologies Used](#technologies-used)
+   - [Languages](#languages)
+   - [Tools](#tools)
+   - [Styling](#styling)
+   - [Validation](#validation)
+   - [Databases](#databases)
+6. [Testing](#testing)
+   - [Code Validation](#code-validation)
+     - [W3C HTML Validator](#w3c-html-validator)
+     - [W3C CSS Validator](#w3c-css-validator)
+     - [JS Hint](#js-hint)
+     - [CI Python checker](#ci-python-checker)
+     - [Lighthouse](#lighthouse)
+   - [Responsiveness](#responsiveness)
+7. [Bugs](#bugs)
+   - [Bug 1: SVG glitches](#bug-1-svg-glitches)
+   - [Bug 2: Placeholder issue](#bug-2-placeholder-issue)
+   - [Bug 3: Comment duplication](#bug-3-comment-duplication)
+   - [Bug 4](#bug-4)
+   - [Bug 5](#bug-5)
+   - [Bug 6](#bug-6)
+   - [Bug 7](#bug-7)
+   - [Known bugs](#known-bugs)
+8. [Deployment](#deployment)
+   - [Create Application](#create-application)
+   - [ElephantSQL](#elephantsql)
+   - [Cloudinary](#cloudinary)
+   - [Final Repo Preparations](#final-repo-preparations)
+   - [Heroku Deploy](#heroku-deploy)
+9. [Credits](#credits)
+   - [For Code Help and Advice](#for-code-help-and-advice)
+   - [Helpful Resources](#helpful-resources)
+   - [For Content and Code](#for-content-and-code)
+
+
+
+
 # UX / UI
 
 The UX or User Experience centers on the website's accessibility and its level of user-friendliness, both of which play a critical role in determining the website's overall success.

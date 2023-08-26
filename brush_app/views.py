@@ -322,6 +322,32 @@ def report_comment(request, post_id, slug, comment_id):
 
 
 class PostEdit(View):
+    """
+    A Django View class to handle the editing of existing Post objects.
+
+    Methods:
+        get(request, slug, *args, **kwargs):
+            Handles GET requests. Renders an edit form initialized with the
+            post's current data. Only the,
+            author of the post can access this form.
+
+        post(request, slug, *args, **kwargs):
+            Handles POST requests. Updates the Post object based on submitted
+            form data. Validates the form, performs image type and size checks,
+            and updates the slug of the post before saving. Redirects the user
+            to the 'post_detail' view after successful updates.
+
+    Access Restrictions:
+        Both GET and POST methods check if the,
+        request user is the author of the,
+        post. If not, a HttpResponseForbidden is returned.
+
+    Response Types:
+        - Returns a rendered HTML form on GET.
+        - Returns a JSON response on POST, either with a 'redirect_url' or
+          with 'errors'.
+    """
+
     def get(self, request, slug, *args, **kwargs):
         post = get_object_or_404(Post, slug=slug)
         if request.user != post.author:
@@ -618,7 +644,3 @@ def random_post_redirect(request):
     all_posts = list(Post.objects.all())
     random_post = random.choice(all_posts)
     return redirect(reverse('post_detail', kwargs={'slug': random_post.slug}))
-
-
-def custom_403_view(request, exception):
-    return render(request, '403.html', {}, status=403)
