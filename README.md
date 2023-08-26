@@ -11,8 +11,6 @@ This is my coding repository dedicated to the Tarraing website. It is a digital 
 ![Image of site on different platforms]()
 
 # Table of Contents
-
-# Table of Contents
 1. [Introduction](#introduction)
    - [Purpose](#purpose)
    - [Target Audience](#target-audience)
@@ -575,8 +573,17 @@ Your application is now successfully deployed!
 
 ## For Code Help and Advice
 * [Harry Dhillon](https://github.com/Harry-Leepz)
+* [Harry Dhillon](https://github.com/Harry-Leepz)
 
 ## Helpful Resources
 
+
 ## For Content and Code
+* [Building the base of the project with the I think therefore I blog.](https://github.com/Grawnya/I-think-therefore-I-blog)
+* [Lottie files webplayer creator](https://lottiefiles.com/web-player)
+
+&nbsp;
+[Back to Top](#table-of-contents)
+\
+&nbsp;
 
