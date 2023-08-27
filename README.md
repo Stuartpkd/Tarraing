@@ -307,51 +307,81 @@ The home page serves as the initial gateway to the website, presenting a curated
 &nbsp;
 
 ### Profile page
+
+![Profile page](docs/features/profile-feature.png)
+
 The profile page offers users a personalized space to showcase their creative journey, displaying their uploaded artwork, profile picture, and important metrics like total likes, posts, and downloads.
 \
 &nbsp;
 
 ### Upload page
+
+![Upload](docs/features/upload-feature.png)
+
 The upload page empowers users to share their artwork with the community, allowing them to submit images and descriptions that capture the essence of their creations.
 \
 &nbsp;
 
 ### Search 
+
+![Search](docs/features/nav.png)
+
 The search bar grants users quick access to discover specific artwork, artists, or topics, enhancing navigation and facilitating exploration across the platform.
 \
 &nbsp;
 
 ### Nav bar
+
+![Search](docs/features/nav.png)
+
 The navigation bar acts as a navigation hub, offering easy and intuitive access to various sections of the website, ensuring smooth user movement and interaction.
 \
 &nbsp;
 
 ### Post detail
+
+![Search](docs/features/detail.png)
+
 The post detail view offers a comprehensive display of individual artwork posts, including enlarged images, descriptions, artist information, and engagement metrics.
 \
 &nbsp;
 
 ### Comments
+
+![Comment](docs/features/comment.png)
+
 The comments section provides a dynamic platform for users to express their thoughts, opinions, and appreciation for artworks, fostering interaction and meaningful conversations within the community.
 \
 &nbsp;
 
 ### Saved artwork 
+
+![Saved artwork](docs/features/saved.png)
+
 The saved artwork feature allows users to curate a personal collection of their favourite posts, enabling them to revisit and appreciate chosen pieces conveniently from their profile.
 \
 &nbsp;
 
 ### Delete/Edit posts
+
+![Random post](docs/features/edit.png)
+
 The "Delete Posts" function empowers users to manage their content by removing specific posts from their profile or the platform, ensuring control and tidiness within their artistic showcase. They can also edit parts of the post if they wish.
 \
 &nbsp;
 
 ### Random post
+
+![Random post](docs/features/surprise.png)
+
 I created a random post button that allows users to discover new artists by bringing them to a random post detail.
 \
 &nbsp;
 
 ### Error Pages
+
+![Error](docs/features/not-found.png)
+
 404 and 500 error pages have been created as they are the most common errors that users will come across that the messages cannot account for. A 403 was also created for a forbidden scenario, however I struggled to get this to work on the launched site.
 \
 &nbsp;
