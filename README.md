@@ -8,12 +8,10 @@ This is my coding repository dedicated to the Tarraing website. It is a digital 
 
 [Visit the Project's GitHub Repository Here](https://github.com/Stuartpkd/Tarraing)
 
-![Image of site on different platforms]()
+![Image of site on different platforms](docs/colours/mockup.png)
 
 # Table of Contents
 1. [Introduction](#introduction)
-   - [Target Audience](#target-audience)
-   - [Objectives](#objectives)
 2. [User experience](#user-experience)
 - [Strategy](#strategy)
   * [Target users](#target-users)
@@ -33,9 +31,21 @@ This is my coding repository dedicated to the Tarraing website. It is a digital 
     + [Profile](#profile)
 3. [Skeleton](#skeleton)
   * [Wireframes](#wireframes)
+  * [Surface](#surface)
+  * [Font](#font)
+  * [Colours](#colours)
 4. [Features](#features)
-   - [Implemented Features](#implemented-features)
-   - [Future Features](#future-features)
+   - [Existing Features](#existing-features)
+      + [Home](#home)
+      + [Profile page](#profile-page)
+      + [Upload page](#upload-page)
+      + [Search](#search)
+      + [Nav bar](#nav-bar)
+      + [Post detail](#post-detail)
+      + [Comments](#comments)
+      + [Saved artwork](#saved-artwork)
+      + [Delete / Edit posts](#delete/edit)
+      + [Random post](#random-post)
 5. [Data Models](#data-models)
 6. [Technologies Used](#technologies-used)
    - [Languages](#languages)
@@ -55,11 +65,11 @@ This is my coding repository dedicated to the Tarraing website. It is a digital 
    - [Bug 1: SVG glitches](#bug-1-svg-glitches)
    - [Bug 2: Placeholder issue](#bug-2-placeholder-issue)
    - [Bug 3: Comment duplication](#bug-3-comment-duplication)
-   - [Bug 4](#bug-4)
-   - [Bug 5](#bug-5)
-   - [Bug 6](#bug-6)
-   - [Bug 7](#bug-7)
+   - [Bug 4: Json bug](#bug-4-json-bug)
+   - [Bug 5: CSS overflow bug](#bug-5-css-overdlow-bug)
+   - [Bug 6: Slug bug](#bug-6-slug-bug)
    - [Known bugs](#known-bugs)
+   - [Bug 7: Large comment](#bug-7-large-comment)
 9. [Deployment](#deployment)
    - [Create Application](#create-application)
    - [ElephantSQL](#elephantsql)
@@ -88,7 +98,7 @@ The Surface Plane
 
 ## Strategy 
 
-After thinking about the strategy for my site. I came up with a target audience, which would influence the features included.
+After thinking about the strategy for my site, I came up with a target audience which would influence the features included.
 
 ### Target users:
 
@@ -255,7 +265,7 @@ Basic wireframes can be found below (Note that these vary slightly from the fina
 * [Profile](docs/wireframes/Profile.pdf "Profile")
 * [Upload](docs/wireframes/Upload.pdf "Upload")
 * [Signup](docs/wireframes/Login-Signup.pdf "Signup")
-* [Brushes](docs/wireframes/Login-Signup.pdf "Brushes")
+* [Brushes](docs/wireframes/Brushes.pdf "Brushes")
 \
 &nbsp;
 
@@ -271,7 +281,7 @@ The font used is called Montserrat, it has good readability and had a lot of wei
 
 ![Colours](docs/colours/colours.png)
 
-I've designed the site's color scheme to be minimalist yet visually intriguing. The subtle palette ensures that the artwork remains the focus, without any distractions. These careful color choices add to the user experience without overshadowing the art itself.
+I've designed the site's colour scheme to be minimalist yet visually intriguing. The subtle palette ensures that the artwork remains the focus, without any distractions. These careful colour choices add to the user experience without overshadowing the art itself.
 \
 &nbsp;
 
@@ -327,7 +337,7 @@ The comments section provides a dynamic platform for users to express their thou
 &nbsp;
 
 ### Saved artwork 
-The saved artwork feature allows users to curate a personal collection of their favorite posts, enabling them to revisit and appreciate chosen pieces conveniently from their profile.
+The saved artwork feature allows users to curate a personal collection of their favourite posts, enabling them to revisit and appreciate chosen pieces conveniently from their profile.
 \
 &nbsp;
 
@@ -385,11 +395,15 @@ I created a random post button that allows users to discover new artists by brin
 
 # Testing
 
+## Manual testing
+
+* [Manual testing link](https://github.com/Stuartpkd/Tarraing/blob/main/MANUAL_TEST.md)
+
 ## Code Validation
 
 ### W3C HTML Validator
 
-All html code passed easily when it came to testing at the end of the project. I was sure to validate frequently during the creating of the templates.
+All HTML code passed easily when it came to testing at the end of the project. I was sure to validate frequently during the creating of the templates.
 
 ### Home page
 
@@ -435,7 +449,7 @@ Each of my javascript code blocks passed the validator without any major issues.
 \
 &nbsp;
 
-These functions are in the js static folder and are used to ask the user to confirm deletion of posts and comments. It says they are unused but thats only because they are called in another template. Two of the scripts are placed in templates. Since they use event listeners, if I placed the javascript link in the base html, they would be called upon in all templates. This obviously caused a lot of console errors so the best way to combat this was to have them placed in their corresponding templates.
+These functions are in the js static folder and are used to ask the user to confirm deletion of posts and comments. It says they are unused but thats only because they are called in another template. Two of the scripts are placed in templates. Since they use event listeners, if I placed the javascript link in the base HTML, they would be called upon in all templates. This obviously caused a lot of console errors so the best way to combat this was to have them placed in their corresponding templates.
 
 ![Javascript validation](docs/code-testing/switch-js.png)
 \
@@ -506,31 +520,33 @@ Parts of artwork exported from illustrator would be coloured black unless I expo
 \
 &nbsp;
 
-While trying to apply placeholders to the pages. I came across an issue where the post was not displaying the cloudinary link placeholder when it did not have an image supplied by a user. This was because the model provided its own placeholder which was not matched up properly. I solved this by just linking the placeholder in the html instead.
+While trying to apply placeholders to the pages I came across an issue where the post was not displaying the cloudinary link placeholder when it did not have an image supplied by a user. This was because the model provided its own placeholder which was not matched up properly. I solved this by just linking the placeholder in the html instead.
 
 ## Bug 3:Comment duplication
 
-![Bug 3](docs/bugs/bug_3.png)
+![Bug 3](docs/bugs/Bug_3.png)
 \
 &nbsp;
 
 When a user would reload the page after posting a comment, the comment would get posted again. I fixed this by modifying the comment view. I made it so that the page redirects back to the post detail, otherwise the page would keep posting the same comment if the page reloaded.
 
-## Bug 4: 
+## Bug 4: Json bug
 
-![Bug 4](docs/bugs/bug_4.png)
+![Bug 4](docs/bugs/Bug_4.png)
 \
 &nbsp;
 
 This javascript caused some issues when it came to redirecting the user to a post detail upon successful upload. The javascript would expect a json response however would not recieve it. So I then provided a check, to see what it was recieving. This then allowed it to redirect.
 
-## Bug 5: 
+## Bug 5: CSS overflow bug
 
-![Bug 5](docs/bugs/bug_5.png)
+![Bug 5](docs/bugs/Bug_5.png)
 \
 &nbsp;
 
-I struggled to figure out how to select these parts of a form that was generated by django in the template. Since there was no html I had to go into the dev tools to see how to stop the parts of the form overflowing over the page.
+I struggled to figure out how to select these parts of a form that was generated by django in the template. Since there was no HTML I had to go into the dev tools to see how to stop the parts of the form overflowing over the page.
+
+## Bug 6: Slug bug
 
 ![Bug 6](docs/bugs/bug-6.png)
 \
@@ -540,7 +556,7 @@ The slugs for post details are made from the posts title. Through manual testing
 
 ## Known bugs
 
-![Bug 7](docs/bugs/bug_7.png)
+![Bug 7: Large comment](docs/bugs/bug_7.png)
 \
 &nbsp;
 
@@ -587,14 +603,24 @@ Your application is now successfully deployed!
 
 ## For Code Help and Advice
 * [Harry Dhillon](https://github.com/Harry-Leepz)
-* [Harry Dhillon](https://github.com/Harry-Leepz)
+* [Harry Dhillon](https://github.com/Daisy-McG)
 
 ## Helpful Resources
+* [Stack overflow helped a lot with problem solving.](https://stackoverflow.com/)
+* [MDM also contained a lot of helpful resources when building the project.](https://developer.mozilla.org/en-US/)
+* [W3 schools always has very helpful threads on anything to do with coding.](https://www.w3schools.com/)
+* [Github had plenty of repositories that helped a lot with coding.](https://github.com/)
+* [Geeks for geeks had a lot of great information on python.](https://www.geeksforgeeks.org/python-programming-language/)
 
 
 ## For Content and Code
+
 * [Building the base of the project with the I think therefore I blog.](https://github.com/Grawnya/I-think-therefore-I-blog)
-* [Lottie files webplayer creator](https://lottiefiles.com/web-player)
+* [Lottie files webplayer creator.](https://lottiefiles.com/web-player)
+* [How to create a django view.](https://www.geeksforgeeks.org/views-in-django-python/)
+* [Best practice for data models.](https://cloud.google.com/appengine/docs/legacy/standard/python/datastore/datamodeling)
+* [How to use django tags.](https://www.w3schools.com/django/django_template_tags.php#:~:text=In%20Django%20templates%2C%20you%20can,them%20in%20%7B%25%20%25%7D%20brackets.)
+* [Checking file types with.](https://stackoverflow.com/questions/5899497/how-can-i-check-the-extension-of-a-file)
 
 &nbsp;
 [Back to Top](#table-of-contents)
