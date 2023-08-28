@@ -8,6 +8,8 @@ This is my coding repository dedicated to the Tarraing website. It is a digital 
 
 [Visit the Project's GitHub Repository Here](https://github.com/Stuartpkd/Tarraing)
 
+[Link to the projects board](https://github.com/users/Stuartpkd/projects/2)
+
 ![Image of site on different platforms](docs/colours/mockup.png)
 
 # Table of Contents
@@ -240,7 +242,7 @@ It can be broken down as follows:
 &nbsp;
 
 #### Profile
-The Profile model encompasses the profile's owner, an uploaded picture serving as their profile image, a slug connected to the user's profile page, accumulated counts for likes, posts, and downloads, collectively providing an overview of the user's engagement and activity on the platform.
+The Profile model encompasses the profile's owner, an uploaded picture serving as their profile image, a slug connected to the user's profile page, accumulated counts for likes, and posts collectively providing an overview of the user's engagement and activity on the platform.
 
 It can be broken down as follows:
 * `user` - A one-to-one relationship with the User model, representing the user associated with this profile. Deleting a user will also delete their corresponding profile due to the cascade on delete.
@@ -310,7 +312,7 @@ The home page serves as the initial gateway to the website, presenting a curated
 
 ![Profile page](docs/features/profile-feature.png)
 
-The profile page offers users a personalized space to showcase their creative journey, displaying their uploaded artwork, profile picture, and important metrics like total likes, posts, and downloads.
+The profile page offers users a personalized space to showcase their creative journey, displaying their uploaded artwork, profile picture, and important metrics like total likes and posts.
 \
 &nbsp;
 

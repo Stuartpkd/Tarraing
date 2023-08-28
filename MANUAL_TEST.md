@@ -159,7 +159,7 @@ Here they have made their way to the post detail where they can see further info
 \
 &nbsp;
 
-This user story is met by clicking on any post link to be brought to its post detail page. It will contain the users name, the upload date, comment section, likes, a download button and a description. The user may also return to the home page by clicking on the back button found at the top of the post detail page.
+This user story is met by clicking on any post link to be brought to its post detail page. It will contain the users name, the upload date, comment section, likes and a description. The user may also return to the home page by clicking on the back button found at the top of the post detail page.
 \
 &nbsp;
 
@@ -557,9 +557,6 @@ This user story is met by having the report comment button below all comments ma
     
 2. **Like Post**
     - Ensure that the like/unlike function updates the like count and icon state correctly.
-
-3. **Download Button**
-    - Verify that the download button downloads the artwork correctly.
     
 4. **Like and Comment Count**
     - Confirm that the like and comment counts are correctly displayed and updated.

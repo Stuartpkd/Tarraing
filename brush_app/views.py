@@ -1,4 +1,6 @@
 from django.shortcuts import render, get_object_or_404, reverse, redirect
+import requests
+from django.http import FileResponse
 from django.views.generic.edit import CreateView
 from django.contrib import messages
 from django.db.models import Count, Q
@@ -13,6 +15,7 @@ from django.http import (
     FileResponse,
     HttpResponse,
     JsonResponse,
+    HttpResponseNotFound,
 )
 from .models import Post, Profile, SavedArtwork, Comment, Upload
 from .forms import (
@@ -156,41 +159,6 @@ def search_posts(request):
 
     return render(request, 'search_results.html', {'results':
                                                    results, 'form': form})
-
-
-def download_artwork(request, post_slug):
-    """
-    View function for downloading artwork image associated with a post.
-
-    Args:
-        request: The incoming HTTP request object.
-        post_slug (str):
-        The slug of the post whose artwork is to be downloaded.
-
-    Returns:
-        HttpResponse:
-        The HTTP response containing the downloadable artwork image.
-    """
-    post = get_object_or_404(Post, slug=post_slug)
-
-    if post.artwork_image:
-        image_format = post.artwork_image.format
-        public_id = post.artwork_image.public_id
-
-        download_url = (
-           "https://res.cloudinary.com/YOUR_CLOUD_NAME/image/upload/"
-           f"{public_id}.{image_format}"
-        )
-
-        response = HttpResponse()
-        response['Content-Disposition'] = (
-            f'attachment; '
-            f'filename="{post.title}.{image_format}"'
-        )
-        response['X-Accel-Redirect'] = download_url
-        return response
-    else:
-        return HttpResponseNotFound("Artwork not found")
 
 
 class CommentEdit(View):

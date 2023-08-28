@@ -151,10 +151,10 @@ class Comment(models.Model):
         ordering = ['created_on']
 
     def __str__(self):
-        """
-        Returns a formatted string representation of the comment.
-        """
-        return f"Comment {self.body} by {self.name}"
+        if self.user and self.user.username:
+            return str(self.user.username)
+        else:
+            return 'Unknown Profile'
 
 
 class Profile(models.Model):
@@ -168,16 +168,12 @@ class Profile(models.Model):
         num_likes (PositiveIntegerField): Number of likes received by the user.
         num_posts (PositiveIntegerField):
         Number of posts submitted by the user.
-        num_downloads (PositiveIntegerField):
-        Number of downloads initiated by the user.
 
     Methods:
         update_likes_count():
         Updates the num_likes count based on user's artwork likes.
         update_posts_count():
         Updates the num_posts count based on user's posts.
-        update_downloads_count():
-        Updates the num_downloads count based on user's downloads.
         save(*args, **kwargs): Overrides the save method to set a unique slug.
     """
 
@@ -186,7 +182,6 @@ class Profile(models.Model):
     slug = models.SlugField(max_length=100, unique=True)
     num_likes = models.PositiveIntegerField(default=0)
     num_posts = models.PositiveIntegerField(default=0)
-    num_downloads = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return self.user.username
@@ -202,12 +197,6 @@ class Profile(models.Model):
         Updates the num_posts count based on the user's posts.
         """
         self.num_posts = self.user.posts.count()
-
-    def update_downloads_count(self):
-        """
-        Updates the num_downloads count based on the user's downloads.
-        """
-        self.num_downloads = self.user.downloads.count()
 
     def save(self, *args, **kwargs):
         """

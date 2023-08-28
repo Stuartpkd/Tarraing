@@ -8,7 +8,6 @@ from .views import (
     CommentDelete,
     Upload,
     random_post_redirect,
-    download_artwork,
     report_comment,
 )
 
@@ -32,8 +31,6 @@ urlpatterns = [
          views.PostDetail.as_view(), name='post_detail'),
     path('random-post/', random_post_redirect,
          name='random_post_redirect'),
-    path('download/<slug:post_slug>/',
-         download_artwork, name='download_artwork'),
     path('save-post/<slug:post_slug>/', views.save_post, name='save_post'),
     path('unsave-post/<slug:post_slug>/',
          views.unsave_post, name='unsave_post'),

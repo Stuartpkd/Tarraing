@@ -25,10 +25,17 @@ class CommentAdmin(admin.ModelAdmin):
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
 
-    list_display = ('user', 'profile_picture', 'num_likes',
-                    'num_posts', 'num_downloads')
+    def display_profile_picture(self, obj):
+        return (
+                str(obj.profile_picture)
+                if obj.profile_picture
+                else 'No Profile Picture'
+                )
+    display_profile_picture.short_description = 'Profile Picture'
+    list_display = ('user', 'display_profile_picture',
+                    'num_likes', 'num_posts')
     search_fields = ('user__username',)
-    list_filter = ('num_likes', 'num_posts', 'num_downloads')
+    list_filter = ('num_likes', 'num_posts')
 
 
 @admin.register(SavedArtwork)

@@ -62,9 +62,6 @@
         const formData = new FormData(form);
 
         try {
-            // Log the URL you are trying to hit
-            console.log("Fetching URL:", form.action);
-
             const response = await fetch(form.action, {
                 method: 'POST',
                 body: formData
@@ -83,8 +80,6 @@
                 } else if (data.redirect_url) {
                     window.location.href = data.redirect_url;
                 }
-            } else {
-                console.log("Received non-JSON response");
             }
         } catch (error) {
             console.error('Fetch Error:', error);

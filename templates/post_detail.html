@@ -72,11 +72,6 @@
                 </form>
                 {% endif %}
                 <div class="post-detail-btn">
-                    <a href="{% url 'download_artwork' post.slug %}" download>
-                        <i class="fas fa-download post-icon"></i>
-                    </a>
-                </div>
-                <div class="post-detail-btn">
                     <i class="fas fa-heart text-white post-icon"></i> <span
                         class="text-white count">{{ post.likes.count }}</span>
                 </div>
